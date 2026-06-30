@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RSVP — VowToDo</title>
+<style>
+  :root{--bg:#F5F3EC;--surface:#FFFFFF;--ink:#1A1A1A;--muted:#6B6B66;--line:#E2E2DE;
+        --sage:#3F6B52;--sage-ink:#FFFFFF;--gold:#C2A36B;--ok:#2F9E44;--no:#E03131;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+       line-height:1.5;-webkit-text-size-adjust:100%}
+  .wrap{max-width:560px;margin:0 auto;padding:24px 16px 48px}
+  h1{font-size:26px;margin:0 0 4px;font-weight:600}
+  .date{color:var(--sage);font-weight:500;margin:0 0 2px}
+  .venue{color:var(--muted);margin:0 0 20px;font-size:15px}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:14px;
+        padding:18px 16px;margin:0 0 16px}
+  .gname{font-size:18px;font-weight:600;margin:0 0 12px}
+  .qlabel{font-size:14px;color:var(--muted);margin:14px 0 8px;font-weight:500}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{border:1.5px solid var(--line);background:var(--surface);color:var(--ink);
+        border-radius:999px;padding:8px 14px;font-size:15px;cursor:pointer;user-select:none;
+        transition:transform .04s ease}
+  .chip:active{transform:scale(.97)}
+  .chip[aria-pressed="true"]{border-color:transparent;font-weight:500}
+  .att .chip[data-v="attending"][aria-pressed="true"]{background:var(--ok);color:#fff}
+  .att .chip[data-v="declined"][aria-pressed="true"]{background:var(--no);color:#fff}
+  .muted{color:var(--muted)}
+  .bar{position:sticky;bottom:0;background:linear-gradient(180deg,rgba(245,243,236,0),var(--bg) 40%);
+       padding:16px 0 4px;margin-top:8px}
+  button.save{width:100%;background:var(--sage);color:var(--sage-ink);border:0;border-radius:12px;
+        padding:15px;font-size:16px;font-weight:600;cursor:pointer}
+  button.save:disabled{opacity:.6;cursor:default}
+  .status{text-align:center;font-size:14px;min-height:20px;margin:10px 0 0}
+  .status.ok{color:var(--ok)} .status.err{color:var(--no)}
+  .foot{text-align:center;color:var(--muted);font-size:13px;margin-top:24px}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <h1 id="title">RSVP</h1>
+  <p class="date" id="date" hidden></p>
+  <p class="venue" id="venue" hidden></p>
+  <div id="forms"></div>
+  <div class="bar" id="bar" hidden>
+    <button class="save" id="save">Update response</button>
+    <p class="status" id="status"></p>
+  </div>
+  <p class="foot">Powered by VowToDo</p>
+</main>
+<script>
+// The vowtodo.com page calls the Supabase Edge Function (JSON API) cross-origin.
+const API = 'https://ejfddddwqbjebwffgadc.supabase.co/functions/v1/rsvp';
+
+const params = new URLSearchParams(location.search);
+const g = params.get('g') || '';
+let DATA = null;
+const state = {};
+
+function showMessage(msg) {
+  document.getElementById('forms').innerHTML =
+    '<div class="card"><p class="muted">' + msg + '</p></div>';
+}
+
+function chip(label, pressed, onClick, style) {
+  const b = document.createElement('button');
+  b.className = 'chip'; b.type = 'button'; b.textContent = label;
+  b.setAttribute('aria-pressed', pressed ? 'true' : 'false');
+  if (pressed && style) { b.style.background = style.color; b.style.color = style.textColor; b.style.borderColor = 'transparent'; }
+  b.addEventListener('click', onClick);
+  return b;
+}
+
+function render() {
+  const root = document.getElementById('forms');
+  root.innerHTML = '';
+  for (const guest of DATA.guests) {
+    const card = document.createElement('div'); card.className = 'card';
+    const nm = document.createElement('div'); nm.className = 'gname'; nm.textContent = guest.name; card.appendChild(nm);
+
+    const al = document.createElement('div'); al.className = 'qlabel'; al.textContent = 'Will you attend?'; card.appendChild(al);
+    const att = document.createElement('div'); att.className = 'chips att';
+    for (const v of [['attending', 'Attending'], ['declined', 'Declined']]) {
+      const c = chip(v[1], state[guest.token].rsvp_status === v[0], () => {
+        state[guest.token].rsvp_status = state[guest.token].rsvp_status === v[0] ? 'pending' : v[0];
+        render();
+      });
+      c.setAttribute('data-v', v[0]);
+      att.appendChild(c);
+    }
+    card.appendChild(att);
+
+    for (const q of DATA.questions) {
+      const ql = document.createElement('div'); ql.className = 'qlabel'; ql.textContent = q.label; card.appendChild(ql);
+      const wrap = document.createElement('div'); wrap.className = 'chips';
+      for (const opt of q.options) {
+        const sel = state[guest.token].answers[q.id] === opt.label;
+        wrap.appendChild(chip(opt.label, sel, () => {
+          state[guest.token].answers[q.id] = sel ? undefined : opt.label;
+          render();
+        }, opt));
+      }
+      card.appendChild(wrap);
+    }
+    root.appendChild(card);
+  }
+}
+
+async function save() {
+  const btn = document.getElementById('save');
+  const st = document.getElementById('status');
+  btn.disabled = true; st.className = 'status'; st.textContent = 'Saving…';
+  const responses = DATA.guests.map((guest) => ({
+    token: guest.token,
+    rsvp_status: state[guest.token].rsvp_status,
+    answers: state[guest.token].answers,
+  }));
+  try {
+    const r = await fetch(API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ responses }),
+    });
+    const out = await r.json();
+    if (!r.ok || out.error) throw new Error(out.error || 'Save failed');
+    DATA.guests = out.guests;
+    for (const guest of DATA.guests) {
+      state[guest.token] = { rsvp_status: guest.rsvp_status, answers: Object.assign({}, guest.answers) };
+    }
+    render();
+    st.className = 'status ok'; st.textContent = 'Saved — thank you!';
+  } catch (e) {
+    st.className = 'status err'; st.textContent = (e && e.message) ? e.message : 'Could not save. Please try again.';
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+async function load() {
+  if (!g) { showMessage('This RSVP link is missing its guest information.'); return; }
+  try {
+    const r = await fetch(API + '?g=' + encodeURIComponent(g));
+    const out = await r.json();
+    if (!r.ok || out.error) { showMessage(out.error || 'This RSVP link could not be opened.'); return; }
+    DATA = out;
+    for (const guest of DATA.guests) {
+      state[guest.token] = { rsvp_status: guest.rsvp_status, answers: Object.assign({}, guest.answers) };
+    }
+    document.getElementById('title').textContent = DATA.space.name;
+    if (DATA.space.wedding_date) {
+      const d = new Date(DATA.space.wedding_date + 'T00:00:00');
+      const el = document.getElementById('date');
+      el.textContent = d.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+      el.hidden = false;
+    }
+    if (DATA.space.venue) {
+      const el = document.getElementById('venue');
+      el.textContent = DATA.space.venue; el.hidden = false;
+    }
+    document.getElementById('bar').hidden = false;
+    document.getElementById('save').addEventListener('click', save);
+    render();
+  } catch (e) {
+    showMessage('Could not reach the server. Please check your connection and try again.');
+  }
+}
+
+load();
+</script>
+</body>
+</html>

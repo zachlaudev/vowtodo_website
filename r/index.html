@@ -24,12 +24,18 @@
     line-height:1.5;-webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased}
   .script{font-family:'Dancing Script',cursive;font-weight:700;line-height:1.05}
 
+  .previewbar{position:sticky;top:0;z-index:10;background:var(--gold);color:#3A3222;
+    text-align:center;font-size:13.5px;font-weight:600;letter-spacing:.06em;
+    padding:9px 14px}
+  .previewbar b{text-transform:uppercase;letter-spacing:.14em}
+
   .page{display:grid;grid-template-columns:minmax(0,440px) minmax(0,1fr);min-height:100vh}
 
   /* ---------- Left invite panel ---------- */
   .invite{position:sticky;top:0;align-self:start;height:100vh;overflow:hidden;
     background:var(--sage);color:var(--invite-ink);
     padding:56px 48px;display:flex;flex-direction:column}
+  body.haspreview .invite{top:40px;height:calc(100vh - 40px)}
   .invite .c{position:absolute;border-radius:50%;pointer-events:none}
   .invite .c1{width:340px;height:340px;background:var(--sage-soft);opacity:.45;top:-90px;right:-120px}
   .invite .c2{width:220px;height:220px;background:var(--sage-deep);opacity:.4;bottom:-70px;left:-80px}
@@ -70,11 +76,20 @@
   .pill.going{background:var(--going-bg);color:var(--going-ink)}
   .pill.cant{background:var(--cant-bg);color:var(--cant-ink)}
   .pill.pending{background:var(--pending-bg);color:var(--pending-ink)}
+  .remove{font:inherit;font-size:12.5px;font-weight:600;color:var(--muted);background:none;
+    border:1px solid var(--line);border-radius:999px;padding:6px 12px;cursor:pointer;white-space:nowrap}
+  .remove:hover{color:#B23B2E;border-color:#B23B2E}
 
   .seclab{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
     font-weight:700;margin:20px 0 10px}
 
+  .nameinput{width:100%;font:inherit;font-size:16px;color:var(--ink);
+    background:#fff;border:1.5px solid var(--line);border-radius:15px;padding:14px 16px}
+  .nameinput:focus{outline:none;border-color:var(--accept);box-shadow:inset 0 0 0 1px var(--accept)}
+  .nameinput::placeholder{color:#B9B3A2}
+
   .att{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .att.side3{grid-template-columns:1fr 1fr 1fr}
   .att button{display:flex;align-items:center;justify-content:center;gap:10px;
     border-radius:15px;border:1.5px solid var(--line);background:#fff;padding:15px;
     font:inherit;font-size:15.5px;font-weight:600;color:var(--ink);cursor:pointer;transition:transform .05s}
@@ -83,6 +98,8 @@
     display:grid;place-items:center;color:transparent}
   .att .accept[aria-pressed="true"]{background:var(--accept);border-color:var(--accept);color:#fff}
   .att .decline[aria-pressed="true"]{background:var(--decline);border-color:var(--decline);color:#fff}
+  .att .sidebtn{gap:8px;padding:13px 8px;font-size:14.5px}
+  .att .sidebtn[aria-pressed="true"]{background:var(--sage);border-color:var(--sage);color:#fff}
   .att button[aria-pressed="true"] .rc{background:#fff;border-color:#fff}
   .att .accept[aria-pressed="true"] .rc{color:var(--accept)}
   .att .decline[aria-pressed="true"] .rc{color:var(--decline)}
@@ -105,6 +122,12 @@
     border-radius:14px;padding:14px 16px;font-size:14.5px;margin-top:18px}
   .declined svg{width:17px;height:17px;stroke:#9C5A33;fill:none;stroke-width:1.7;flex:0 0 auto}
 
+  .addperson{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;
+    background:none;border:1.5px dashed #C9C2AE;border-radius:18px;padding:16px;
+    font:inherit;font-size:15px;font-weight:600;color:var(--muted);cursor:pointer;margin:0 0 18px}
+  .addperson:hover{color:var(--sage-deep);border-color:var(--sage)}
+  .addperson svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.2}
+
   .submitbar{position:sticky;bottom:0;padding:16px 0 8px;
     background:linear-gradient(180deg,rgba(240,235,223,0),var(--cream) 38%)}
   .submit{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;
@@ -123,15 +146,18 @@
   @media(max-width:860px){
     .page{grid-template-columns:1fr}
     .invite{position:static;height:auto;min-height:auto;padding:38px 24px 34px}
+    body.haspreview .invite{top:auto;height:auto}
     .invite .spacer{display:none}
     .pre{margin-top:26px}
     .couple{font-size:clamp(44px,13vw,60px)}
     .form{padding:30px 18px 40px}
     .att{grid-template-columns:1fr}
+    .att.side3{grid-template-columns:1fr}
   }
 </style>
 </head>
 <body>
+<div class="previewbar" id="previewbar" hidden><b>Preview</b> · this is how guests see the form — replies are disabled</div>
 <div class="page">
   <aside class="invite" id="invite">
     <span class="c c1"></span><span class="c c2"></span>
@@ -159,16 +185,32 @@
 
 <script>
 // The vowtodo.com page calls the Supabase Edge Function (JSON API) cross-origin.
+// Modes:
+//   ?g=<token>,<token>   named link  — pre-created guests, update in place
+//   ?s=<space_token>     generic link — visitor types their own name (+side); each submit creates new guests
+//   &preview=1           owner preview — form renders and can be tapped, but sending is disabled
 const API = 'https://ejfddddwqbjebwffgadc.supabase.co/functions/v1/rsvp';
 
 const params = new URLSearchParams(location.search);
 const g = params.get('g') || '';
+const s = params.get('s') || '';
+const PREVIEW = params.get('preview') === '1';
+let GENERIC = !g && !!s;
 let DATA = null;
 const state = {};
+let ORDER = [];         // generic mode: block ids in display order
+let nextBlock = 1;
+const MAX_PEOPLE = 10;  // matches the API's per-submission cap
 const AV = ['#7E8C57', '#BE7C52', '#C2A36B', '#6E7C4A', '#9A6A8C'];
+const SIDE_OPTS = [
+  { value: 'bride', label: '👰 Bride’s guest' },
+  { value: 'groom', label: '🤵 Groom’s guest' },
+  { value: 'both',  label: '💑 Guest of both' },
+];
 
 const CHECK = '<svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 6"/></svg>';
 const CROSS = '<svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+const PLUS  = '<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>';
 
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function firstName(n){return String(n||'').trim().split(/\s+/)[0]||'there';}
@@ -216,11 +258,106 @@ function statusPill(s){
   return '<span class="pill pending">Awaiting reply</span>';
 }
 
+/* --------- shared card sections (attendance + questions) --------- */
+
+function appendQuestionSections(card, st, name){
+  if(st.rsvp_status==='declined'){
+    const d = document.createElement('div'); d.className = 'declined';
+    d.innerHTML = CROSS.replace('viewBox','aria-hidden="true" viewBox')
+      + '<span>We\'ll miss you'+(name?', '+esc(firstName(name)):'')+' — no further questions for you.</span>';
+    card.appendChild(d);
+    return;
+  }
+  for(const q of DATA.questions){
+    const opts = Array.isArray(q.options) ? q.options : [];
+    if(!opts.length) continue; // only render choice questions
+    const ql = document.createElement('div'); ql.className = 'seclab'; ql.textContent = q.label; card.appendChild(ql);
+    const list = document.createElement('div'); list.className = 'optlist';
+    const multi = q.field_type === 'multi_select';
+    const cur = st.answers[q.id];
+    for(const opt of opts){
+      const sel = multi ? (Array.isArray(cur) && cur.includes(opt.label)) : (cur === opt.label);
+      list.appendChild(optRow(opt, sel, st, q.id, multi));
+    }
+    card.appendChild(list);
+  }
+}
+
+function appendAttendance(card, st){
+  const sec = document.createElement('div'); sec.className = 'seclab'; sec.textContent = 'Will you be attending?';
+  card.appendChild(sec);
+  const att = document.createElement('div'); att.className = 'att';
+  att.appendChild(attBtn('accept','attending','Joyfully accept', st));
+  att.appendChild(attBtn('decline','declined','Regretfully decline', st));
+  card.appendChild(att);
+}
+
+/* ----------------------------- render ----------------------------- */
+
 function render(){
   const root = document.getElementById('guests');
   root.innerHTML = '';
-  const total = DATA.guests.length;
 
+  if(GENERIC){
+    ORDER.forEach((id, gi) => {
+      const st = state[id];
+      const card = document.createElement('div'); card.className = 'guest';
+
+      // header
+      const head = document.createElement('div'); head.className = 'ghead';
+      head.innerHTML =
+        '<span class="avatar" data-av style="background:'+AV[gi%AV.length]+'">'+esc(initial(st.name))+'</span>'
+        + '<div class="meta"><div class="gname">'+(ORDER.length>1?('Person '+(gi+1)):'Your reply')+'</div>'
+        + '<div class="gsub">Fill in your details below</div></div>'
+        + statusPill(st.rsvp_status);
+      card.appendChild(head);
+      if(ORDER.length>1){
+        const rm = document.createElement('button'); rm.type='button'; rm.className='remove'; rm.textContent='Remove';
+        rm.addEventListener('click', ()=>{ ORDER = ORDER.filter(x=>x!==id); delete state[id]; render(); });
+        head.appendChild(rm);
+      }
+
+      // name
+      const nl = document.createElement('div'); nl.className='seclab'; nl.textContent='Your name';
+      card.appendChild(nl);
+      const inp = document.createElement('input');
+      inp.className='nameinput'; inp.type='text'; inp.placeholder='Full name';
+      inp.maxLength = 80; inp.autocomplete='name'; inp.value = st.name;
+      inp.addEventListener('input', ()=>{
+        st.name = inp.value;
+        const av = card.querySelector('[data-av]'); if(av) av.textContent = initial(st.name);
+      });
+      card.appendChild(inp);
+
+      // side
+      const sl = document.createElement('div'); sl.className='seclab'; sl.textContent='Whose guest are you?';
+      card.appendChild(sl);
+      const sideRow = document.createElement('div'); sideRow.className='att side3';
+      for(const so of SIDE_OPTS){
+        const b = document.createElement('button'); b.type='button'; b.className='sidebtn';
+        b.setAttribute('aria-pressed', st.side===so.value?'true':'false');
+        b.textContent = so.label;
+        b.addEventListener('click', ()=>{ st.side = so.value; render(); });
+        sideRow.appendChild(b);
+      }
+      card.appendChild(sideRow);
+
+      appendAttendance(card, st);
+      appendQuestionSections(card, st, st.name);
+      root.appendChild(card);
+    });
+
+    if(ORDER.length < MAX_PEOPLE){
+      const add = document.createElement('button'); add.type='button'; add.className='addperson';
+      add.innerHTML = PLUS + '<span>RSVP for another person</span>';
+      add.addEventListener('click', ()=>{ addBlock(); render(); });
+      root.appendChild(add);
+    }
+    updateSubmitLabel();
+    return;
+  }
+
+  const total = DATA.guests.length;
   DATA.guests.forEach((guest, gi) => {
     const st = state[guest.token];
     const card = document.createElement('div'); card.className = 'guest';
@@ -234,64 +371,36 @@ function render(){
       + statusPill(st.rsvp_status);
     card.appendChild(head);
 
-    // attendance
-    const sec = document.createElement('div'); sec.className = 'seclab'; sec.textContent = 'Will you be attending?';
-    card.appendChild(sec);
-    const att = document.createElement('div'); att.className = 'att';
-    att.appendChild(attBtn('accept','attending','Joyfully accept', st.rsvp_status==='attending', guest.token));
-    att.appendChild(attBtn('decline','declined','Regretfully decline', st.rsvp_status==='declined', guest.token));
-    card.appendChild(att);
-
-    if(st.rsvp_status==='declined'){
-      const d = document.createElement('div'); d.className = 'declined';
-      d.innerHTML = CROSS.replace('viewBox','aria-hidden="true" viewBox')
-        + '<span>We\'ll miss you, '+esc(firstName(guest.name))+' — no further questions for you.</span>';
-      card.appendChild(d);
-    } else {
-      for(const q of DATA.questions){
-        const opts = Array.isArray(q.options) ? q.options : [];
-        if(!opts.length) continue; // only render choice questions
-        const ql = document.createElement('div'); ql.className = 'seclab'; ql.textContent = q.label; card.appendChild(ql);
-        const list = document.createElement('div'); list.className = 'optlist';
-        const multi = q.field_type === 'multi_select';
-        const cur = st.answers[q.id];
-        for(const opt of opts){
-          const sel = multi ? (Array.isArray(cur) && cur.includes(opt.label)) : (cur === opt.label);
-          list.appendChild(optRow(opt, sel, guest.token, q.id, multi));
-        }
-        card.appendChild(list);
-      }
-    }
+    appendAttendance(card, st);
+    appendQuestionSections(card, st, guest.name);
     root.appendChild(card);
   });
 }
 
-function attBtn(cls, value, label, pressed, token){
+function attBtn(cls, value, label, st){
   const b = document.createElement('button'); b.type='button'; b.className=cls;
-  b.setAttribute('aria-pressed', pressed?'true':'false');
+  b.setAttribute('aria-pressed', st.rsvp_status===value?'true':'false');
   b.innerHTML = '<span class="rc">'+(value==='attending'?CHECK:CROSS)+'</span><span>'+esc(label)+'</span>';
   b.addEventListener('click', ()=>{
-    const s = state[token];
-    s.rsvp_status = (s.rsvp_status===value) ? 'pending' : value;
+    st.rsvp_status = (st.rsvp_status===value) ? 'pending' : value;
     render();
   });
   return b;
 }
 
-function optRow(opt, sel, token, qid, multi){
+function optRow(opt, sel, st, qid, multi){
   const b = document.createElement('button'); b.type='button'; b.className='opt';
   b.setAttribute('aria-pressed', sel?'true':'false');
   b.innerHTML = '<span class="sw" style="background:'+esc(opt.color||'#CBC6B6')+'"></span>'
     + '<span class="lbl">'+esc(opt.label)+'</span>'
     + '<span class="tick">'+CHECK+'</span>';
   b.addEventListener('click', ()=>{
-    const s = state[token];
     if(multi){
-      let arr = Array.isArray(s.answers[qid]) ? s.answers[qid].slice() : [];
+      let arr = Array.isArray(st.answers[qid]) ? st.answers[qid].slice() : [];
       if(arr.includes(opt.label)) arr = arr.filter(x=>x!==opt.label); else arr.push(opt.label);
-      s.answers[qid] = arr.length ? arr : undefined;
+      st.answers[qid] = arr.length ? arr : undefined;
     } else {
-      s.answers[qid] = (s.answers[qid]===opt.label) ? undefined : opt.label;
+      st.answers[qid] = (st.answers[qid]===opt.label) ? undefined : opt.label;
     }
     render();
   });
@@ -303,19 +412,62 @@ function submitLabel(n){
   if(n===2) return 'Send both replies';
   return 'Send all '+n+' replies';
 }
+function updateSubmitLabel(){
+  const n = GENERIC ? ORDER.length : (DATA ? DATA.guests.length : 1);
+  document.getElementById('save').firstChild.textContent = submitLabel(n)+' ';
+}
+
+function addBlock(){
+  const id = 'new_'+(nextBlock++);
+  state[id] = { name:'', side:'both', rsvp_status:'pending', answers:{} };
+  ORDER.push(id);
+}
+
+/* ------------------------------ save ------------------------------ */
 
 async function save(){
+  if(PREVIEW) return;
   const btn = document.getElementById('save'), st = document.getElementById('status');
+
+  let bodyObj;
+  if(GENERIC){
+    const people = ORDER.map(id => state[id]).filter(p => p.name.trim().length > 0);
+    if(people.length === 0){
+      st.className='hint err'; st.textContent = 'Please fill in your name first.';
+      return;
+    }
+    bodyObj = { space_token: s, responses: people.map(p => ({
+      name: p.name.trim(), side: p.side, rsvp_status: p.rsvp_status, answers: p.answers,
+    })) };
+  } else {
+    bodyObj = { responses: DATA.guests.map(guest => ({
+      token: guest.token,
+      rsvp_status: state[guest.token].rsvp_status,
+      answers: state[guest.token].answers,
+    })) };
+  }
+
   btn.disabled = true; st.className='hint'; st.textContent = 'Sending…';
-  const responses = DATA.guests.map(guest => ({
-    token: guest.token,
-    rsvp_status: state[guest.token].rsvp_status,
-    answers: state[guest.token].answers,
-  }));
   try{
-    const r = await fetch(API, {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({responses})});
+    const r = await fetch(API, {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(bodyObj)});
     const out = await r.json();
     if(!r.ok || out.error) throw new Error(out.error||'Save failed');
+
+    if(GENERIC && Array.isArray(out.created_tokens) && out.created_tokens.length){
+      // Swap to the personal (named) link so revisiting / re-submitting updates, not duplicates.
+      GENERIC = false;
+      history.replaceState(null, '', location.pathname + '?g=' + out.created_tokens.join(','));
+      DATA = out;
+      for(const k of Object.keys(state)) delete state[k];
+      for(const guest of DATA.guests){
+        state[guest.token] = {rsvp_status:guest.rsvp_status, answers:Object.assign({}, guest.answers)};
+      }
+      buildNamedChrome();
+      render();
+      st.className='hint ok'; st.textContent = 'Reply sent — this page is now your personal RSVP link. Bookmark it to make changes.';
+      return;
+    }
+
     if(Array.isArray(out.guests)){
       DATA.guests = out.guests;
       for(const guest of DATA.guests){
@@ -326,32 +478,62 @@ async function save(){
     st.className='hint ok'; st.textContent = 'Replies sent — thank you!';
   }catch(e){
     st.className='hint err'; st.textContent = (e&&e.message)?e.message:'Could not send. Please try again.';
-  }finally{ btn.disabled = false; }
+  }finally{ btn.disabled = PREVIEW; }
+}
+
+/* ------------------------------ load ------------------------------ */
+
+function buildNamedChrome(){
+  const n = DATA.guests.length;
+  document.getElementById('lead').innerHTML =
+    'This invitation covers <b>'+n+' guest'+(n===1?'':'s')+'</b> — please reply for each below.';
+  const covers = DATA.guests.map((gu,i)=>
+    '<span class="who"><span class="avatar" style="background:'+AV[i%AV.length]+'">'+esc(initial(gu.name))+'</span>'+esc(gu.name)+'</span>'
+  ).join('');
+  document.getElementById('covers').innerHTML = '<span class="lab">This link covers</span>'+covers;
+  updateSubmitLabel();
+}
+
+function buildGenericChrome(){
+  document.getElementById('lead').innerHTML =
+    'Let us know if you can make it — <b>fill in your name</b> and reply below.';
+  document.getElementById('covers').innerHTML = '';
+  updateSubmitLabel();
+}
+
+function enablePreview(){
+  document.getElementById('previewbar').hidden = false;
+  document.body.classList.add('haspreview');
+  const btn = document.getElementById('save');
+  btn.disabled = true;
+  const st = document.getElementById('status');
+  st.className='hint'; st.textContent = 'Preview mode — sending is disabled.';
 }
 
 async function load(){
-  if(!g){ notice('This RSVP link is missing its guest information.'); return; }
+  if(!g && !s){ notice('This RSVP link is missing its guest information.'); return; }
   try{
-    const r = await fetch(API + '?g=' + encodeURIComponent(g));
+    const qs = GENERIC ? ('?s='+encodeURIComponent(s)) : ('?g='+encodeURIComponent(g));
+    const r = await fetch(API + qs);
     const out = await r.json();
     if(!r.ok || out.error){ notice(out.error||'This RSVP link could not be opened.'); return; }
     DATA = out;
-    for(const guest of DATA.guests){
-      state[guest.token] = {rsvp_status:guest.rsvp_status, answers:Object.assign({}, guest.answers)};
-    }
     buildInvite(DATA.space);
-    const n = DATA.guests.length;
-    document.getElementById('lead').innerHTML =
-      'This invitation covers <b>'+n+' guest'+(n===1?'':'s')+'</b> — please reply for each below.';
-    const covers = DATA.guests.map((gu,i)=>
-      '<span class="who"><span class="avatar" style="background:'+AV[i%AV.length]+'">'+esc(initial(gu.name))+'</span>'+esc(gu.name)+'</span>'
-    ).join('');
-    document.getElementById('covers').innerHTML = '<span class="lab">This link covers</span>'+covers;
-    const btn = document.getElementById('save');
-    btn.firstChild.textContent = submitLabel(n)+' ';
-    btn.addEventListener('click', save);
+
+    if(GENERIC){
+      addBlock();
+      buildGenericChrome();
+    } else {
+      for(const guest of DATA.guests){
+        state[guest.token] = {rsvp_status:guest.rsvp_status, answers:Object.assign({}, guest.answers)};
+      }
+      buildNamedChrome();
+    }
+
+    document.getElementById('save').addEventListener('click', save);
     document.getElementById('bar').hidden = false;
     render();
+    if(PREVIEW) enablePreview();
   }catch(e){
     notice('Could not reach the server. Please check your connection and try again.');
   }

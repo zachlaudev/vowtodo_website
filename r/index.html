@@ -106,6 +106,22 @@
   .att .rc svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:3}
 
   .optlist{display:flex;flex-direction:column;gap:10px}
+  .qblock{margin-top:18px;padding-top:4px;border-top:1px solid var(--line)}
+  .qblock .seclab{margin-top:14px}
+  /* submission-received overlay */
+  .successOverlay{position:fixed;inset:0;background:rgba(46,42,34,.55);display:flex;align-items:center;
+    justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s ease;z-index:60}
+  .successOverlay.show{opacity:1;pointer-events:auto}
+  .successCard{background:var(--card);border-radius:24px;padding:34px 30px 28px;text-align:center;
+    max-width:320px;margin:0 20px;transform:scale(.92);transition:transform .25s ease;
+    box-shadow:0 18px 50px rgba(0,0,0,.25)}
+  .successOverlay.show .successCard{transform:scale(1)}
+  .successTick{width:64px;height:64px;border-radius:50%;background:var(--accept);margin:0 auto 14px;
+    display:flex;align-items:center;justify-content:center;animation:tickpop .5s cubic-bezier(.2,1.4,.4,1)}
+  @keyframes tickpop{0%{transform:scale(.3)}70%{transform:scale(1.12)}100%{transform:scale(1)}}
+  .successTick svg{width:30px;height:30px;stroke:#fff;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+  .successTitle{font-size:20px;font-weight:800;color:var(--ink);margin:0 0 6px}
+  .successSub{font-size:13.5px;line-height:1.45;color:var(--muted);margin:0}
   .opt{display:flex;align-items:center;gap:13px;width:100%;text-align:left;
     background:#fff;border:1.5px solid var(--line);border-radius:15px;padding:14px 16px;
     font:inherit;font-size:15.5px;color:var(--ink);cursor:pointer;transition:transform .05s}
@@ -271,7 +287,8 @@ function appendQuestionSections(card, st, name){
   for(const q of DATA.questions){
     const opts = Array.isArray(q.options) ? q.options : [];
     if(!opts.length) continue; // only render choice questions
-    const ql = document.createElement('div'); ql.className = 'seclab'; ql.textContent = q.label; card.appendChild(ql);
+    const block = document.createElement('div'); block.className = 'qblock';
+    const ql = document.createElement('div'); ql.className = 'seclab'; ql.textContent = q.label; block.appendChild(ql);
     const list = document.createElement('div'); list.className = 'optlist';
     const multi = q.field_type === 'multi_select';
     const cur = st.answers[q.id];
@@ -279,7 +296,8 @@ function appendQuestionSections(card, st, name){
       const sel = multi ? (Array.isArray(cur) && cur.includes(opt.label)) : (cur === opt.label);
       list.appendChild(optRow(opt, sel, st, q.id, multi));
     }
-    card.appendChild(list);
+    block.appendChild(list);
+    card.appendChild(block);
   }
 }
 
@@ -465,6 +483,7 @@ async function save(){
       buildNamedChrome();
       render();
       st.className='hint ok'; st.textContent = 'Reply sent — this page is now your personal RSVP link. Bookmark it to make changes.';
+      showSuccess('This page is now your personal RSVP link — bookmark it to make changes anytime.');
       return;
     }
 
@@ -476,9 +495,31 @@ async function save(){
       render();
     }
     st.className='hint ok'; st.textContent = 'Replies sent — thank you!';
+    showSuccess('Your RSVP has been received. You can update it from this page anytime.');
   }catch(e){
     st.className='hint err'; st.textContent = (e&&e.message)?e.message:'Could not send. Please try again.';
   }finally{ btn.disabled = PREVIEW; }
+}
+
+/* --------------------- submission-received overlay ------------------ */
+
+let successEl = null;
+function showSuccess(sub){
+  if(!successEl){
+    successEl = document.createElement('div');
+    successEl.className = 'successOverlay';
+    successEl.innerHTML = '<div class="successCard">'
+      + '<div class="successTick"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l5 5L19.5 7"/></svg></div>'
+      + '<p class="successTitle">Reply sent!</p>'
+      + '<p class="successSub"></p>'
+      + '</div>';
+    successEl.addEventListener('click', () => successEl.classList.remove('show'));
+    document.body.appendChild(successEl);
+  }
+  successEl.querySelector('.successSub').textContent = sub || 'Your RSVP has been received.';
+  requestAnimationFrame(() => successEl.classList.add('show'));
+  clearTimeout(successEl._t);
+  successEl._t = setTimeout(() => successEl.classList.remove('show'), 3400);
 }
 
 /* ------------------------------ load ------------------------------ */

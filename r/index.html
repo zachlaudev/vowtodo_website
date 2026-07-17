@@ -128,11 +128,8 @@
   .opt:active{transform:scale(.99)}
   .opt .sw{width:22px;height:22px;border-radius:7px;flex:0 0 auto}
   .opt .lbl{flex:1 1 auto;font-weight:500}
-  .opt .tick{width:20px;height:20px;border-radius:999px;border:2px solid #CBC6B6;flex:0 0 auto;
-    display:grid;place-items:center;color:transparent}
-  .opt .tick svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:3}
   .opt[aria-pressed="true"]{border-color:var(--accept);box-shadow:inset 0 0 0 1px var(--accept)}
-  .opt[aria-pressed="true"] .tick{background:var(--accept);border-color:var(--accept);color:#fff}
+
 
   .declined{display:flex;align-items:center;gap:10px;background:#F6ECE2;color:#9C5A33;
     border-radius:14px;padding:14px 16px;font-size:14.5px;margin-top:18px}
@@ -144,7 +141,7 @@
   .addperson:hover{color:var(--sage-deep);border-color:var(--sage)}
   .addperson svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.2}
 
-  .submitbar{position:sticky;bottom:0;padding:16px 0 8px;
+  .submitbar{padding:20px 0 8px;
     background:linear-gradient(180deg,rgba(240,235,223,0),var(--cream) 38%)}
   .submit{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;
     background:var(--ink-btn);color:var(--invite-ink);border:0;border-radius:999px;padding:18px;
@@ -411,8 +408,7 @@ function attBtn(cls, value, label, st){
 function optRow(opt, sel, st, qid, multi){
   const b = document.createElement('button'); b.type='button'; b.className='opt';
   b.setAttribute('aria-pressed', sel?'true':'false');
-  b.innerHTML = '<span class="lbl">'+esc(opt.label)+'</span>'
-    + '<span class="tick">'+CHECK+'</span>';
+  b.innerHTML = '<span class="lbl">'+esc(opt.label)+'</span>';
   b.addEventListener('click', ()=>{
     if(multi){
       let arr = Array.isArray(st.answers[qid]) ? st.answers[qid].slice() : [];

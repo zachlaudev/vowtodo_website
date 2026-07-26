@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>VowToDo — Wedding Planning App | Checklist, Budget & Guest RSVPs</title>
 <meta name="description" content="VowToDo is a collaborative wedding planning app for iPhone. Plan your checklist, budget, guest list, RSVPs and day-of schedule together with your partner, family and crew.">
+<link rel="icon" href="/img/favicon.png" sizes="any">
+<link rel="apple-touch-icon" href="/img/favicon.png">
 <link rel="canonical" href="https://vowtodo.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="VowToDo">
@@ -75,6 +77,30 @@
   .row.done .cb:after{content:"";position:absolute;left:5px;top:1px;width:5px;height:10px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
   .row.done span{color:var(--muted);text-decoration:line-through}
   .row .tag{margin-left:auto;font-size:10.5px;color:var(--muted)}
+
+
+  /* --- app walkthrough language: worry-chip cloud (screen 1) --- */
+  .chipcloud{display:flex;flex-direction:column;align-items:center;gap:8px;margin:22px 0 0}
+  .chiprow{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+  .chip{font-family:'Caveat',cursive;font-weight:700;font-size:16px;line-height:1.15;
+    padding:6px 12px;border-radius:9px;white-space:nowrap;display:inline-block}
+  .couple{display:block;margin:14px auto 0;max-width:300px;width:100%;height:auto}
+  .deepbreath{font-family:'Lexend';font-size:16px;color:var(--terracotta);margin:10px 0 0;font-weight:500}
+
+  /* --- bento tiles (screen 2) --- */
+  .bento{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:760px;margin:0 auto}
+  .tile{border-radius:24px;padding:20px;position:relative;overflow:hidden;min-height:210px;
+    display:flex;flex-direction:column;box-shadow:0 8px 22px rgba(44,42,37,.10)}
+  .tile b{font-family:'Bricolage Grotesque','Lexend',sans-serif;font-weight:700;font-size:25px;
+    letter-spacing:-.02em;line-height:1.1}
+  .tile img{width:78%;max-width:210px;height:auto;margin-top:auto;align-self:center;display:block}
+  .t-check{background:#7E8C57;color:#F7F1E3;transform:rotate(-1.2deg)}
+  .t-sched{background:#A29AD0;color:#FBF6EC;transform:rotate(1.2deg)}
+  .t-rsvp{background:#2C2A25;color:#F3ECDC;transform:rotate(-1deg)}
+  .t-budget{background:#C0835E;color:#FBF6EC;transform:rotate(1deg)}
+  .quiet{font-family:'Caveat',cursive;font-weight:700;font-size:22px;color:var(--olive);
+    text-align:right;max-width:760px;margin:16px auto 0}
+  @media(max-width:620px){.bento{grid-template-columns:1fr}.tile{min-height:180px}}
 
   /* strip */
   .strip{background:var(--cream-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0}
@@ -176,8 +202,9 @@
   <div class="wrap heroin">
     <div>
       <p class="eyebrow">Wedding planning, together</p>
-      <h1>Plan your wedding — and everyone in it — in one calm place.</h1>
-      <p class="lede">Checklist, budget, guest list, RSVPs and a day-of schedule, all in sync with your partner, family and crew.</p>
+      <h1>Wedding plans<br>can get messy.</h1>
+      <p class="deepbreath">okay — deep breath.</p>
+      <p class="lede">Checklist, budget, the day itself, every RSVP — together at last, in sync with your partner, family and crew.</p>
       <div class="cta">
         <a class="appstore" href="https://apps.apple.com/sg/app/vowtodo-wedding-planner/id6788746982" target="_blank" rel="noopener">
           <svg viewBox="0 0 384 512"><path fill="currentColor" d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zM262.1 104.5c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
@@ -187,17 +214,9 @@
       </div>
       <p class="trial"><b>7-day free trial</b> · everyone you invite joins free</p>
     </div>
-    <div class="phone" aria-hidden="true">
-      <div class="screen">
-        <div class="scr-top"><div class="k">12 months before</div><div class="t script">Our Checklist</div></div>
-        <div class="scr-body">
-          <div class="row done"><span class="cb"></span><span>Set the date</span><span class="tag">Done</span></div>
-          <div class="row done"><span class="cb"></span><span>Book the venue</span><span class="tag">Done</span></div>
-          <div class="row"><span class="cb"></span><span>Draft the guest list</span><span class="tag">You</span></div>
-          <div class="row"><span class="cb"></span><span>Choose a caterer</span><span class="tag">Mum</span></div>
-          <div class="row"><span class="cb"></span><span>Send save-the-dates</span><span class="tag">Sep</span></div>
-        </div>
-      </div>
+    <div class="heroart">
+      <div class="chipcloud" aria-hidden="true"><div class="chiprow"><span class="chip" style="background:#DCE0C2;color:#5C6A3A">write our vows</span><span class="chip" style="background:#EDE3D0;color:#7A7060">seating chart</span><span class="chip" style="background:#F0E4C4;color:#8A6A2F">cake tasting</span></div><div class="chiprow"><span class="chip" style="background:#D2E2CE;color:#4C7050">guest list</span><span class="chip" style="background:#F4D6D2;color:#A85046">chase RSVPs</span><span class="chip" style="background:#E4D7EC;color:#6E4F86">save the dates</span></div><div class="chiprow"><span class="chip" style="background:#EDE3D0;color:#7A7060">first dance</span><span class="chip" style="background:#D2E2CE;color:#4C7050">florist quote</span><span class="chip" style="background:#DCE0C2;color:#5C6A3A">hotel block</span></div></div>
+      <img class="couple" src="/img/couple.webp" width="600" height="350" alt="Illustration of a couple embracing" loading="eager">
     </div>
   </div>
 </section>
@@ -212,8 +231,16 @@
 
 <section class="sec" id="features">
   <div class="wrap">
-    <h2>Everything a wedding needs, in one place</h2>
-    <p class="sub">VowToDo keeps the plans — and the people helping — together, so nothing slips through the cracks.</p>
+    <h2>We can help.</h2>
+    <p class="sub">Checklist, budget, the day itself, every RSVP — together at last.</p>
+    <div class="bento">
+      <div class="tile t-check"><b>Checklist</b><img src="/img/checklist_onboarding.png" alt="Wedding checklist illustration" loading="lazy" width="520" height="520"></div>
+      <div class="tile t-sched"><b>Schedule</b><img src="/img/schedule_onboarding.png" alt="Day-of schedule illustration" loading="lazy" width="520" height="520"></div>
+      <div class="tile t-rsvp"><b>RSVPs</b><img src="/img/rsvp_onboarding.png" alt="Guest RSVP illustration" loading="lazy" width="520" height="520"></div>
+      <div class="tile t-budget"><b>Budget</b><img src="/img/budget_onboarding.png" alt="Wedding budget illustration" loading="lazy" width="520" height="520"></div>
+    </div>
+    <p class="quiet">— all in one quiet place</p>
+    <div style="height:44px"></div>
     <div class="grid">
       <div class="feat"><div class="ic"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><h3>Smart checklist</h3><p>Tasks organised by how far out they are — from “12 months before” to the big day — tailored to your wedding.</p></div>
       <div class="feat"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><h3>Budget tracker</h3><p>See totals, what’s spent and what’s left at a glance, so the numbers never surprise you.</p></div>
@@ -227,8 +254,8 @@
 
 <section class="sec how" id="how">
   <div class="wrap">
-    <h2>How it works</h2>
-    <p class="sub">From “where do we even start” to a shared plan in minutes.</p>
+    <h2>Plan it with your people.</h2>
+    <p class="sub">Invite loved ones as crew — or hand a trusted few the admin keys.</p>
     <div class="steps">
       <div class="step"><div class="n">1</div><h3>Create your space</h3><p>Answer a few questions and start with a checklist tailored to your wedding — or a blank canvas.</p></div>
       <div class="step"><div class="n">2</div><h3>Invite your people</h3><p>Bring in your partner, family and friends for free, and give a trusted few the admin keys.</p></div>

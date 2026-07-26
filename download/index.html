@@ -11,10 +11,12 @@
 <meta name="theme-color" content="#7B8A56">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Caveat:wght@600;700&family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root{--sage:#7B8A56;--sage-deep:#6B7A48;--gold:#C2A36B;--cream:#F0EBDF;
-        --ink:#2E2A22;--muted:#7A7566;--line:#E5DECE;--card:#FFFFFF;}
+  :root{--sand:#F1E8D6;--surface:#EADFC9;--sand-2:#F5EEDF;--line:#DDD1BA;--dark:#2C2A25;--dark-2:#3A372F;--on-dark:#F3ECDC;--on-dark-muted:#B7AE99;--ink:#2C2A25;--muted:#8A8273;--faint:#B3AB99;--olive:#7E8C57;--olive-dark:#5C6A3A;--olive-tint:#E5E7CF;--on-olive:#F7F1E3;--gold:#C8A86B;--terracotta:#C0835E;--terracotta-dark:#A66A47;--lavender:#CBC7E6;--lavender-dark:#5E5887;--white:#FBF6EC;--sage:#7E8C57;--sage-deep:#5C6A3A;--sage-soft:#8C9A6A;--cream:#F1E8D6;--cream-2:#F5EEDF;--card:#FBF6EC;--accept:#7E8C57;--decline:#C0835E;--ink-btn:#2C2A25;--invite-ink:#F3ECDC;--going-bg:#E5E7CF;--going-ink:#5C6A3A;--cant-bg:#F1E1D5;--cant-ink:#A66A47;--pending-bg:#EADFC9;--pending-ink:#8A8273;}
+  /* app-matched typography: Bricolage display + Lexend body + Caveat accents */
+  h1,h2,h3,.display{font-family:'Bricolage Grotesque','Lexend',system-ui,sans-serif;font-weight:700;letter-spacing:-.02em}
+  .accent-sub{color:var(--terracotta);font-weight:500}
   *{box-sizing:border-box}
   html,body{margin:0}
   body{background:var(--cream);color:var(--ink);
@@ -31,7 +33,7 @@
   .mark{width:66px;height:66px;border-radius:20px;background:#20201C;margin:0 auto 16px;
     display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(0,0,0,.2)}
   .mark svg{width:38px;height:38px;fill:none;stroke:#F6F2E7;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-  .brand{font-family:'Dancing Script',cursive;font-weight:700;font-size:52px;line-height:1;margin:0 0 8px;color:#FBF8EF}
+  .brand{font-family:'Caveat',cursive;font-weight:700;font-size:52px;line-height:1;margin:0 0 8px;color:#FBF8EF}
   .tag{font-size:18px;font-weight:500;margin:0 0 6px}
   .sub{font-size:14.5px;font-weight:300;opacity:.92;margin:0 auto;max-width:30ch}
 
@@ -59,7 +61,6 @@
   footer a{color:var(--muted)}
   @media(max-width:480px){.hero{padding:38px 22px 30px}.brand{font-size:46px}}
 </style>
-<link rel="canonical" href="https://vowtodo.com/download">
 </head>
 <body>
   <main class="wrap">

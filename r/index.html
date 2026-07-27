@@ -3,198 +3,302 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>RSVP — VowToDo</title>
+<meta name="robots" content="noindex">
+<title>RSVP</title>
+<link rel="icon" href="/img/favicon-32.png" sizes="32x32">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Caveat:wght@600;700&family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,700&family=Caveat:wght@600&family=Lexend:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{--sand:#F1E8D6;--surface:#EADFC9;--sand-2:#F5EEDF;--line:#DDD1BA;--dark:#2C2A25;--dark-2:#3A372F;--on-dark:#F3ECDC;--on-dark-muted:#B7AE99;--ink:#2C2A25;--muted:#8A8273;--faint:#B3AB99;--olive:#7E8C57;--olive-dark:#5C6A3A;--olive-tint:#E5E7CF;--on-olive:#F7F1E3;--gold:#C8A86B;--terracotta:#C0835E;--terracotta-dark:#A66A47;--lavender:#CBC7E6;--lavender-dark:#5E5887;--white:#FBF6EC;--sage:#7E8C57;--sage-deep:#5C6A3A;--sage-soft:#8C9A6A;--cream:#F1E8D6;--cream-2:#F5EEDF;--card:#FBF6EC;--accept:#7E8C57;--decline:#C0835E;--ink-btn:#2C2A25;--invite-ink:#F3ECDC;--going-bg:#E5E7CF;--going-ink:#5C6A3A;--cant-bg:#F1E1D5;--cant-ink:#A66A47;--pending-bg:#EADFC9;--pending-ink:#8A8273;}
-  /* app-matched typography: Bricolage display + Lexend body + Caveat accents */
-  h1,h2,h3,.display{font-family:'Bricolage Grotesque','Lexend',system-ui,sans-serif;font-weight:700;letter-spacing:-.02em}
-  .accent-sub{color:var(--terracotta);font-weight:500}
-  *{box-sizing:border-box}
-  html,body{margin:0}
-  body{background:var(--cream);color:var(--ink);
-    font-family:'Lexend',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    line-height:1.5;-webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased}
-  .script{font-family:'Caveat',cursive;font-weight:700;line-height:1.05}
+/* ============================================================
+   VowToDo guest RSVP — printed-stationery register.
+   Colorways ("card stocks") are owner-picked: sand / olive / ink.
+   ============================================================ */
+:root{
+  --sand:#F1E8D6; --surface:#EADFC9; --white:#FBF6EC; --line:#DDD1BA;
+  --ink-c:#2C2A25; --muted-c:#8A8273; --faint:#B3AB99;
+  --olive:#7E8C57; --olive-dark:#5C6A3A; --olive-tint:#E5E7CF;
+  --gold:#C8A86B; --terracotta:#C0835E; --terracotta-dark:#A66A47;
+  --lavender:#CBC7E6; --on-dark:#F3ECDC; --on-dark-muted:#B7AE99;
+  --dark:#2C2A25; --danger:#B5564A;
+}
+body{
+  --bg:var(--sand); --tx:var(--ink-c); --mut:var(--muted-c);
+  --rule:rgba(44,42,37,.30); --hair:rgba(44,42,37,.16);
+  --accept:var(--olive-dark); --decline:var(--terracotta-dark);
+  --mat:var(--white); --onfill:var(--on-dark);
+  --focus:var(--olive-dark); --btn-ink:var(--ink-c); --btn-tx:var(--on-dark);
+}
+body[data-way="olive"]{
+  --bg:#55633A; --tx:var(--on-dark); --mut:rgba(243,236,220,.62);
+  --rule:rgba(243,236,220,.38); --hair:rgba(243,236,220,.20);
+  --accept:var(--gold); --decline:#D8B08A;
+  --mat:rgba(243,236,220,.10); --onfill:#55633A;
+  --focus:var(--gold); --btn-ink:var(--on-dark); --btn-tx:#55633A;
+}
+body[data-way="ink"]{
+  --bg:#2C2A25; --tx:var(--on-dark); --mut:var(--on-dark-muted);
+  --rule:rgba(243,236,220,.36); --hair:rgba(243,236,220,.18);
+  --accept:var(--gold); --decline:#C89B78;
+  --mat:rgba(243,236,220,.08); --onfill:#2C2A25;
+  --focus:var(--gold); --btn-ink:var(--on-dark); --btn-tx:#2C2A25;
+}
 
-  .previewbar{position:sticky;top:0;z-index:10;background:var(--gold);color:#3A3222;
-    text-align:center;font-size:13.5px;font-weight:600;letter-spacing:.06em;
-    padding:9px 14px}
-  .previewbar b{text-transform:uppercase;letter-spacing:.14em}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:var(--bg); color:var(--tx);
+  font-family:'Lexend',system-ui,sans-serif; font-weight:300;
+  line-height:1.6; -webkit-text-size-adjust:100%; -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--gold); color:#2C2A25}
+button{-webkit-tap-highlight-color:transparent}
 
-  .page{display:grid;grid-template-columns:minmax(0,440px) minmax(0,1fr);min-height:100vh}
+/* ---------- owner preview band ---------- */
+.previewbar{
+  position:sticky; top:0; z-index:40; background:var(--gold); color:#3A3222;
+  text-align:center; font-size:11.5px; font-weight:500; letter-spacing:.18em;
+  text-transform:uppercase; padding:10px 14px;
+}
+.previewbar b{font-weight:600; letter-spacing:.26em}
 
-  /* ---------- Left invite panel ---------- */
-  .invite{position:sticky;top:0;align-self:start;height:100vh;overflow:hidden;
-    background:var(--sage);color:var(--invite-ink);
-    padding:56px 48px;display:flex;flex-direction:column}
-  body.haspreview .invite{top:40px;height:calc(100vh - 40px)}
-  .invite .c{position:absolute;border-radius:50%;pointer-events:none}
-  .invite .c1{width:340px;height:340px;background:var(--sage-soft);opacity:.45;top:-90px;right:-120px}
-  .invite .c2{width:220px;height:220px;background:var(--sage-deep);opacity:.4;bottom:-70px;left:-80px}
-  .invite > *{position:relative;z-index:1}
-  .kicker{font-size:13px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;opacity:.85;margin:0}
-  .invite .spacer{flex:1 1 auto;min-height:32px}
-  .pre{font-size:16px;opacity:.9;margin:0 0 10px;font-weight:300}
-  .couple{font-size:clamp(48px,6vw,72px);margin:0 0 14px;color:#FBF8EF}
-  .post{font-size:16px;opacity:.92;margin:0;max-width:22ch;font-weight:300}
-  .divider{height:1px;background:rgba(244,239,227,.35);margin:28px 0 22px;max-width:340px}
-  .fact{display:flex;align-items:center;gap:12px;margin:0 0 14px;font-size:15.5px}
-  .fact .ic{width:34px;height:34px;border-radius:10px;flex:0 0 auto;
-    background:rgba(244,239,227,.16);display:grid;place-items:center}
-  .fact svg{width:17px;height:17px;stroke:var(--invite-ink);fill:none;stroke-width:1.7}
+/* ---------- page frame ---------- */
+.sheet{max-width:720px; margin:0 auto; padding:clamp(20px,4vw,44px)}
+.frame{
+  border:1px solid var(--rule); padding:clamp(28px,6vw,72px) clamp(22px,6.5vw,84px);
+  position:relative;
+}
+.frame::after{content:""; position:absolute; inset:7px; border:1px solid var(--hair); pointer-events:none}
 
-  /* ---------- Right form panel ---------- */
-  .form{padding:56px 40px 40px}
-  .inner{max-width:640px;margin:0 auto}
-  .heading{font-size:clamp(34px,4.4vw,46px);margin:0 0 6px;color:var(--ink)}
-  .lead{color:var(--muted);margin:0 0 22px;font-size:15.5px}
-  .lead b{color:var(--ink);font-weight:600}
+/* ---------- invitation head ---------- */
+.head{text-align:center}
+.eyebrow{font-size:11px; letter-spacing:.34em; text-transform:uppercase; font-weight:400; color:var(--mut); margin:0 0 26px}
+.names{
+  font-family:'Bricolage Grotesque',sans-serif; font-weight:300;
+  font-size:clamp(38px,7.6vw,62px); line-height:1.08; letter-spacing:-.01em; margin:0 0 8px;
+  overflow-wrap:break-word;
+}
+.names .amp{
+  font-family:'Caveat',cursive; font-weight:600; font-size:.58em;
+  color:var(--accept); vertical-align:.05em; padding:0 .24em;
+}
+.headrule{width:56px; height:1px; background:var(--rule); border:0; margin:26px auto}
+.facts{margin:0; font-size:12.5px; letter-spacing:.26em; text-transform:uppercase; font-weight:400}
+.facts span{display:block; margin:0 0 8px}
+.count{font-size:13px; color:var(--mut); margin:16px 0 0; letter-spacing:.02em}
 
-  .covers{display:flex;flex-wrap:wrap;align-items:center;gap:8px;
-    background:rgba(255,255,255,.6);border:1px solid var(--line);border-radius:18px;padding:12px 14px;margin:0 0 22px}
-  .covers .lab{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-right:2px}
-  .who{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);
-    border-radius:999px;padding:4px 13px 4px 4px;font-size:14px;font-weight:500}
-  .avatar{width:26px;height:26px;border-radius:999px;display:grid;place-items:center;
-    font-size:12px;font-weight:700;color:#fff;flex:0 0 auto}
+/* ---------- cover photo as mounted plate ---------- */
+.plate{margin:44px auto 0; max-width:520px; background:var(--mat); border:1px solid var(--rule); padding:10px}
+.plate img{display:block; width:100%; aspect-ratio:3/2; object-fit:cover;
+  filter:saturate(.82) contrast(.98); border:1px solid var(--hair)}
 
-  .guest{background:var(--card);border:1px solid var(--line);border-radius:22px;
-    padding:22px;margin:0 0 18px;box-shadow:0 1px 2px rgba(46,42,34,.03)}
-  .ghead{display:flex;align-items:center;gap:13px;margin:0 0 4px}
-  .ghead .meta{flex:1 1 auto;min-width:0}
-  .gname{font-size:18px;font-weight:700;line-height:1.2}
-  .gsub{font-size:12.5px;color:var(--muted);margin-top:1px}
-  .pill{font-size:12.5px;font-weight:600;border-radius:999px;padding:6px 12px;white-space:nowrap}
-  .pill.going{background:var(--going-bg);color:var(--going-ink)}
-  .pill.cant{background:var(--cant-bg);color:var(--cant-ink)}
-  .pill.pending{background:var(--pending-bg);color:var(--pending-ink)}
-  .remove{font:inherit;font-size:12.5px;font-weight:600;color:var(--muted);background:none;
-    border:1px solid var(--line);border-radius:999px;padding:6px 12px;cursor:pointer;white-space:nowrap}
-  .remove:hover{color:#B23B2E;border-color:#B23B2E}
+/* ---------- couple message ---------- */
+.note{max-width:44ch; margin:40px auto 0; text-align:center; font-size:16.5px; line-height:1.75}
+.note p{margin:0; white-space:pre-line}
 
-  .seclab{font-size:14px;letter-spacing:.02em;color:var(--ink);
-    font-weight:800;margin:18px 0 9px}
+/* ---------- section rule + deadline ---------- */
+.replyrule{display:flex; align-items:center; gap:18px; margin:56px 0 8px}
+.replyrule::before,.replyrule::after{content:""; height:1px; background:var(--rule); flex:1}
+.replyrule .t{font-size:11px; letter-spacing:.3em; text-transform:uppercase; font-weight:400; white-space:nowrap}
+.deadline{text-align:center; font-size:13px; color:var(--mut); margin:0 0 44px; letter-spacing:.02em}
+.deadline b{color:var(--tx); font-weight:500}
+.replyintro{text-align:center; font-size:13.5px; color:var(--mut); margin:-30px 0 40px}
+.deadline[hidden] + .replyintro{margin-top:6px}
 
-  .nameinput{width:100%;font:inherit;font-size:16px;color:var(--ink);
-    background:#fff;border:1.5px solid var(--line);border-radius:15px;padding:14px 16px}
-  .nameinput:focus{outline:none;border-color:var(--accept);box-shadow:inset 0 0 0 1px var(--accept)}
-  .nameinput::placeholder{color:#B9B3A2}
+/* ---------- guest reply blocks ---------- */
+.guest{margin:0 0 52px}
+.gname{display:flex; align-items:baseline; gap:14px; border-bottom:1px solid var(--rule); padding-bottom:10px; margin-bottom:22px}
+.gname .n{font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:19px; letter-spacing:.01em; min-width:0; overflow-wrap:anywhere}
+.gname .st{font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--mut); white-space:nowrap}
+.gname .rm{
+  margin-left:auto; font:inherit; font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--mut); background:none; border:0; padding:2px 0; cursor:pointer;
+}
+.gname .rm:hover{color:var(--danger)}
 
-  .att{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  .att.side3{grid-template-columns:1fr 1fr 1fr}
-  .att button{display:flex;align-items:center;justify-content:center;gap:10px;
-    border-radius:15px;border:1.5px solid var(--line);background:#fff;padding:15px;
-    font:inherit;font-size:15.5px;font-weight:600;color:var(--ink);cursor:pointer;transition:transform .05s}
-  .att button:active{transform:scale(.985)}
-  .att .rc{width:22px;height:22px;border-radius:999px;border:2px solid #CBC6B6;flex:0 0 auto;
-    display:grid;place-items:center;color:transparent}
-  .att .accept[aria-pressed="true"]{background:var(--accept);border-color:var(--accept);color:#fff}
-  .att .decline[aria-pressed="true"]{background:var(--decline);border-color:var(--decline);color:#fff}
-  .att .sidebtn{gap:8px;padding:13px 8px;font-size:14.5px}
-  .att .sidebtn[aria-pressed="true"]{background:var(--sage);border-color:var(--sage);color:#fff}
-  .att button[aria-pressed="true"] .rc{background:#fff;border-color:#fff}
-  .att .accept[aria-pressed="true"] .rc{color:var(--accept)}
-  .att .decline[aria-pressed="true"] .rc{color:var(--decline)}
-  .att .rc svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:3}
+/* ballot rows — the reply-card idiom */
+.ballot{display:flex; flex-direction:column; gap:2px}
+.brow{
+  display:flex; align-items:center; gap:16px; width:100%; text-align:left;
+  background:none; border:0; padding:13px 2px; cursor:pointer; color:var(--tx);
+  font:inherit; font-size:15.5px; font-weight:300; border-bottom:1px solid var(--hair);
+  transition:padding-left .18s ease;
+}
+.brow:hover{padding-left:8px}
+.brow .bx{
+  width:17px; height:17px; border:1px solid var(--rule); flex:0 0 auto; position:relative;
+  transition:background .15s ease, border-color .15s ease;
+}
+.brow .bx::after{
+  content:""; position:absolute; inset:0; opacity:0; transform:scale(.6);
+  transition:opacity .15s ease, transform .18s cubic-bezier(.2,1.4,.4,1);
+  background-repeat:no-repeat; background-position:center; background-size:12px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M2 8 5.5 11.5 12 2.5' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+body[data-way="olive"] .brow .bx::after, body[data-way="ink"] .brow .bx::after{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M2 8 5.5 11.5 12 2.5' fill='none' stroke='%232C2A25' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+.brow[aria-pressed="true"] .bx{background:var(--accept); border-color:var(--accept)}
+.brow[aria-pressed="true"] .bx::after{opacity:1; transform:scale(1)}
+.brow[aria-pressed="true"]{font-weight:400}
+.brow.decline[aria-pressed="true"] .bx{background:var(--decline); border-color:var(--decline)}
+.brow em{font-style:normal; color:var(--mut); font-size:13px; margin-left:auto; letter-spacing:.02em}
 
-  .optlist{display:flex;flex-direction:column;gap:10px}
-  .qblock{margin-top:18px;padding-top:4px;border-top:1px solid var(--line)}
-  .qblock .seclab{margin-top:14px}
-  /* submission-received overlay */
-  .successOverlay{position:fixed;inset:0;background:rgba(46,42,34,.55);display:flex;align-items:center;
-    justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s ease;z-index:60}
-  .successOverlay.show{opacity:1;pointer-events:auto}
-  .successCard{background:var(--card);border-radius:24px;padding:34px 30px 28px;text-align:center;
-    max-width:320px;margin:0 20px;transform:scale(.92);transition:transform .25s ease;
-    box-shadow:0 18px 50px rgba(0,0,0,.25)}
-  .successOverlay.show .successCard{transform:scale(1)}
-  .successTick{width:64px;height:64px;border-radius:50%;background:var(--accept);margin:0 auto 14px;
-    display:flex;align-items:center;justify-content:center;animation:tickpop .5s cubic-bezier(.2,1.4,.4,1)}
-  @keyframes tickpop{0%{transform:scale(.3)}70%{transform:scale(1.12)}100%{transform:scale(1)}}
-  .successTick svg{width:30px;height:30px;stroke:#fff;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
-  .successTitle{font-size:20px;font-weight:800;color:var(--ink);margin:0 0 6px}
-  .successSub{font-size:13.5px;line-height:1.45;color:var(--muted);margin:0}
-  .opt{display:flex;align-items:center;gap:10px;width:100%;text-align:left;
-    background:#fff;border:1.5px solid var(--line);border-radius:13px;padding:10px 13px;
-    font:inherit;font-size:13.5px;color:var(--ink);cursor:pointer;transition:transform .05s}
-  .opt:active{transform:scale(.99)}
-  .opt .sw{width:22px;height:22px;border-radius:7px;flex:0 0 auto}
-  .opt .lbl{flex:1 1 auto;font-weight:500}
-  .opt[aria-pressed="true"]{border-color:var(--accept);box-shadow:inset 0 0 0 1px var(--accept)}
+/* declined guests fold their questions away */
+.qs{max-height:4000px; overflow:hidden; transition:max-height .45s ease, opacity .35s ease; opacity:1}
+.guest.folded .qs{max-height:0; opacity:0}
+.foldnote{display:none; font-size:13.5px; color:var(--mut); margin:14px 2px 0}
+.guest.folded .foldnote{display:block}
 
+/* question blocks */
+.q{margin-top:30px}
+.qlab{font-size:11px; letter-spacing:.26em; text-transform:uppercase; font-weight:400; color:var(--mut); margin:0 0 12px}
+.qlab b{color:var(--tx); font-weight:500}
 
-  .declined{display:flex;align-items:center;gap:10px;background:#F6ECE2;color:#9C5A33;
-    border-radius:14px;padding:14px 16px;font-size:14.5px;margin-top:18px}
-  .declined svg{width:17px;height:17px;stroke:#9C5A33;fill:none;stroke-width:1.7;flex:0 0 auto}
+/* menu-style single select */
+.menu .brow{align-items:flex-start; padding:12px 2px}
+.menu .bx{margin-top:3px; border-radius:50%}
+.menu .bx::after{background-size:10px}
 
-  .addperson{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;
-    background:none;border:1.5px dashed #C9C2AE;border-radius:18px;padding:16px;
-    font:inherit;font-size:15px;font-weight:600;color:var(--muted);cursor:pointer;margin:0 0 18px}
-  .addperson:hover{color:var(--sage-deep);border-color:var(--sage)}
-  .addperson svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.2}
+/* multi-select tags */
+.chips{display:flex; flex-wrap:wrap; gap:9px}
+.chip{
+  font:inherit; font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--tx); background:none; border:1px solid var(--rule); border-radius:0;
+  padding:9px 16px; cursor:pointer; transition:all .15s ease; font-weight:400;
+}
+.chip[aria-pressed="true"]{background:var(--accept); border-color:var(--accept); color:var(--onfill)}
+body:not([data-way]) .chip[aria-pressed="true"]{color:var(--on-dark)}
 
-  .submitbar{padding:20px 0 8px;
-    background:linear-gradient(180deg,rgba(240,235,223,0),var(--cream) 38%)}
-  .submit{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;
-    background:var(--ink-btn);color:var(--invite-ink);border:0;border-radius:999px;padding:18px;
-    font:inherit;font-size:16.5px;font-weight:600;cursor:pointer;transition:transform .05s,opacity .2s}
-  .submit:active{transform:scale(.99)}
-  .submit:disabled{opacity:.6;cursor:default}
-  .submit svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.2}
-  .hint{text-align:center;color:var(--muted);font-size:13px;margin:10px 0 0;min-height:18px}
-  .hint.ok{color:var(--going-ink)} .hint.err{color:#B23B2E}
+/* ruled write-in line */
+.writein input{
+  width:100%; font:inherit; font-size:15.5px; color:var(--tx); background:transparent;
+  border:0; border-bottom:1px solid var(--rule); border-radius:0; padding:10px 2px 9px;
+  transition:border-color .15s ease;
+}
+.writein input:focus{outline:none; border-bottom:1.5px solid var(--focus)}
+.writein input::placeholder{color:var(--mut); opacity:.8; font-weight:300}
 
-  .notice{background:#fff;border:1px solid var(--line);border-radius:18px;padding:28px 22px;
-    text-align:center;color:var(--muted);font-size:15px}
-  .foot{text-align:center;color:var(--muted);font-size:12.5px;margin:26px 0 0;opacity:.8}
+/* generic: side segmented control */
+.side{display:flex; border:1px solid var(--rule)}
+.side button{
+  flex:1; font:inherit; font-size:11.5px; letter-spacing:.14em; text-transform:uppercase;
+  font-weight:400; color:var(--tx); background:none; border:0; padding:12px 4px; cursor:pointer;
+}
+.side button + button{border-left:1px solid var(--rule)}
+.side button[aria-pressed="true"]{background:var(--accept); color:var(--onfill)}
+body:not([data-way]) .side button[aria-pressed="true"]{color:var(--on-dark)}
 
-  @media(max-width:860px){
-    .page{grid-template-columns:1fr}
-    .invite{position:static;height:auto;min-height:auto;padding:38px 24px 34px}
-    body.haspreview .invite{top:auto;height:auto}
-    .invite .spacer{display:none}
-    .pre{margin-top:26px}
-    .couple{font-size:clamp(44px,13vw,60px)}
-    .form{padding:30px 18px 40px}
-    .att{grid-template-columns:1fr}
-    .att.side3{grid-template-columns:1fr}
-  }
-  .brand .lm,.brand .lmimg{width:34px;height:34px;border-radius:10px;display:block;object-fit:cover;background:#20201C}
+.addrow{
+  font:inherit; font-size:12px; letter-spacing:.22em; text-transform:uppercase; font-weight:400;
+  color:var(--mut); background:none; border:0; border-bottom:1px solid var(--hair);
+  width:100%; text-align:left; padding:13px 2px; cursor:pointer; margin-bottom:52px;
+}
+.addrow:hover{color:var(--tx)}
+
+/* ---------- send ---------- */
+.send{margin:10px 0 0}
+.send button{
+  width:100%; font:inherit; font-size:13px; letter-spacing:.3em; text-transform:uppercase;
+  font-weight:500; color:var(--btn-tx); background:var(--btn-ink);
+  border:1px solid var(--btn-ink); padding:19px 10px 18px; cursor:pointer;
+  transition:letter-spacing .25s ease, opacity .15s ease;
+}
+.send button:hover{letter-spacing:.38em}
+.send button:active{opacity:.85}
+.send button:disabled{opacity:.55; cursor:default}
+.hint{text-align:center; font-size:12.5px; color:var(--mut); margin:14px 0 0; min-height:1em}
+.hint.err{color:var(--danger)}
+body[data-way="olive"] .hint.err, body[data-way="ink"] .hint.err{color:#E8A79B}
+
+/* ---------- notices / closed ---------- */
+.notice{text-align:center; font-size:14px; color:var(--mut); padding:30px 0}
+.closed{text-align:center; padding:26px 0 8px}
+.closed .big{font-family:'Bricolage Grotesque',sans-serif; font-weight:300; font-size:30px; margin:0 0 12px}
+.closed p{margin:0 auto; max-width:40ch; font-size:15px; color:var(--mut)}
+
+/* ---------- success overlay ---------- */
+.successOverlay{
+  position:fixed; inset:0; background:rgba(44,42,37,.55); display:flex; align-items:center;
+  justify-content:center; opacity:0; pointer-events:none; transition:opacity .25s ease; z-index:60;
+}
+.successOverlay.show{opacity:1; pointer-events:auto}
+.successCard{
+  background:var(--sand); color:var(--ink-c); border:1px solid rgba(44,42,37,.3);
+  padding:36px 32px 30px; text-align:center; max-width:330px; margin:0 20px; position:relative;
+  transform:scale(.94); transition:transform .25s ease;
+}
+.successCard::after{content:""; position:absolute; inset:6px; border:1px solid rgba(44,42,37,.16); pointer-events:none}
+.successOverlay.show .successCard{transform:scale(1)}
+.successTick{
+  width:54px; height:54px; border:1px solid var(--olive-dark); border-radius:50%; margin:0 auto 16px;
+  display:flex; align-items:center; justify-content:center;
+}
+.successTick svg{width:24px; height:24px; stroke:var(--olive-dark); stroke-width:2.2; fill:none; stroke-linecap:round; stroke-linejoin:round}
+.successTitle{font-family:'Bricolage Grotesque',sans-serif; font-weight:300; font-size:24px; margin:0 0 8px}
+.successSub{font-size:13px; line-height:1.55; color:var(--muted-c); margin:0}
+
+/* ---------- footer ---------- */
+.foot{text-align:center; margin-top:58px; font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:var(--mut)}
+.foot a{color:inherit; text-decoration:none; border-bottom:1px solid var(--hair); padding-bottom:2px}
+
+/* ---------- entrance ---------- */
+@media (prefers-reduced-motion: no-preference){
+  .rise{opacity:0; transform:translateY(9px); animation:rise .7s ease forwards}
+  @keyframes rise{to{opacity:1; transform:none}}
+  .d1{animation-delay:.05s}.d2{animation-delay:.14s}.d3{animation-delay:.23s}
+  .d4{animation-delay:.32s}.d5{animation-delay:.41s}.d6{animation-delay:.5s}
+}
+:is(button,input,a):focus-visible{outline:2px solid var(--focus); outline-offset:3px}
+
+@media (max-width:560px){
+  .frame{padding:34px 20px}
+  .frame::after{inset:5px}
+  .brow em{display:none}
+}
+@media print{.previewbar,.send,.foot{display:none}}
 </style>
-<link rel="icon" href="/img/favicon.ico" sizes="any">
-<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
-<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
-<link rel="manifest" href="/site.webmanifest">
 </head>
 <body>
-<div class="previewbar" id="previewbar" hidden><b>Preview</b> · this is how guests see the form — replies are disabled</div>
-<div class="page">
-  <aside class="invite" id="invite">
-    <span class="c c1"></span><span class="c c2"></span>
-    <p class="kicker">You're invited</p>
-    <div class="spacer"></div>
-    <div id="inviteBody"></div>
-  </aside>
 
-  <main class="form">
-    <div class="inner">
-      <h1 class="heading script" id="heading">Will we see you there?</h1>
-      <p class="lead" id="lead"></p>
-      <div id="covers"></div>
-      <div id="guests"><div class="notice" id="notice">Loading your invitation…</div></div>
-      <div class="submitbar" id="bar" hidden>
-        <button class="submit" id="save">Send reply
-          <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </button>
+<div class="previewbar" id="previewbar" hidden><b>Preview</b> · this is what your guests will see · replies are disabled</div>
+
+<div class="sheet">
+<main class="frame">
+  <header class="head" id="head" hidden>
+    <p class="eyebrow rise d1">Together with their families</p>
+    <h1 class="names rise d2" id="names"></h1>
+    <hr class="headrule rise d2">
+    <p class="facts rise d3" id="facts"></p>
+    <p class="count rise d3" id="count" hidden></p>
+  </header>
+
+  <figure class="plate rise d4" id="plate" hidden></figure>
+  <div class="note rise d5" id="note" hidden><p id="noteText"></p></div>
+
+  <div id="reply" hidden>
+    <div class="replyrule rise d6"><span class="t">The Reply</span></div>
+    <p class="deadline rise d6" id="deadline" hidden></p>
+    <p class="replyintro" id="replyintro" hidden></p>
+
+    <div id="replybody">
+      <div id="guests"></div>
+      <div class="send" id="bar" hidden>
+        <button type="button" id="save">Send Reply</button>
         <p class="hint" id="status"></p>
       </div>
-      <p class="foot">Powered by VowToDo</p>
     </div>
-  </main>
+
+    <div class="closed" id="closedCard" hidden>
+      <p class="big">The reply book has closed</p>
+      <p id="closedText"></p>
+    </div>
+  </div>
+
+  <div class="notice" id="notice">Opening your invitation…</div>
+
+  <footer class="foot"><a href="https://vowtodo.com" rel="noopener">Made with VowToDo</a></footer>
+</main>
 </div>
 
 <script>
@@ -203,6 +307,9 @@
 //   ?g=<token>,<token>   named link  — pre-created guests, update in place
 //   ?s=<space_token>     generic link — visitor types their own name (+side); each submit creates new guests
 //   &preview=1           owner preview — form renders and can be tapped, but sending is disabled
+// Wave 1: space carries rsvp_deadline / rsvp_message / rsvp_cover_url / rsvp_theme;
+// questions carry kind (meal/dietary/custom) and any field_type
+// (single_select · multi_select · boolean · text). payload.closed is authoritative.
 const API = 'https://ejfddddwqbjebwffgadc.supabase.co/functions/v1/rsvp';
 
 const params = new URLSearchParams(location.search);
@@ -212,105 +319,201 @@ const PREVIEW = params.get('preview') === '1';
 let GENERIC = !g && !!s;
 let DATA = null;
 const state = {};
-let ORDER = [];         // generic mode: block ids in display order
+let ORDER = [];        // generic mode: block ids in display order
 let nextBlock = 1;
-const MAX_PEOPLE = 10;  // matches the API's per-submission cap
-const AV = ['#7E8C57', '#BE7C52', '#C2A36B', '#6E7C4A', '#9A6A8C'];
+const MAX_PEOPLE = 10; // matches the API's per-submission cap
+const THEMES = ['sand','olive','ink'];
 const SIDE_OPTS = [
-  { value: 'bride', label: '👰 Bride’s guest' },
-  { value: 'groom', label: '🤵 Groom’s guest' },
-  { value: 'both',  label: '💑 Guest of both' },
+  { value: 'bride', label: "Bride's guest" },
+  { value: 'groom', label: "Groom's guest" },
+  { value: 'both',  label: 'Guest of both' },
 ];
 
-const CHECK = '<svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 6"/></svg>';
-const CROSS = '<svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>';
-const PLUS  = '<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>';
-
-function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function esc(x){return String(x==null?'':x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function firstName(n){return String(n||'').trim().split(/\s+/)[0]||'there';}
-function initial(n){return (String(n||'').trim()[0]||'?').toUpperCase();}
+function el(tag, cls, text){const e=document.createElement(tag); if(cls)e.className=cls; if(text!=null)e.textContent=text; return e;}
 
 function notice(msg){
-  document.getElementById('guests').innerHTML = '<div class="notice">'+esc(msg)+'</div>';
-  document.getElementById('bar').hidden = true;
+  const n = document.getElementById('notice');
+  n.hidden = false; n.textContent = msg;
 }
 
-function fmtDate(d){
+function fmtDate(d, opts){
   if(!d) return '';
   const dt = new Date(d+'T00:00:00');
   if(isNaN(dt)) return '';
-  return dt.toLocaleDateString(undefined,{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  return dt.toLocaleDateString('en-SG', opts || {weekday:'long', day:'numeric', month:'long', year:'numeric'});
 }
 
-function buildInvite(space){
+/* ----------------------------- head ----------------------------- */
+
+function buildHead(space){
   const couple = String(space.name||'').replace(/[’'`]s\s+wedding$/i,'').replace(/\s+wedding$/i,'').trim();
   const parts = couple.split(/\s*&\s*|\s+and\s+/i).filter(Boolean);
-  const coupleHtml = parts.length>=2
-    ? esc(parts[0])+' &<br>'+esc(parts.slice(1).join(' & '))
-    : esc(couple||'You\'re invited');
-  let html = '<p class="pre">Together with their loved ones,</p>'
-    + '<h2 class="couple script">'+coupleHtml+'</h2>'
-    + '<p class="post">are getting married, and would be so glad to have you there.</p>';
+  const namesEl = document.getElementById('names');
+  if(parts.length>=2){
+    namesEl.innerHTML = parts.map(esc).join('<span class="amp" aria-label="and">&amp;</span>');
+  } else {
+    namesEl.textContent = couple || "You're invited";
+  }
+
+  const facts = [];
   const date = fmtDate(space.wedding_date);
-  if(date || space.venue) html += '<div class="divider"></div>';
-  if(date){
-    html += '<div class="fact"><span class="ic"><svg viewBox="0 0 24 24">'
-      + '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg></span>'
-      + '<span>'+esc(date)+'</span></div>';
+  if(date) facts.push('<span>'+esc(date)+'</span>');
+  if(space.venue) facts.push('<span>'+esc(space.venue)+'</span>');
+  document.getElementById('facts').innerHTML = facts.join('');
+
+  if(space.wedding_date){
+    const days = Math.ceil((new Date(space.wedding_date+'T00:00:00') - new Date()) / 86400000);
+    const c = document.getElementById('count');
+    if(days > 1){ c.hidden = false; c.textContent = days + ' days from today'; }
+    else if(days === 1){ c.hidden = false; c.textContent = 'Tomorrow'; }
+    else if(days === 0){ c.hidden = false; c.textContent = "Today's the day"; }
   }
-  if(space.venue){
-    html += '<div class="fact"><span class="ic"><svg viewBox="0 0 24 24">'
-      + '<path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span>'
-      + '<span>'+esc(space.venue)+'</span></div>';
+
+  if(space.rsvp_cover_url){
+    const plate = document.getElementById('plate');
+    plate.hidden = false;
+    const img = document.createElement('img');
+    img.alt = ''; img.loading = 'lazy'; img.src = space.rsvp_cover_url;
+    img.addEventListener('error', ()=>{ plate.hidden = true; });
+    plate.appendChild(img);
   }
-  document.getElementById('inviteBody').innerHTML = html;
+
+  if(space.rsvp_message && space.rsvp_message.trim()){
+    document.getElementById('note').hidden = false;
+    document.getElementById('noteText').textContent = space.rsvp_message.trim();
+  }
+
+  if(space.rsvp_deadline){
+    const d = document.getElementById('deadline');
+    d.hidden = false;
+    d.innerHTML = 'Kindly respond by <b>'+esc(fmtDate(space.rsvp_deadline,{day:'numeric',month:'long',year:'numeric'}))+'</b>';
+  }
+
+  document.getElementById('head').hidden = false;
+  document.getElementById('reply').hidden = false;
 }
 
-function statusPill(s){
-  if(s==='attending') return '<span class="pill going">✓ Going</span>';
-  if(s==='declined')  return '<span class="pill cant">Can\'t make it</span>';
-  return '<span class="pill pending">Awaiting reply</span>';
+/* --------------------------- questions --------------------------- */
+
+function statusText(rs){
+  if(rs==='attending') return 'Joyfully accepted';
+  if(rs==='declined')  return 'Declined with regret';
+  return 'Awaiting reply';
 }
 
-/* --------- shared card sections (attendance + questions) --------- */
+function ballotRow(label, pressed, extra, onPress, cls){
+  const b = el('button', 'brow'+(cls?' '+cls:''));
+  b.type='button'; b.setAttribute('aria-pressed', pressed?'true':'false');
+  b.appendChild(el('span','bx'));
+  b.appendChild(document.createTextNode(label));
+  if(extra) b.appendChild(el('em', null, extra));
+  b.addEventListener('click', onPress);
+  return b;
+}
 
-function appendQuestionSections(card, st, name){
-  if(st.rsvp_status==='declined'){
-    const d = document.createElement('div'); d.className = 'declined';
-    d.innerHTML = CROSS.replace('viewBox','aria-hidden="true" viewBox')
-      + '<span>We\'ll miss you'+(name?', '+esc(firstName(name)):'')+' — no further questions for you.</span>';
-    card.appendChild(d);
-    return;
-  }
-  let qn = 0;
-  for(const q of DATA.questions){
+function questionBlock(q, st, rerender){
+  const wrap = el('div','q');
+  const cur = st.answers[q.id];
+
+  if(q.field_type === 'single_select'){
     const opts = Array.isArray(q.options) ? q.options : [];
-    if(!opts.length) continue; // only render choice questions
-    qn += 1;
-    const block = document.createElement('div'); block.className = 'qblock';
-    const ql = document.createElement('div'); ql.className = 'seclab'; ql.textContent = qn + '. ' + q.label; block.appendChild(ql);
-    const list = document.createElement('div'); list.className = 'optlist';
-    const multi = q.field_type === 'multi_select';
-    const cur = st.answers[q.id];
+    if(!opts.length) return null;
+    wrap.classList.add('menu');
+    const lab = el('p','qlab'); lab.innerHTML = esc(q.label)+' · <b>choose one</b>';
+    wrap.appendChild(lab);
     for(const opt of opts){
-      const sel = multi ? (Array.isArray(cur) && cur.includes(opt.label)) : (cur === opt.label);
-      list.appendChild(optRow(opt, sel, st, q.id, multi));
+      wrap.appendChild(ballotRow(opt.label, cur===opt.label, null, ()=>{
+        st.answers[q.id] = (st.answers[q.id]===opt.label) ? undefined : opt.label;
+        rerender();
+      }));
     }
-    block.appendChild(list);
-    card.appendChild(block);
+    return wrap;
   }
+
+  if(q.field_type === 'multi_select'){
+    const opts = Array.isArray(q.options) ? q.options : [];
+    if(!opts.length) return null;
+    const lab = el('p','qlab'); lab.innerHTML = esc(q.label)+' · <b>any that apply</b>';
+    wrap.appendChild(lab);
+    const chips = el('div','chips');
+    const arr = Array.isArray(cur) ? cur : [];
+    for(const opt of opts){
+      const c = el('button','chip',opt.label); c.type='button';
+      c.setAttribute('aria-pressed', arr.includes(opt.label)?'true':'false');
+      c.addEventListener('click', ()=>{
+        let a = Array.isArray(st.answers[q.id]) ? st.answers[q.id].slice() : [];
+        if(a.includes(opt.label)) a = a.filter(x=>x!==opt.label); else a.push(opt.label);
+        st.answers[q.id] = a.length ? a : undefined;
+        c.setAttribute('aria-pressed', a.includes(opt.label)?'true':'false');
+      });
+      chips.appendChild(c);
+    }
+    wrap.appendChild(chips);
+    return wrap;
+  }
+
+  if(q.field_type === 'boolean'){
+    wrap.appendChild(el('p','qlab',q.label));
+    const group = el('div','ballot');
+    group.setAttribute('role','group'); group.setAttribute('aria-label', q.label);
+    group.appendChild(ballotRow('Yes', cur===true, null, ()=>{
+      st.answers[q.id] = (st.answers[q.id]===true) ? undefined : true; rerender();
+    }));
+    group.appendChild(ballotRow('No', cur===false, null, ()=>{
+      st.answers[q.id] = (st.answers[q.id]===false) ? undefined : false; rerender();
+    }));
+    wrap.appendChild(group);
+    return wrap;
+  }
+
+  if(q.field_type === 'text'){
+    wrap.appendChild(el('p','qlab',q.label));
+    const w = el('div','writein');
+    const inp = document.createElement('input');
+    inp.type='text'; inp.maxLength = 500; inp.placeholder = 'Write here…';
+    inp.value = typeof cur === 'string' ? cur : '';
+    inp.addEventListener('input', ()=>{
+      const t = inp.value;
+      st.answers[q.id] = t.trim().length ? t : undefined;
+    });
+    w.appendChild(inp);
+    wrap.appendChild(w);
+    return wrap;
+  }
+
+  return null;
 }
 
-function appendAttendance(card, st){
-  const sec = document.createElement('div'); sec.className = 'seclab'; sec.textContent = 'Will you be attending?';
-  card.appendChild(sec);
-  const att = document.createElement('div'); att.className = 'att';
-  att.appendChild(attBtn('accept','attending','Joyfully accept', st));
-  att.appendChild(attBtn('decline','declined','Regretfully decline', st));
-  card.appendChild(att);
+function appendQuestions(container, st, rerender){
+  const qs = el('div','qs');
+  for(const q of DATA.questions){
+    const block = questionBlock(q, st, rerender);
+    if(block) qs.appendChild(block);
+  }
+  container.appendChild(qs);
+}
+
+function appendAttendance(container, st, rerender){
+  const group = el('div','ballot');
+  group.setAttribute('role','group'); group.setAttribute('aria-label','Will you attend?');
+  group.appendChild(ballotRow('Joyfully accepts', st.rsvp_status==='attending', "we can't wait", ()=>{
+    st.rsvp_status = (st.rsvp_status==='attending') ? 'pending' : 'attending'; rerender();
+  }, 'accept'));
+  group.appendChild(ballotRow('Regretfully declines', st.rsvp_status==='declined', "you'll be missed", ()=>{
+    st.rsvp_status = (st.rsvp_status==='declined') ? 'pending' : 'declined'; rerender();
+  }, 'decline'));
+  container.appendChild(group);
 }
 
 /* ----------------------------- render ----------------------------- */
+
+function submitLabel(n){
+  if(n<=1) return 'Send Reply';
+  if(n===2) return 'Send Both Replies';
+  return 'Send All '+n+' Replies';
+}
 
 function render(){
   const root = document.getElementById('guests');
@@ -319,124 +522,85 @@ function render(){
   if(GENERIC){
     ORDER.forEach((id, gi) => {
       const st = state[id];
-      const card = document.createElement('div'); card.className = 'guest';
+      const sec = el('section','guest');
+      if(st.rsvp_status==='declined') sec.classList.add('folded');
 
-      // header
-      const head = document.createElement('div'); head.className = 'ghead';
-      head.innerHTML =
-        '<span class="avatar" data-av style="background:'+AV[gi%AV.length]+'">'+esc(initial(st.name))+'</span>'
-        + '<div class="meta"><div class="gname">'+(ORDER.length>1?('Person '+(gi+1)):'Your reply')+'</div>'
-        + '<div class="gsub">Fill in your details below</div></div>'
-        + statusPill(st.rsvp_status);
-      card.appendChild(head);
+      const head = el('div','gname');
+      head.appendChild(el('span','n', ORDER.length>1 ? 'Person '+(gi+1) : 'Your reply'));
+      head.appendChild(el('span','st', statusText(st.rsvp_status)));
       if(ORDER.length>1){
-        const rm = document.createElement('button'); rm.type='button'; rm.className='remove'; rm.textContent='Remove';
+        const rm = el('button','rm','Remove'); rm.type='button';
         rm.addEventListener('click', ()=>{ ORDER = ORDER.filter(x=>x!==id); delete state[id]; render(); });
         head.appendChild(rm);
       }
+      sec.appendChild(head);
 
-      // name
-      const nl = document.createElement('div'); nl.className='seclab'; nl.textContent='Your name';
-      card.appendChild(nl);
+      const nq = el('div','q'); nq.style.marginTop = '0';
+      nq.appendChild(el('p','qlab','Your name'));
+      const nw = el('div','writein');
       const inp = document.createElement('input');
-      inp.className='nameinput'; inp.type='text'; inp.placeholder='Full name';
-      inp.maxLength = 80; inp.autocomplete='name'; inp.value = st.name;
-      inp.addEventListener('input', ()=>{
-        st.name = inp.value;
-        const av = card.querySelector('[data-av]'); if(av) av.textContent = initial(st.name);
-      });
-      card.appendChild(inp);
+      inp.type='text'; inp.maxLength=80; inp.autocomplete='name';
+      inp.placeholder='As it appears on your invitation'; inp.value = st.name;
+      inp.addEventListener('input', ()=>{ st.name = inp.value; });
+      nw.appendChild(inp); nq.appendChild(nw); sec.appendChild(nq);
 
-      // side
-      const sl = document.createElement('div'); sl.className='seclab'; sl.textContent='Whose guest are you?';
-      card.appendChild(sl);
-      const sideRow = document.createElement('div'); sideRow.className='att side3';
+      const sq = el('div','q');
+      sq.appendChild(el('p','qlab','Guest of'));
+      const side = el('div','side');
+      side.setAttribute('role','group'); side.setAttribute('aria-label','Whose guest are you?');
       for(const so of SIDE_OPTS){
-        const b = document.createElement('button'); b.type='button'; b.className='sidebtn';
+        const b = el('button', null, so.label); b.type='button';
         b.setAttribute('aria-pressed', st.side===so.value?'true':'false');
-        b.textContent = so.label;
-        b.addEventListener('click', ()=>{ st.side = so.value; render(); });
-        sideRow.appendChild(b);
+        b.addEventListener('click', ()=>{
+          st.side = so.value;
+          [...side.children].forEach(x=>x.setAttribute('aria-pressed', x===b?'true':'false'));
+        });
+        side.appendChild(b);
       }
-      card.appendChild(sideRow);
+      sq.appendChild(side); sec.appendChild(sq);
 
-      appendAttendance(card, st);
-      appendQuestionSections(card, st, st.name);
-      root.appendChild(card);
+      const att = el('div','q');
+      att.appendChild(el('p','qlab','Will you attend?'));
+      appendAttendance(att, st, render);
+      sec.appendChild(att);
+
+      appendQuestions(sec, st, render);
+      sec.appendChild(el('p','foldnote',"We'll miss you — nothing more to fill in."));
+      root.appendChild(sec);
     });
 
     if(ORDER.length < MAX_PEOPLE){
-      const add = document.createElement('button'); add.type='button'; add.className='addperson';
-      add.innerHTML = PLUS + '<span>RSVP for another person</span>';
+      const add = el('button','addrow','+ RSVP for another person'); add.type='button';
       add.addEventListener('click', ()=>{ addBlock(); render(); });
       root.appendChild(add);
     }
-    updateSubmitLabel();
-    return;
+  } else {
+    DATA.guests.forEach((guest) => {
+      const st = state[guest.token];
+      const sec = el('section','guest');
+      if(st.rsvp_status==='declined') sec.classList.add('folded');
+
+      const head = el('div','gname');
+      head.appendChild(el('span','n', guest.name));
+      head.appendChild(el('span','st', statusText(st.rsvp_status)));
+      sec.appendChild(head);
+
+      appendAttendance(sec, st, render);
+      appendQuestions(sec, st, render);
+      sec.appendChild(el('p','foldnote', "We'll miss you, "+firstName(guest.name)+' — nothing more to fill in.'));
+      root.appendChild(sec);
+    });
   }
 
-  const total = DATA.guests.length;
-  DATA.guests.forEach((guest, gi) => {
-    const st = state[guest.token];
-    const card = document.createElement('div'); card.className = 'guest';
-
-    // header
-    const head = document.createElement('div'); head.className = 'ghead';
-    head.innerHTML =
-      '<span class="avatar" style="background:'+AV[gi%AV.length]+'">'+esc(initial(guest.name))+'</span>'
-      + '<div class="meta"><div class="gname">'+esc(guest.name)+'</div>'
-      + '<div class="gsub">Guest '+(gi+1)+' of '+total+' · reply below</div></div>'
-      + statusPill(st.rsvp_status);
-    card.appendChild(head);
-
-    appendAttendance(card, st);
-    appendQuestionSections(card, st, guest.name);
-    root.appendChild(card);
-  });
-}
-
-function attBtn(cls, value, label, st){
-  const b = document.createElement('button'); b.type='button'; b.className=cls;
-  b.setAttribute('aria-pressed', st.rsvp_status===value?'true':'false');
-  b.innerHTML = '<span class="rc">'+(value==='attending'?CHECK:CROSS)+'</span><span>'+esc(label)+'</span>';
-  b.addEventListener('click', ()=>{
-    st.rsvp_status = (st.rsvp_status===value) ? 'pending' : value;
-    render();
-  });
-  return b;
-}
-
-function optRow(opt, sel, st, qid, multi){
-  const b = document.createElement('button'); b.type='button'; b.className='opt';
-  b.setAttribute('aria-pressed', sel?'true':'false');
-  b.innerHTML = '<span class="lbl">'+esc(opt.label)+'</span>';
-  b.addEventListener('click', ()=>{
-    if(multi){
-      let arr = Array.isArray(st.answers[qid]) ? st.answers[qid].slice() : [];
-      if(arr.includes(opt.label)) arr = arr.filter(x=>x!==opt.label); else arr.push(opt.label);
-      st.answers[qid] = arr.length ? arr : undefined;
-    } else {
-      st.answers[qid] = (st.answers[qid]===opt.label) ? undefined : opt.label;
-    }
-    render();
-  });
-  return b;
-}
-
-function submitLabel(n){
-  if(n<=1) return 'Send reply';
-  if(n===2) return 'Send both replies';
-  return 'Send all '+n+' replies';
-}
-function updateSubmitLabel(){
-  const n = GENERIC ? ORDER.length : (DATA ? DATA.guests.length : 1);
-  document.getElementById('save').firstChild.textContent = submitLabel(n)+' ';
+  const n = GENERIC ? ORDER.length : DATA.guests.length;
+  document.getElementById('save').textContent = submitLabel(n);
+  document.getElementById('bar').hidden = false;
 }
 
 function addBlock(){
-  const id = 'new_'+(nextBlock++);
-  state[id] = { name:'', side:'both', rsvp_status:'pending', answers:{} };
+  const id = 'p'+(nextBlock++);
   ORDER.push(id);
+  state[id] = { name:'', side:'both', rsvp_status:'pending', answers:{} };
 }
 
 /* ------------------------------ save ------------------------------ */
@@ -467,7 +631,8 @@ async function save(){
   try{
     const r = await fetch(API, {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(bodyObj)});
     const out = await r.json();
-    if(!r.ok || out.error) throw new Error(out.error||'Save failed');
+    if(r.status === 410 && out && out.closed){ showClosed(); return; }
+    if(!r.ok || out.error) throw new Error(out.error||'Your reply could not be sent.');
 
     if(GENERIC && Array.isArray(out.created_tokens) && out.created_tokens.length){
       // Swap to the personal (named) link so revisiting / re-submitting updates, not duplicates.
@@ -478,9 +643,8 @@ async function save(){
       for(const guest of DATA.guests){
         state[guest.token] = {rsvp_status:guest.rsvp_status, answers:Object.assign({}, guest.answers)};
       }
-      buildNamedChrome();
       render();
-      st.className='hint ok'; st.textContent = 'Reply sent — this page is now your personal RSVP link. Bookmark it to make changes.';
+      st.className='hint'; st.textContent = 'This page is now your personal link — bookmark it to make changes.';
       showSuccess('This page is now your personal RSVP link — bookmark it to make changes anytime.');
       return;
     }
@@ -492,14 +656,15 @@ async function save(){
       }
       render();
     }
-    st.className='hint ok'; st.textContent = 'Replies sent — thank you!';
-    showSuccess('Your RSVP has been received. You can update it from this page anytime.');
+    st.className='hint'; st.textContent = 'Reply sent — thank you.';
+    showSuccess('You can return to this page to change your answers any time'
+      + (DATA.space && DATA.space.rsvp_deadline ? ' before '+fmtDate(DATA.space.rsvp_deadline,{day:'numeric',month:'long'}) : '')+'.');
   }catch(e){
     st.className='hint err'; st.textContent = (e&&e.message)?e.message:'Could not send. Please try again.';
   }finally{ btn.disabled = PREVIEW; }
 }
 
-/* --------------------- submission-received overlay ------------------ */
+/* --------------------- received overlay --------------------- */
 
 let successEl = null;
 function showSuccess(sub){
@@ -508,7 +673,7 @@ function showSuccess(sub){
     successEl.className = 'successOverlay';
     successEl.innerHTML = '<div class="successCard">'
       + '<div class="successTick"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l5 5L19.5 7"/></svg></div>'
-      + '<p class="successTitle">Reply sent!</p>'
+      + '<p class="successTitle">Reply received</p>'
       + '<p class="successSub"></p>'
       + '</div>';
     successEl.addEventListener('click', () => successEl.classList.remove('show'));
@@ -517,76 +682,68 @@ function showSuccess(sub){
   successEl.querySelector('.successSub').textContent = sub || 'Your RSVP has been received.';
   requestAnimationFrame(() => successEl.classList.add('show'));
   clearTimeout(successEl._t);
-  successEl._t = setTimeout(() => successEl.classList.remove('show'), 3400);
+  successEl._t = setTimeout(() => successEl.classList.remove('show'), 3600);
+}
+
+/* ----------------------------- closed ----------------------------- */
+
+function showClosed(){
+  document.getElementById('replybody').hidden = true;
+  document.getElementById('deadline').hidden = true;
+  document.getElementById('replyintro').hidden = true;
+  const card = document.getElementById('closedCard');
+  card.hidden = false;
+  const dl = DATA && DATA.space && DATA.space.rsvp_deadline
+    ? 'Replies were collected until '+fmtDate(DATA.space.rsvp_deadline,{day:'numeric',month:'long',year:'numeric'})+'. '
+    : '';
+  const couple = DATA && DATA.space ? String(DATA.space.name||'').replace(/[’'`]s\s+wedding$/i,'').replace(/\s+wedding$/i,'').trim() : '';
+  document.getElementById('closedText').textContent =
+    dl + 'If your plans have changed, reach ' + (couple || 'the couple') + " directly and they'll take care of it.";
 }
 
 /* ------------------------------ load ------------------------------ */
 
-function buildNamedChrome(){
-  const n = DATA.guests.length;
-  document.getElementById('lead').innerHTML =
-    'This invitation covers <b>'+n+' guest'+(n===1?'':'s')+'</b> — please reply for each below.';
-  const covers = DATA.guests.map((gu,i)=>
-    '<span class="who"><span class="avatar" style="background:'+AV[i%AV.length]+'">'+esc(initial(gu.name))+'</span>'+esc(gu.name)+'</span>'
-  ).join('');
-  document.getElementById('covers').innerHTML = '<span class="lab">This link covers</span>'+covers;
-  updateSubmitLabel();
-}
-
-function buildGenericChrome(){
-  document.getElementById('lead').innerHTML =
-    'Let us know if you can make it — <b>fill in your name</b> and reply below.';
-  document.getElementById('covers').innerHTML = '';
-  updateSubmitLabel();
-}
-
 function enablePreview(){
   document.getElementById('previewbar').hidden = false;
-  document.body.classList.add('haspreview');
-  const btn = document.getElementById('save');
-  btn.disabled = true;
-  const st = document.getElementById('status');
-  st.className='hint'; st.textContent = 'Preview mode — sending is disabled.';
+  document.getElementById('save').disabled = true;
 }
 
 async function load(){
-  if(!g && !s){ notice('This RSVP link is missing its guest information.'); return; }
+  if(!g && !s){ notice('This link is missing its invitation code. Please use the link you were sent.'); return; }
+  const qs = g ? ('?g='+encodeURIComponent(g)) : ('?s='+encodeURIComponent(s));
   try{
-    const qs = GENERIC ? ('?s='+encodeURIComponent(s)) : ('?g='+encodeURIComponent(g));
     const r = await fetch(API + qs);
     const out = await r.json();
-    if(!r.ok || out.error){ notice(out.error||'This RSVP link could not be opened.'); return; }
+    if(!r.ok || out.error) throw new Error(out.error||'This invitation could not be opened.');
     DATA = out;
-    buildInvite(DATA.space);
+
+    const theme = THEMES.includes(out.space.rsvp_theme) ? out.space.rsvp_theme : 'sand';
+    if(theme !== 'sand') document.body.dataset.way = theme;
+
+    document.getElementById('notice').hidden = true;
+    buildHead(out.space);
 
     if(GENERIC){
       addBlock();
-      buildGenericChrome();
+      document.getElementById('replyintro').hidden = false;
+      document.getElementById('replyintro').textContent = 'Fill in your name and reply below.';
     } else {
-      for(const guest of DATA.guests){
+      for(const guest of out.guests){
         state[guest.token] = {rsvp_status:guest.rsvp_status, answers:Object.assign({}, guest.answers)};
       }
-      buildNamedChrome();
     }
 
-    document.getElementById('save').addEventListener('click', save);
-    document.getElementById('bar').hidden = false;
-    render();
+    if(out.closed){ showClosed(); }
+    else { render(); }
+
     if(PREVIEW) enablePreview();
   }catch(e){
-    notice('Could not reach the server. Please check your connection and try again.');
+    notice((e&&e.message)?e.message:'This invitation could not be opened.');
   }
 }
 
+document.getElementById('save').addEventListener('click', save);
 load();
-
-// Keep the focused input visible above mobile keyboards.
-document.addEventListener('focusin', (e) => {
-  const t = e.target;
-  if (t && (t.matches('input') || t.matches('textarea'))) {
-    setTimeout(() => t.scrollIntoView({ block: 'center', behavior: 'smooth' }), 150);
-  }
-});
 </script>
 </body>
 </html>

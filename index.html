@@ -43,6 +43,11 @@
   .links a{color:var(--ink);text-decoration:none;font-size:14.5px;font-weight:500}
   .links a:hover{color:var(--olive-dark)}
   .btn-sm{background:var(--ink);color:#F6F2E7;text-decoration:none;font-size:14px;font-weight:600;padding:9px 17px;border-radius:999px;white-space:nowrap}
+  .navapp{display:inline-flex;align-items:center;gap:6px;color:var(--ink);text-decoration:none;font-size:14px;font-weight:500;white-space:nowrap}
+  .navapp svg{width:15px;height:15px;color:var(--olive-dark)}
+  .navapp:hover{color:var(--olive-dark)}
+  @media(max-width:520px){.navapp span,.navapp{font-size:0;gap:0}.navapp svg{font-size:15px}}
+
   @media(max-width:820px){.links{display:none}}
 
   /* hero */
@@ -53,6 +58,10 @@
   h1{font-size:clamp(36px,5.2vw,56px);line-height:1.04;margin:0 0 18px}
   .lede{font-size:18.5px;color:#57533F;margin:0 0 26px;max-width:40ch}
   .cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+  .surfaces{margin:20px 0 0;font-size:14px;color:#57533F}
+  .surfaces a{color:var(--olive-dark);font-weight:600;text-decoration:none;border-bottom:1px solid var(--line)}
+  .surfaces a:hover{border-bottom-color:var(--olive-dark)}
+  .surfaces .dot{color:var(--faint);margin:0 2px}
   .appstore{display:inline-flex;align-items:center;gap:11px;background:#161513;color:#fff;text-decoration:none;padding:13px 22px;border-radius:14px}
   .appstore svg{width:24px;height:24px}
   .appstore .l{display:flex;flex-direction:column;line-height:1.1;text-align:left}
@@ -187,6 +196,7 @@
       <a href="/blog">Blog</a>
       
     </nav>
+    <a class="navapp" href="/app" title="Open the VowToDo web app"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.8" y="4.4" width="18.4" height="12.4" rx="2"/><path d="M9 20.4h6"/><path d="M12 16.8v3.6"/></svg>Web app</a>
     <a class="btn-sm" href="/download">Get the app</a>
   </div>
 </header>
@@ -204,6 +214,7 @@
         </a>
         <a class="ghost" href="/features">See how it works →</a>
       </div>
+      <p class="surfaces">On your phone, and on your laptop at <a href="/app">vowtodo.com/app</a> — the same shared space, either way.</p>
       <p class="trial"><b>7-day free trial</b> · your crew joins free · Android soon</p>
     </div>
     <div>
@@ -353,7 +364,7 @@
         <a class="brand" href="/" style="font-size:24px"><img class="lmimg" src="/img/logo-1024.png" alt="" width="30" height="30" loading="lazy">VowToDo</a>
         <p style="color:#8E887A;font-size:13px;margin-top:10px">Wedding planning, together.</p>
       </div>
-      <div><p class="fh">Product</p><a href="/features">Features</a><a href="/download">Get the app</a></div>
+      <div><p class="fh">Product</p><a href="/features">Features</a><a href="/app">Web app</a><a href="/download">Get the app</a></div>
       <div><p class="fh">Resources</p><a href="/blog">Blog</a></div>
       <div><p class="fh">Legal</p><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Use</a><a href="mailto:zachlaudev@gmail.com">Contact</a></div>
     </div>

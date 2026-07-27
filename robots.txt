@@ -2,5 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /r
 Disallow: /join
+Disallow: /app
 
 Sitemap: https://vowtodo.com/sitemap.xml

@@ -29,10 +29,10 @@
   .brand .lm{width:30px;height:30px;border-radius:9px;background:#20201C;display:grid;place-items:center}
   .brand .lm svg{width:18px;height:18px;fill:none;stroke:#F6F2E7;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
   .btn-sm{margin-left:auto;background:var(--ink);color:#F6F2E7;text-decoration:none;font-size:14px;font-weight:600;padding:9px 16px;border-radius:999px}
-  .navapp{display:inline-flex;align-items:center;gap:6px;color:var(--ink);text-decoration:none;font-size:14px;font-weight:500;white-space:nowrap}
-  .navapp svg{width:15px;height:15px;color:var(--olive-dark)}
-  .navapp:hover{color:var(--olive-dark)}
-  @media(max-width:520px){.navapp span,.navapp{font-size:0;gap:0}.navapp svg{font-size:15px}}
+  .navapp{display:inline-flex;align-items:center;gap:7px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);text-decoration:none;font-size:14px;font-weight:600;padding:8px 15px;border-radius:999px;white-space:nowrap;transition:border-color .15s ease,color .15s ease}
+  .navapp svg{width:15px;height:15px;color:var(--olive-dark);flex:none}
+  .navapp:hover{border-color:var(--olive);color:var(--olive-dark)}
+  @media(max-width:560px){.navapp{padding:8px 11px}.navapp .lbl{display:none}}
 
   article{max-width:720px;margin:0 auto;padding:34px 22px 60px}
   .crumb{font-size:13px;color:var(--muted);margin-bottom:14px}
@@ -81,8 +81,8 @@
 <header class="nav">
   <div class="navin">
     <a class="brand" href="/"><img class="lmimg" src="/img/logo-1024.png" alt="" width="34" height="34" loading="eager">VowToDo</a>
-    <a class="navapp" href="/app" title="Open the VowToDo web app"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.8" y="4.4" width="18.4" height="12.4" rx="2"/><path d="M9 20.4h6"/><path d="M12 16.8v3.6"/></svg>Web app</a>
-    <a class="btn-sm" href="/download">Get the app</a>
+    <a class="navapp" href="/app/login" title="Sign in to the VowToDo web app"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.8" y="4.4" width="18.4" height="12.4" rx="2"/><path d="M9 20.4h6"/><path d="M12 16.8v3.6"/></svg><span class="lbl">Web App</span></a>
+    <a class="btn-sm" href="/download">Mobile App</a>
   </div>
 </header>
 
@@ -165,7 +165,7 @@
 </article>
 
 <footer>
-  © 2026 VowToDo · <a href="/">Home</a><a href="/app">Web app</a><a href="/blog">Blog</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a>
+  © 2026 VowToDo · <a href="/">Home</a><a href="/app/login">Web App</a><a href="/blog">Blog</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a>
 </footer>
 </body>
 </html>

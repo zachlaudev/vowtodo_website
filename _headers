@@ -1,0 +1,5 @@
+# Hashed build assets never change content under the same name — let browsers
+# keep them for a year. index.html and route shells keep the platform default
+# (max-age=0, must-revalidate) so a deploy is picked up on the next load.
+/app/assets/*
+  Cache-Control: public, max-age=31536000, immutable

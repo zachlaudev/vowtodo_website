@@ -112,19 +112,30 @@
   .cmpwrap{max-width:880px;margin:0 auto;overflow-x:auto;border-radius:20px;
     border:1px solid var(--line);background:var(--card);
     box-shadow:0 1px 2px rgba(44,42,37,.05),0 16px 36px -18px rgba(44,42,37,.18)}
-  .cmp{width:100%;border-collapse:collapse;font-size:14.5px;min-width:560px}
-  .cmp th,.cmp td{padding:13px 16px;text-align:center;border-top:1px solid color-mix(in srgb,var(--line) 65%,transparent)}
-  .cmp thead th{border-top:0;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700;padding:15px 16px}
-  .cmp tbody th{text-align:left;font-weight:600;color:var(--ink);font-size:14px}
-  .cmp .what{width:34%}
+  .cmp{width:100%;border-collapse:collapse;font-size:13.5px;min-width:720px}
+  .cmp th,.cmp td{padding:13px 18px;text-align:left;border-top:1px solid color-mix(in srgb,var(--line) 65%,transparent);vertical-align:middle}
+  .cmp thead th{border-top:0;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700;padding:15px 18px}
+  .cmp tbody th{font-weight:600;color:var(--ink);font-size:14px}
+  .cmp .what{width:22%}
   .cmp .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
   .cmp td.us,.cmp th.us{background:var(--olive-tint)}
   .cmp thead th.us{color:var(--olive-dark);font-size:12.5px}
-  .cmp .yes{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:999px;background:var(--olive-dark);color:#FBF8EF;font-size:13px;font-weight:700}
-  .cmp .no{color:var(--terracotta-dark);font-weight:700;font-size:14px;opacity:.85}
-  .cmp .some{font-size:12.5px;color:var(--muted)}
-  .cmp .txt{font-size:13px;color:var(--body-ink)}
-  .cmp .txt.strong{font-weight:700;color:var(--olive-dark)}
+  .cmp td{color:var(--muted);line-height:1.45}
+  .cmp td.win{color:var(--body-ink);font-weight:600}
+  .cmp td.us{color:var(--olive-dark);font-weight:600}
+  .cmp td.us .cell{display:flex;align-items:flex-start;gap:8px}
+  @media(max-width:640px){
+    .cmp{display:block;min-width:0;font-size:13px}
+    .cmp thead{display:none}
+    .cmp tbody,.cmp tr,.cmp tbody th,.cmp td{display:block}
+    .cmp tbody th{padding:15px 16px 5px;font-size:15px;border-top:1px solid var(--line)}
+    .cmp tr:first-child th{border-top:0}
+    .cmp td{border-top:0;padding:3px 16px;display:flex;align-items:flex-start;gap:10px}
+    .cmp td::before{content:attr(data-l);flex:none;width:94px;font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--faint);margin-top:3px}
+    .cmp td.us{margin:7px 12px 15px;padding:9px 12px;border-radius:12px}
+    .cmp td.us::before{color:var(--olive-dark)}
+  }
+  .cmp td.us .yes{display:inline-grid;place-items:center;width:19px;height:19px;border-radius:999px;background:var(--olive-dark);color:#FBF8EF;font-size:11px;font-weight:700;flex:none;margin-top:1px}
   .otherapps{max-width:640px;margin:30px auto 0;text-align:center;font-size:15.5px;color:var(--body-ink);line-height:1.65}
   .otherapps b{color:var(--ink)}
   /* crew */
@@ -263,20 +274,20 @@
     <div class="cmpwrap reveal">
       <table class="cmp">
         <thead>
-          <tr><th scope="col" class="what"><span class="sr">Capability</span></th><th scope="col">Spreadsheets</th><th scope="col">Other apps</th><th scope="col" class="us">VowToDo</th></tr>
+          <tr><th scope="col" class="what"><span class="sr">Capability</span></th><th scope="col">Spreadsheets</th><th scope="col">Wedding apps</th><th scope="col" class="us">VowToDo</th></tr>
         </thead>
         <tbody>
-          <tr><th scope="row">Everything in one place</th><td><span class="no">✕</span></td><td><span class="some">Some</span></td><td class="us"><span class="yes">✓</span></td></tr>
-          <tr><th scope="row">Built for two + helpers</th><td><span class="no">✕</span></td><td><span class="no">✕</span></td><td class="us"><span class="yes">✓</span></td></tr>
-          <tr><th scope="row">Automatic reminders</th><td><span class="no">✕</span></td><td><span class="some">Some</span></td><td class="us"><span class="yes">✓</span></td></tr>
-          <tr><th scope="row">RSVPs collect themselves</th><td><span class="no">✕</span></td><td><span class="some">Some</span></td><td class="us"><span class="yes">✓</span></td></tr>
-          <tr><th scope="row">Seating chart</th><td><span class="no">✕</span></td><td><span class="some">Paid</span></td><td class="us"><span class="yes">✓</span></td></tr>
-          <tr><th scope="row">Phone + web, synced</th><td><span class="some">Clunky</span></td><td><span class="some">Some</span></td><td class="us"><span class="yes">✓</span></td></tr>
-          <tr><th scope="row">Price</th><td><span class="txt">Free</span></td><td><span class="txt">Paid tiers</span></td><td class="us"><span class="txt strong">Free — all of it</span></td></tr>
+          <tr><th scope="row">Everything in one place</th><td data-l="Spreadsheets">You build every tab</td><td data-l="Wedding apps">A checklist, then links out</td><td class="us" data-l="VowToDo"><span class="cell"><span class="yes">✓</span><span>Tasks to seating, built in</span></span></td></tr>
+          <tr><th scope="row">Working together</th><td data-l="Spreadsheets">Everyone edits everything</td><td data-l="Wedding apps">Built around one planner</td><td class="us" data-l="VowToDo"><span class="cell"><span class="yes">✓</span><span>Couple + helpers, with roles</span></span></td></tr>
+          <tr><th scope="row">Reminders</th><td data-l="Spreadsheets">It never pings you</td><td data-l="Wedding apps">Promos more than progress</td><td class="us" data-l="VowToDo"><span class="cell"><span class="yes">✓</span><span>Due dates nudge the right person</span></span></td></tr>
+          <tr><th scope="row">Collecting RSVPs</th><td data-l="Spreadsheets">You chase every reply</td><td data-l="Wedding apps">Tied to their invites</td><td class="us" data-l="VowToDo"><span class="cell"><span class="yes">✓</span><span>One link — answers file themselves</span></span></td></tr>
+          <tr><th scope="row">Seating chart</th><td data-l="Spreadsheets">Cells and crossed fingers</td><td data-l="Wedding apps">Cramped on a small screen</td><td class="us" data-l="VowToDo"><span class="cell"><span class="yes">✓</span><span>Drag guests onto seats</span></span></td></tr>
+          <tr><th scope="row">Phone + laptop</th><td data-l="Spreadsheets">Pinch-zoom on mobile</td><td data-l="Wedding apps">App or website — pick one</td><td class="us" data-l="VowToDo"><span class="cell"><span class="yes">✓</span><span>iPhone app + full web app</span></span></td></tr>
+          <tr><th scope="row">What it costs</th><td class="win" data-l="Spreadsheets">Free</td><td data-l="Wedding apps">“Free” — then ads, upsells, tiers</td><td class="us" data-l="VowToDo"><span class="cell"><span class="yes">✓</span><span>Free. All of it.</span></span></td></tr>
         </tbody>
       </table>
     </div>
-    <p class="otherapps">No spreadsheet gymnastics, no upsells halfway through. <b>The whole wedding, free.</b></p>
+    <p class="otherapps">Most planning tools are “free” because they're selling you something else. <b>VowToDo is just free — the whole wedding, no catch.</b></p>
   </div>
 </section>
 

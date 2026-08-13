@@ -17,7 +17,7 @@
   --lavender:#CBC7E6; --lavender-dark:#5E5887; --white:#FBF6EC; --card:#FBF6EC;
   --cream:#F1E8D6; --cream-2:#F5EEDF;
   --font-display:'Bricolage Grotesque','Lexend',system-ui,sans-serif;
-  --font-body:'Bricolage Grotesque','Lexend',system-ui,sans-serif;
+  --font-body:'Instrument Sans','Bricolage Grotesque',system-ui,sans-serif;
   --font-mono:'Fragment Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
   --font-script:'Caveat',cursive;
 }
@@ -150,6 +150,10 @@ a{color:var(--olive-dark)}
 }
 .appstore:hover,.store.ios:hover{box-shadow:0 2px 4px rgba(32,32,28,.28),0 14px 30px -12px rgba(32,32,28,.55)}
 .appstore:active,.store.ios:active{transform:scale(.98)}
+.appstore svg,.store.ios svg{width:24px; height:24px; flex:none}
+.appstore .l,.store.ios .lab{display:flex; flex-direction:column; line-height:1.12; text-align:left}
+.appstore .l small,.store.ios .lab small{font-size:10.5px; opacity:.85}
+.appstore .l b,.store.ios .lab b{font-size:16px; font-weight:600}
 .ghost{
   display:inline-flex; align-items:center; gap:7px; border:1.5px solid var(--line);
   color:var(--ink); background:transparent; text-decoration:none; padding:12px 20px;

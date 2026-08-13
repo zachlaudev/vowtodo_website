@@ -7,7 +7,8 @@
 <meta name="description" content="How VowToDo collects, uses, and protects your information.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Caveat:wght@600;700&family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,600;12..96,700;12..96,800&family=Caveat:wght@600;700&family=Fragment+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/site.css">
 <style>
   :root{--sand:#F1E8D6;--surface:#EADFC9;--sand-2:#F5EEDF;--line:#DDD1BA;--dark:#2C2A25;--dark-2:#3A372F;--on-dark:#F3ECDC;--on-dark-muted:#B7AE99;--ink:#2C2A25;--muted:#8A8273;--faint:#B3AB99;--olive:#7E8C57;--olive-dark:#5C6A3A;--olive-tint:#E5E7CF;--on-olive:#F7F1E3;--gold:#C8A86B;--terracotta:#C0835E;--terracotta-dark:#A66A47;--lavender:#CBC7E6;--lavender-dark:#5E5887;--white:#FBF6EC;--sage:#7E8C57;--sage-deep:#5C6A3A;--sage-soft:#8C9A6A;--cream:#F1E8D6;--cream-2:#F5EEDF;--card:#FBF6EC;--accept:#7E8C57;--decline:#C0835E;--ink-btn:#2C2A25;--invite-ink:#F3ECDC;--going-bg:#E5E7CF;--going-ink:#5C6A3A;--cant-bg:#F1E1D5;--cant-ink:#A66A47;--pending-bg:#EADFC9;--pending-ink:#8A8273;}
   /* app-matched typography: Bricolage display + Lexend body + Caveat accents */
@@ -16,7 +17,7 @@
   *{box-sizing:border-box}
   html,body{margin:0}
   body{background:var(--cream);color:var(--ink);
-       font-family:'Lexend',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+       font-family:var(--font-body);
        line-height:1.65;-webkit-font-smoothing:antialiased}
   a{color:var(--sage-deep)}
   .top{background:var(--sage);color:#F4EFE3}
@@ -48,10 +49,25 @@
 <link rel="manifest" href="/site.webmanifest">
 </head>
 <body>
-<header class="top">
+<header class="site-nav">
   <div class="in">
-    <a class="brand" href="/">VowToDo</a>
-    <nav class="nav"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></nav>
+    <a class="site-brand" href="/"><img src="/img/logo-1024.png" alt="" width="32" height="32">VowToDo</a>
+    <nav class="site-links" aria-label="Site">
+      <a href="/features">Features</a>
+      <a href="/guide">Guide</a>
+      <a href="/blog">Blog</a>
+    </nav>
+    <details class="site-menu">
+      <summary aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></summary>
+      <nav class="sheet" aria-label="Site">
+        <a href="/features">Features</a>
+        <a href="/guide">Guide</a>
+        <a href="/blog">Blog</a>
+        <a href="/download">Mobile App</a>
+      </nav>
+    </details>
+    <a class="site-navapp" href="/app/login" title="Sign in to the VowToDo web app"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.8" y="4.4" width="18.4" height="12.4" rx="2"/><path d="M9 20.4h6"/><path d="M12 16.8v3.6"/></svg><span class="lbl">Web App</span></a>
+    <a class="site-btn" href="/download">Mobile App</a>
   </div>
 </header>
 
@@ -165,8 +181,19 @@
 </article>
 </main>
 
-<footer>
-  © 2026 VowToDo · <a href="/">Home</a><a href="/app/login">Web App</a><a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms of Use</a>
+<footer class="site-footer">
+  <div class="in">
+    <div class="cols">
+      <div>
+        <a class="site-brand" href="/"><img src="/img/logo-1024.png" alt="" width="32" height="32">VowToDo</a>
+        <p class="tagline">Wedding planning, together.</p>
+      </div>
+      <div class="col"><p class="fh">Product</p><a href="/features">Features</a><a href="/app/login">Web App</a><a href="/download">Mobile App</a></div>
+      <div class="col"><p class="fh">Resources</p><a href="/guide">Wedding Guide</a><a href="/blog">Blog</a></div>
+      <div class="col"><p class="fh">Legal</p><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Use</a><a href="mailto:zachlaudev@gmail.com">Contact</a></div>
+    </div>
+    <div class="legal"><span>© 2026 VowToDo</span><span>Made for couples, with care.</span></div>
+  </div>
 </footer>
 </body>
 </html>

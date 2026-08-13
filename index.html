@@ -19,14 +19,15 @@
 <meta name="theme-color" content="#7E8C57">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Caveat:wght@600;700&family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,600;12..96,700;12..96,800&family=Caveat:wght@600;700&family=Fragment+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/site.css">
 <style>
   :root{--sand:#F1E8D6;--surface:#EADFC9;--sand-2:#F5EEDF;--line:#DDD1BA;--dark:#2C2A25;--dark-2:#3A372F;--on-dark:#F3ECDC;--on-dark-muted:#B7AE99;--ink:#2C2A25;--muted:#8A8273;--faint:#B3AB99;--olive:#7E8C57;--olive-dark:#5C6A3A;--olive-tint:#E5E7CF;--on-olive:#F7F1E3;--gold:#C8A86B;--terracotta:#C0835E;--terracotta-dark:#A66A47;--lavender:#CBC7E6;--lavender-dark:#5E5887;--white:#FBF6EC;--sage:#7E8C57;--sage-deep:#5C6A3A;--cream:#F1E8D6;--cream-2:#F5EEDF;--card:#FBF6EC;}
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   html,body{margin:0}
   body{background:var(--cream);color:var(--ink);
-    font-family:'Lexend',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    font-family:var(--font-body);
     line-height:1.6;-webkit-font-smoothing:antialiased}
   h1,h2,h3,.display{font-family:'Bricolage Grotesque','Lexend',system-ui,sans-serif;font-weight:700;letter-spacing:-.025em}
   a{color:var(--olive-dark)}
@@ -56,7 +57,7 @@
   .eyebrow{display:inline-block;background:var(--olive-tint);color:var(--olive-dark);font-weight:700;
     letter-spacing:.1em;text-transform:uppercase;font-size:11.5px;margin:0 0 16px;padding:6px 12px;border-radius:999px}
   h1{font-size:clamp(36px,5.2vw,56px);line-height:1.04;margin:0 0 18px}
-  .lede{font-size:18.5px;color:#57533F;margin:0 0 26px;max-width:40ch}
+  .lede{font-size:18.5px;color:var(--body-ink);margin:0 0 26px;max-width:40ch}
   .cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
   .surfaces{margin:20px 0 0;font-size:14px;color:#57533F}
   .surfaces a{color:var(--olive-dark);font-weight:600;text-decoration:none;border-bottom:1px solid var(--line)}
@@ -70,7 +71,7 @@
   .ghost{display:inline-flex;align-items:center;gap:7px;border:1.5px solid var(--line);color:var(--ink);
     background:transparent;text-decoration:none;padding:12px 20px;border-radius:14px;font-weight:600;font-size:15px}
   .ghost:hover{border-color:var(--olive)}
-  .trial{margin:18px 0 0;font-size:13.5px;color:var(--muted)}
+  .trial{margin:18px 0 0;font-family:var(--font-mono);font-size:12.5px;color:var(--muted)}
   .trial b{color:var(--olive-dark)}
 
   /* chip cloud + couple */
@@ -79,7 +80,7 @@
   .chip{font-family:'Caveat',cursive;font-weight:700;font-size:16.5px;line-height:1.15;
     padding:6px 12px;border-radius:9px;white-space:nowrap;display:inline-block}
   .couple{display:block;margin:12px auto 0;max-width:290px;width:100%;height:auto}
-  .deepbreath{font-size:15.5px;color:var(--terracotta);margin:12px 0 0;font-weight:500;text-align:center}
+  .deepbreath{font-family:var(--font-script);font-weight:700;font-size:20px;color:var(--terracotta);margin:12px 0 0;text-align:center}
 
   /* sections */
   .sec{padding:68px 0}
@@ -121,19 +122,19 @@
   .rb{margin-left:auto;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
     padding:4px 10px;border-radius:999px;background:rgba(200,168,107,.2);color:var(--gold);white-space:nowrap}
   .rb.crew{background:rgba(243,236,220,.12);color:var(--on-dark-muted)}
-  .rnote{font-family:'Caveat',cursive;font-weight:700;font-size:19px;color:var(--gold);text-align:right;margin:12px 4px 0}
+  .rnote{font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);text-align:right;margin:14px 4px 0}
 
   /* bento */
   .bento{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:760px;margin:0 auto}
   .tile{border-radius:24px;padding:20px;overflow:hidden;min-height:206px;display:flex;flex-direction:column;
-    box-shadow:0 8px 22px rgba(44,42,37,.10)}
+    box-shadow:0 1px 2px rgba(44,42,37,.08),0 12px 26px -10px rgba(44,42,37,.16)}
   .tile b{font-family:'Bricolage Grotesque','Lexend',sans-serif;font-weight:700;font-size:25px;letter-spacing:-.02em;line-height:1.1}
   .tile img{width:78%;max-width:206px;height:auto;margin-top:auto;align-self:center;display:block}
-  .t-check{background:#7E8C57;color:#F7F1E3;transform:rotate(-1.2deg)}
-  .t-sched{background:#A29AD0;color:#FBF6EC;transform:rotate(1.2deg)}
-  .t-rsvp{background:#2C2A25;color:#F3ECDC;transform:rotate(-1deg)}
-  .t-budget{background:#C0835E;color:#FBF6EC;transform:rotate(1deg)}
-  .quiet{font-family:'Caveat',cursive;font-weight:700;font-size:22px;color:var(--olive);text-align:right;max-width:760px;margin:16px auto 0}
+  .t-check{background:#7E8C57;color:#F7F1E3;transform:rotate(-1.2deg);box-shadow:0 1px 2px rgba(94,107,64,.2),0 14px 30px -10px rgba(94,107,64,.4)}
+  .t-sched{background:#A29AD0;color:#FBF6EC;transform:rotate(1.2deg);box-shadow:0 1px 2px rgba(94,88,135,.2),0 14px 30px -10px rgba(94,88,135,.4)}
+  .t-rsvp{background:#2C2A25;color:#F3ECDC;transform:rotate(-1deg);box-shadow:0 1px 2px rgba(32,32,28,.25),0 14px 30px -10px rgba(32,32,28,.45)}
+  .t-budget{background:#C0835E;color:#FBF6EC;transform:rotate(1deg);box-shadow:0 1px 2px rgba(166,106,71,.22),0 14px 30px -10px rgba(166,106,71,.42)}
+  .quiet{font-weight:300;font-style:italic;font-size:17px;color:var(--olive-dark);text-align:right;max-width:760px;margin:16px auto 0}
   @media(max-width:620px){.bento{grid-template-columns:1fr}.tile{min-height:176px}.heroin{grid-template-columns:1fr}.hero{padding:44px 0 24px}}
 
   /* spreadsheet objection */
@@ -148,7 +149,7 @@
   .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:920px;margin:0 auto}
   @media(max-width:720px){.steps{grid-template-columns:1fr}}
   .step{text-align:center}
-  .step .n{width:46px;height:46px;border-radius:999px;background:var(--olive);color:#fff;display:grid;place-items:center;font-weight:700;margin:0 auto 13px;font-size:18px}
+  .step .n{width:46px;height:46px;border-radius:999px;background:var(--olive);color:#fff;display:grid;place-items:center;font-family:var(--font-mono);margin:0 auto 13px;font-size:17px}
   .step h3{margin:0 0 5px;font-size:18px}
   .step p{margin:0;color:var(--muted);font-size:14.5px}
 
@@ -187,17 +188,25 @@
 </head>
 <body>
 
-<header class="nav">
-  <div class="navin">
-    <a class="brand" href="/"><img class="lmimg" src="/img/logo-1024.png" alt="" width="34" height="34" loading="eager">VowToDo</a>
-    <nav class="links">
+<header class="site-nav">
+  <div class="in">
+    <a class="site-brand" href="/"><img src="/img/logo-1024.png" alt="" width="32" height="32">VowToDo</a>
+    <nav class="site-links" aria-label="Site">
       <a href="/features">Features</a>
       <a href="/guide">Guide</a>
       <a href="/blog">Blog</a>
-      
     </nav>
-    <a class="navapp" href="/app/login" title="Sign in to the VowToDo web app"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.8" y="4.4" width="18.4" height="12.4" rx="2"/><path d="M9 20.4h6"/><path d="M12 16.8v3.6"/></svg><span class="lbl">Web App</span></a>
-    <a class="btn-sm" href="/download">Mobile App</a>
+    <details class="site-menu">
+      <summary aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></summary>
+      <nav class="sheet" aria-label="Site">
+        <a href="/features">Features</a>
+        <a href="/guide">Guide</a>
+        <a href="/blog">Blog</a>
+        <a href="/download">Mobile App</a>
+      </nav>
+    </details>
+    <a class="site-navapp" href="/app/login" title="Sign in to the VowToDo web app"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.8" y="4.4" width="18.4" height="12.4" rx="2"/><path d="M9 20.4h6"/><path d="M12 16.8v3.6"/></svg><span class="lbl">Web App</span></a>
+    <a class="site-btn" href="/download">Mobile App</a>
   </div>
 </header>
 
@@ -246,7 +255,7 @@
           <li><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Everyone can see the budget</span></li>
         </ul>
       </div>
-      <div class="col new">
+      <div class="col new grainy">
         <p class="kick">With VowToDo</p>
         <h3>The plan carries itself</h3>
         <ul>
@@ -309,10 +318,10 @@
     <h2>We can help.</h2>
     <p class="sub">Checklist, budget, the day itself, every RSVP — together at last.</p>
     <div class="bento">
-      <div class="tile t-check"><b>Checklist</b><img src="/img/checklist_onboarding.png" alt="Wedding checklist illustration" loading="lazy" width="520" height="520"></div>
-      <div class="tile t-sched"><b>Schedule</b><img src="/img/schedule_onboarding.png" alt="Day-of schedule illustration" loading="lazy" width="520" height="520"></div>
-      <div class="tile t-rsvp"><b>RSVPs</b><img src="/img/rsvp_onboarding.png" alt="Guest RSVP illustration" loading="lazy" width="520" height="520"></div>
-      <div class="tile t-budget"><b>Budget</b><img src="/img/budget_onboarding.png" alt="Wedding budget illustration" loading="lazy" width="520" height="520"></div>
+      <div class="tile t-check grainy"><b>Checklist</b><img src="/img/checklist_onboarding.png" alt="Wedding checklist illustration" loading="lazy" width="520" height="520"></div>
+      <div class="tile t-sched grainy"><b>Schedule</b><img src="/img/schedule_onboarding.png" alt="Day-of schedule illustration" loading="lazy" width="520" height="520"></div>
+      <div class="tile t-rsvp grainy"><b>RSVPs</b><img src="/img/rsvp_onboarding.png" alt="Guest RSVP illustration" loading="lazy" width="520" height="520"></div>
+      <div class="tile t-budget grainy"><b>Budget</b><img src="/img/budget_onboarding.png" alt="Wedding budget illustration" loading="lazy" width="520" height="520"></div>
     </div>
     <p class="quiet">— all in one quiet place</p>
     <p style="text-align:center;margin:30px 0 0"><a class="ghost" href="/features">Explore every feature →</a></p>
@@ -347,8 +356,8 @@
 
 <!-- CTA -->
 <section id="get">
-  <div class="band">
-    <h2 class="script" style="font-size:clamp(34px,4.4vw,48px)">Stop planning alone</h2>
+  <div class="band grainy">
+    <h2>Stop planning alone</h2>
     <p>7-day free trial. Your crew joins free.</p>
     <a class="appstore" href="https://apps.apple.com/sg/app/vowtodo-wedding-planner/id6788746982" target="_blank" rel="noopener">
       <svg viewBox="0 0 384 512"><path fill="currentColor" d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zM262.1 104.5c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
@@ -357,16 +366,16 @@
   </div>
 </section>
 
-<footer>
-  <div class="wrap">
+<footer class="site-footer">
+  <div class="in">
     <div class="cols">
-      <div style="max-width:250px">
-        <a class="brand" href="/" style="font-size:24px"><img class="lmimg" src="/img/logo-1024.png" alt="" width="30" height="30" loading="lazy">VowToDo</a>
-        <p style="color:#8E887A;font-size:13px;margin-top:10px">Wedding planning, together.</p>
+      <div>
+        <a class="site-brand" href="/"><img src="/img/logo-1024.png" alt="" width="32" height="32">VowToDo</a>
+        <p class="tagline">Wedding planning, together.</p>
       </div>
-      <div><p class="fh">Product</p><a href="/features">Features</a><a href="/app/login">Web App</a><a href="/download">Mobile App</a></div>
-      <div><p class="fh">Resources</p><a href="/blog">Blog</a></div>
-      <div><p class="fh">Legal</p><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Use</a><a href="mailto:zachlaudev@gmail.com">Contact</a></div>
+      <div class="col"><p class="fh">Product</p><a href="/features">Features</a><a href="/app/login">Web App</a><a href="/download">Mobile App</a></div>
+      <div class="col"><p class="fh">Resources</p><a href="/guide">Wedding Guide</a><a href="/blog">Blog</a></div>
+      <div class="col"><p class="fh">Legal</p><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Use</a><a href="mailto:zachlaudev@gmail.com">Contact</a></div>
     </div>
     <div class="legal"><span>© 2026 VowToDo</span><span>Made for couples, with care.</span></div>
   </div>

@@ -1,52 +1,60 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Join a wedding — VowToDo</title>
 <meta name="description" content="You've been invited to help plan a wedding on VowToDo.">
-<style>
-  :root{
-    --sage:#7B8A56; --sage-deep:#6B7A48; --cream:#F0EBDF; --card:#FFFFFF;
-    --ink:#2E2A22; --muted:#8C8674; --line:#E5DECE; --gold:#C2A36B;
-  }
-  *{box-sizing:border-box} html,body{margin:0}
-  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--cream);color:var(--ink);
-    min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:28px 20px 40px}
-  .brand{font-weight:800;font-size:20px;letter-spacing:-.02em;margin-bottom:26px}
-  .brand a{color:var(--ink);text-decoration:none}
-  .card{background:var(--card);border-radius:26px;box-shadow:0 14px 40px rgba(46,42,34,.10);
-    padding:34px 26px 30px;max-width:420px;width:100%;text-align:center}
-  .script{color:var(--sage);font-size:15px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;margin:0 0 8px}
-  h1{font-size:26px;line-height:1.2;margin:0 0 10px;letter-spacing:-.02em}
-  p.lead{color:var(--muted);font-size:14.5px;line-height:1.5;margin:0 0 22px}
-  .codebox{background:var(--cream);border:1.5px dashed var(--sage);border-radius:18px;padding:16px 14px;margin-bottom:10px}
-  .codelabel{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:6px}
-  .code{font-size:34px;font-weight:800;letter-spacing:.22em;color:var(--ink)}
-  .copy{display:inline-flex;align-items:center;gap:6px;margin:2px 0 22px;background:none;border:none;color:var(--sage-deep);
-    font-weight:700;font-size:13.5px;cursor:pointer;padding:8px}
-  .steps{text-align:left;margin:0 0 24px;padding:0;list-style:none;counter-reset:s}
-  .steps li{counter-increment:s;display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line);font-size:14.5px;line-height:1.45}
-  .steps li:first-child{border-top:none}
-  .steps li::before{content:counter(s);flex:0 0 24px;height:24px;border-radius:50%;background:var(--sage);color:#fff;
-    font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:1px}
-  .badges{display:flex;gap:10px;justify-content:center}
-  .webalt{margin:20px 0 0;font-size:13.5px;color:var(--muted)}
-  .webalt a{color:var(--olive-dark);font-weight:600;text-decoration:none}
-  .webalt a:hover{text-decoration:underline}
-  .badge{flex:1;max-width:170px;border-radius:14px;padding:12px 10px;font-size:13.5px;font-weight:700;text-align:center;
-    background:var(--ink);color:#fff;text-decoration:none;opacity:.45;pointer-events:none;position:relative}
-  .badge small{display:block;font-weight:600;font-size:10.5px;opacity:.8;margin-top:2px}
-  .foot{margin-top:22px;font-size:12px;color:var(--muted)}
-  .foot a{color:var(--muted)}
-</style>
 <link rel="canonical" href="https://vowtodo.com/join">
 <meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#7E8C57">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,600;12..96,700;12..96,800&family=Caveat:wght@600;700&family=Fragment+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/site.css">
+<style>
+  body{min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:28px 20px 44px}
+  .topbrand{margin-bottom:28px}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:24px;
+    box-shadow:0 1px 2px rgba(44,42,37,.06),0 16px 40px -16px rgba(44,42,37,.22);
+    padding:36px 28px 30px; max-width:430px; width:100%; text-align:center}
+  .kick{color:var(--terracotta-dark); font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; font-weight:700; margin:0 0 10px}
+  h1{font-size:28px; font-weight:800; line-height:1.15; margin:0 0 10px}
+  p.lead{color:var(--body-ink); font-size:14.5px; line-height:1.55; margin:0 0 22px}
+  .codebox{background:var(--sand-2); border:1.5px dashed var(--olive); border-radius:16px; padding:16px 14px; margin-bottom:10px}
+  .codelabel{font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); font-weight:700; margin-bottom:6px}
+  .code{font-family:var(--font-mono); font-size:32px; letter-spacing:.22em; color:var(--ink)}
+  .copy{display:inline-flex; align-items:center; gap:6px; margin:2px 0 22px; background:none; border:none; color:var(--olive-dark);
+    font-family:inherit; font-weight:700; font-size:13.5px; cursor:pointer; padding:8px; border-radius:8px;
+    transition:background .15s ease}
+  .copy:hover{background:var(--sand-2)}
+  .steps{text-align:left; margin:0 0 24px; padding:0; list-style:none; counter-reset:s}
+  .steps li{counter-increment:s; display:flex; gap:12px; align-items:flex-start; padding:11px 0; border-top:1px solid var(--line); font-size:14.5px; line-height:1.45; color:var(--body-ink)}
+  .steps li:first-child{border-top:none}
+  .steps li::before{content:counter(s); flex:0 0 26px; height:26px; border-radius:50%; background:var(--olive); color:#fff;
+    font-family:var(--font-mono); font-size:13px; display:flex; align-items:center; justify-content:center; margin-top:1px}
+  .steps strong{color:var(--ink)}
+  .getit{display:flex; flex-direction:column; gap:10px; align-items:center}
+  .getit .store.ios{width:100%; max-width:280px; justify-content:center}
+  .getit .store.ios .lab{display:flex; flex-direction:column; line-height:1.12; text-align:left}
+  .getit .store.ios small{font-size:11px; opacity:.85}
+  .getit .store.ios b{font-size:16px; font-weight:600}
+  .getit svg{width:22px; height:22px}
+  .playnote{font-family:var(--font-mono); font-size:12px; color:var(--muted); margin:0}
+  .webalt{margin:18px 0 0; font-size:13.5px; color:var(--muted)}
+  .webalt a{color:var(--olive-dark); font-weight:700; text-decoration:none}
+  .webalt a:hover{text-decoration:underline}
+  .foot{margin-top:24px; font-family:var(--font-mono); font-size:12px; color:var(--muted)}
+  .foot a{color:var(--muted)}
+</style>
+<link rel="icon" href="/img/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 </head>
 <body>
-  <div class="brand"><a href="https://vowtodo.com">VowToDo</a></div>
-  <div class="card">
-    <p class="script">You're invited</p>
+  <a class="site-brand topbrand" href="/"><img src="/img/logo-1024.png" alt="" width="32" height="32">VowToDo</a>
+  <main class="card">
+    <p class="kick">You're invited</p>
     <h1>Help plan the big day</h1>
     <p class="lead">Someone wants you on their wedding crew. Joining is free — use the app or your browser, and enter the invite code below.</p>
     <div class="codebox" id="codebox" hidden>
@@ -55,18 +63,20 @@
     </div>
     <button class="copy" id="copy" hidden>Copy code</button>
     <ol class="steps">
-      <li>Download VowToDo below.</li>
-      <li>Create your free account.</li>
-      <li>Choose <strong>Join a space</strong> and enter the code.</li>
+      <li><span>Get VowToDo below — or open it in your browser.</span></li>
+      <li><span>Create your free account.</span></li>
+      <li><span>Choose <strong>Join a space</strong> and enter the code.</span></li>
     </ol>
-    <div class="badges">
-      <!-- TODO: swap hrefs + remove disabled styling once live on the stores -->
-      <a class="badge" href="https://apps.apple.com/sg/app/vowtodo-wedding-planner/id6788746982" target="_blank" rel="noopener">App Store<small>Download now</small></a>
-      <a class="badge" href="#">Google Play<small>coming soon</small></a>
+    <div class="getit">
+      <a class="store ios" href="https://apps.apple.com/sg/app/vowtodo-wedding-planner/id6788746982" target="_blank" rel="noopener">
+        <svg viewBox="0 0 384 512"><path fill="currentColor" d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zM262.1 104.5c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+        <span class="lab"><small>Download on the</small><b>App Store</b></span>
+      </a>
+      <p class="playnote">Android is on the way</p>
     </div>
     <p class="webalt">Prefer your laptop? <a href="/app/login">Join on the web →</a></p>
-  </div>
-  <p class="foot">© 2026 VowToDo · <a href="/app/login">Web App</a> · <a href="https://vowtodo.com/privacy">Privacy</a> · <a href="https://vowtodo.com/terms">Terms</a></p>
+  </main>
+  <p class="foot">© 2026 VowToDo · <a href="/app/login">Web App</a> · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>
 <script>
   const code = new URLSearchParams(location.search).get('code');
   if (code && /^[A-Z2-9]{4,10}$/i.test(code)) {
@@ -75,7 +85,7 @@
     const btn = document.getElementById('copy');
     btn.hidden = false;
     btn.addEventListener('click', async () => {
-      try { await navigator.clipboard.writeText(code.toUpperCase()); btn.textContent = 'Copied!'; }
+      try { await navigator.clipboard.writeText(code.toUpperCase()); btn.textContent = 'Copied'; }
       catch { btn.textContent = code.toUpperCase(); }
       setTimeout(() => (btn.textContent = 'Copy code'), 1800);
     });

@@ -1,0 +1,167 @@
+/* ============================================================
+   VowToDo — site-wide design system (marketing pages)
+   One register across every page: Bricolage Grotesque carries
+   display AND body, Fragment Mono is the data voice (dates,
+   codes, counts), Caveat appears once per page at most, as a
+   handwritten aside. Sand & Olive site-side tokens throughout.
+   Pages keep their own layout CSS; this file owns the shell:
+   tokens, base, nav, footer, buttons, and shared micro-craft.
+   ============================================================ */
+
+:root{
+  --sand:#F1E8D6; --surface:#EADFC9; --sand-2:#F5EEDF; --line:#DDD1BA;
+  --dark:#2C2A25; --dark-2:#3A372F; --on-dark:#F3ECDC; --on-dark-muted:#B7AE99;
+  --ink:#2C2A25; --body-ink:#57533F; --muted:#8A8273; --faint:#B3AB99;
+  --olive:#7E8C57; --olive-dark:#5C6A3A; --olive-tint:#E5E7CF; --on-olive:#F7F1E3;
+  --gold:#C8A86B; --terracotta:#C0835E; --terracotta-dark:#A66A47;
+  --lavender:#CBC7E6; --lavender-dark:#5E5887; --white:#FBF6EC; --card:#FBF6EC;
+  --cream:#F1E8D6; --cream-2:#F5EEDF;
+  --font-display:'Bricolage Grotesque','Lexend',system-ui,sans-serif;
+  --font-body:'Bricolage Grotesque','Lexend',system-ui,sans-serif;
+  --font-mono:'Fragment Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --font-script:'Caveat',cursive;
+}
+
+/* ---------- base ---------- */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{margin:0}
+body{
+  background:var(--cream); color:var(--ink);
+  font-family:var(--font-body); font-weight:400;
+  line-height:1.62; -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+h1,h2,h3,.display{
+  font-family:var(--font-display); font-weight:700;
+  letter-spacing:-.025em; text-wrap:balance;
+}
+p{text-wrap:pretty}
+::selection{background:var(--olive-tint); color:var(--olive-dark)}
+:focus-visible{outline:2px solid var(--olive-dark); outline-offset:2px; border-radius:4px}
+a{color:var(--olive-dark)}
+
+.mono{font-family:var(--font-mono); font-weight:400; font-variant-numeric:tabular-nums; letter-spacing:-.01em}
+.script{font-family:var(--font-script); font-weight:700}
+
+/* Tracked small-caps label — the one label voice on the site. */
+.kicker{
+  font-family:var(--font-body); font-size:11.5px; font-weight:700;
+  letter-spacing:.12em; text-transform:uppercase;
+}
+
+/* Paper grain for saturated fills — same turbulence the app uses. */
+.grainy{position:relative; isolation:isolate}
+.grainy::after{
+  content:''; position:absolute; inset:0; z-index:0; border-radius:inherit;
+  pointer-events:none; opacity:.34; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+.grainy>*{position:relative; z-index:1}
+
+/* ---------- shared shell: nav ---------- */
+.site-nav{
+  position:sticky; top:0; z-index:40;
+  background:color-mix(in srgb,var(--cream) 90%,transparent);
+  -webkit-backdrop-filter:saturate(140%) blur(10px); backdrop-filter:saturate(140%) blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.site-nav .in{max-width:1080px; margin:0 auto; padding:11px 22px; display:flex; align-items:center; gap:16px}
+.site-brand{
+  display:flex; align-items:center; gap:10px; text-decoration:none;
+  font-family:var(--font-display); font-weight:800; font-size:20px;
+  letter-spacing:-.03em; color:var(--ink); line-height:1;
+}
+.site-brand img{width:32px; height:32px; border-radius:9px; display:block; object-fit:cover; background:#20201C}
+.site-links{display:flex; gap:22px; margin-left:auto}
+.site-links a{
+  color:var(--ink); text-decoration:none; font-size:14.5px; font-weight:500;
+  transition:color .15s ease;
+}
+.site-links a:hover{color:var(--olive-dark)}
+.site-links a[aria-current="page"]{color:var(--olive-dark); font-weight:700}
+.site-navapp{
+  display:inline-flex; align-items:center; gap:7px;
+  border:1.5px solid var(--line); background:var(--card); color:var(--ink);
+  text-decoration:none; font-size:14px; font-weight:600; padding:8px 15px;
+  border-radius:999px; white-space:nowrap;
+  transition:border-color .15s ease,color .15s ease,transform .06s ease;
+}
+.site-navapp svg{width:15px; height:15px; color:var(--olive-dark); flex:none}
+.site-navapp:hover{border-color:var(--olive); color:var(--olive-dark)}
+.site-navapp:active{transform:scale(.98)}
+.site-btn{
+  background:var(--ink); color:#F6F2E7; text-decoration:none; font-size:14px;
+  font-weight:600; padding:9px 17px; border-radius:999px; white-space:nowrap;
+  transition:background .15s ease,transform .06s ease;
+}
+.site-btn:hover{background:#3A372F}
+.site-btn:active{transform:scale(.98)}
+
+/* Mobile menu — CSS only. The summary is the hamburger. */
+.site-menu{display:none; position:relative}
+.site-menu summary{
+  list-style:none; display:grid; place-items:center; width:38px; height:38px;
+  border-radius:11px; cursor:pointer; color:var(--ink);
+}
+.site-menu summary::-webkit-details-marker{display:none}
+.site-menu summary:hover{background:var(--sand-2)}
+.site-menu .sheet{
+  position:absolute; right:0; top:46px; min-width:180px;
+  background:var(--card); border:1px solid var(--line); border-radius:16px;
+  padding:8px; box-shadow:0 8px 24px rgba(44,42,37,.14); display:grid;
+}
+.site-menu .sheet a{
+  color:var(--ink); text-decoration:none; font-size:15px; font-weight:500;
+  padding:10px 14px; border-radius:10px;
+}
+.site-menu .sheet a:hover{background:var(--sand-2); color:var(--olive-dark)}
+@media(max-width:820px){
+  .site-links{display:none}
+  .site-menu{display:block; margin-left:auto}
+  .site-navapp .lbl{display:none}
+  .site-navapp{padding:8px 11px}
+}
+
+/* ---------- shared shell: footer ---------- */
+.site-footer{background:#20201C; color:#CFC9BB; padding:46px 0 30px; font-size:14px; text-align:left}
+.site-footer .in{max-width:1080px; margin:0 auto; padding:0 22px}
+.site-footer .cols{display:flex; flex-wrap:wrap; gap:30px 46px; justify-content:space-between}
+.site-footer .site-brand{color:#F6F2E7; font-size:19px}
+.site-footer .tagline{color:#8E887A; font-size:13px; margin:10px 0 0; max-width:24ch}
+.site-footer .fh{
+  color:#8E887A; font-size:11.5px; letter-spacing:.12em; text-transform:uppercase;
+  font-weight:700; margin:0 0 10px;
+}
+.site-footer .col a{color:#CFC9BB; text-decoration:none; display:block; margin:8px 0; transition:color .15s ease}
+.site-footer .col a:hover{color:#fff}
+.site-footer .legal{
+  border-top:1px solid #3A362E; margin-top:32px; padding-top:18px; color:#8E887A;
+  font-family:var(--font-mono); font-size:12px; display:flex; flex-wrap:wrap; gap:12px;
+  justify-content:space-between;
+}
+
+/* ---------- shared components ---------- */
+.appstore,.store.ios{
+  display:inline-flex; align-items:center; gap:11px; background:#161513; color:#fff;
+  text-decoration:none; padding:13px 22px; border-radius:14px;
+  transition:transform .08s ease,box-shadow .15s ease;
+  box-shadow:0 1px 2px rgba(32,32,28,.25),0 10px 24px -12px rgba(32,32,28,.5);
+}
+.appstore:hover,.store.ios:hover{box-shadow:0 2px 4px rgba(32,32,28,.28),0 14px 30px -12px rgba(32,32,28,.55)}
+.appstore:active,.store.ios:active{transform:scale(.98)}
+.ghost{
+  display:inline-flex; align-items:center; gap:7px; border:1.5px solid var(--line);
+  color:var(--ink); background:transparent; text-decoration:none; padding:12px 20px;
+  border-radius:14px; font-weight:600; font-size:15px;
+  transition:border-color .15s ease,color .15s ease,transform .06s ease;
+}
+.ghost:hover{border-color:var(--olive); color:var(--olive-dark)}
+.ghost:active{transform:scale(.98)}
+.ghost.on-dark{border-color:rgba(243,236,220,.35); color:var(--on-dark)}
+.ghost.on-dark:hover{border-color:var(--on-dark); color:#fff}
+.ghost.on-olive{border-color:rgba(247,241,227,.4); color:var(--on-olive)}
+.ghost.on-olive:hover{border-color:var(--on-olive); color:#fff}
+
+/* Article metadata reads in the data voice. */
+.byline,.meta{font-family:var(--font-mono)}

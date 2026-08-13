@@ -29,7 +29,8 @@
   .heroin{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
   .freebadge{display:inline-flex;align-items:center;gap:8px;background:var(--olive-tint);color:var(--olive-dark);
     font-weight:700;letter-spacing:.11em;text-transform:uppercase;font-size:11.5px;margin:0 0 18px;padding:7px 14px;border-radius:999px}
-  .freebadge .dot{width:7px;height:7px;border-radius:999px;background:var(--olive-dark)}
+  .freebadge .dot{width:7px;height:7px;border-radius:999px;background:var(--olive-dark);animation:pulse 2.6s ease-in-out infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(92,106,58,.35)}50%{box-shadow:0 0 0 5px rgba(92,106,58,0)}}
   h1{font-size:clamp(38px,5.4vw,60px);line-height:1.02;margin:0 0 18px;letter-spacing:-.03em}
   h1 em{font-style:normal;color:var(--olive-dark)}
   .lede{font-size:18px;color:var(--body-ink);margin:0 0 28px;max-width:44ch;line-height:1.6}
@@ -41,19 +42,26 @@
   .ftile{position:absolute;border-radius:22px;padding:18px;display:flex;flex-direction:column;overflow:hidden;width:250px;height:290px}
   .ftile b{font-family:var(--font-display);font-weight:700;font-size:21px;letter-spacing:-.02em}
   .ftile img{width:82%;max-width:190px;height:auto;margin:auto;display:block}
-  .f1{background:#7E8C57;color:#F7F1E3;left:6%;top:44px;transform:rotate(-5deg);z-index:1;
-    box-shadow:0 2px 4px rgba(94,107,64,.2),0 22px 44px -16px rgba(94,107,64,.55)}
-  .f2{background:#2C2A25;color:#F3ECDC;left:32%;top:12px;transform:rotate(1.5deg);z-index:2;
-    box-shadow:0 2px 4px rgba(32,32,28,.25),0 24px 48px -16px rgba(32,32,28,.5)}
-  .f3{background:#C0835E;color:#FBF6EC;left:56%;top:70px;transform:rotate(6deg);z-index:3;
-    box-shadow:0 2px 4px rgba(166,106,71,.22),0 22px 44px -16px rgba(166,106,71,.5)}
+  .ftile{animation:tile-in .7s cubic-bezier(.22,.61,.36,1) both, bob 7s ease-in-out infinite}
+  .f1{--rot:-5deg;background:#7E8C57;color:#F7F1E3;left:6%;top:44px;transform:rotate(var(--rot));z-index:1;
+    animation-delay:.05s,1s;box-shadow:0 2px 4px rgba(94,107,64,.2),0 22px 44px -16px rgba(94,107,64,.55)}
+  .f2{--rot:1.5deg;background:#2C2A25;color:#F3ECDC;left:32%;top:12px;transform:rotate(var(--rot));z-index:2;
+    animation-delay:.16s,1.6s;box-shadow:0 2px 4px rgba(32,32,28,.25),0 24px 48px -16px rgba(32,32,28,.5)}
+  .f3{--rot:6deg;background:#C0835E;color:#FBF6EC;left:56%;top:70px;transform:rotate(var(--rot));z-index:3;
+    animation-delay:.27s,2.2s;box-shadow:0 2px 4px rgba(166,106,71,.22),0 22px 44px -16px rgba(166,106,71,.5)}
+  @keyframes tile-in{from{opacity:0;transform:translateY(30px) rotate(var(--rot)) scale(.96)}to{opacity:1;transform:translateY(0) rotate(var(--rot)) scale(1)}}
+  @keyframes bob{0%,100%{transform:translateY(0) rotate(var(--rot))}50%{transform:translateY(-6px) rotate(var(--rot))}}
   .fchip{position:absolute;font-family:var(--font-script);font-weight:700;font-size:17px;line-height:1.1;
-    padding:6px 13px;border-radius:10px;white-space:nowrap;box-shadow:0 4px 12px -4px rgba(44,42,37,.28);z-index:4}
-  .fc1{background:#DCE0C2;color:#4E5A2E;left:2%;top:-4px;transform:rotate(-4deg)}
-  .fc2{background:#E4D7EC;color:#5E5887;right:4%;top:26px;transform:rotate(3deg)}
-  .fc3{background:#F0E4C4;color:#7A5A1F;right:12%;bottom:22px;transform:rotate(-2deg)}
-  .deepbreath{position:absolute;left:8%;bottom:-6px;font-family:var(--font-script);font-weight:700;
-    font-size:19px;color:var(--terracotta);transform:rotate(-2deg);z-index:4;margin:0}
+    padding:6px 13px;border-radius:10px;white-space:nowrap;box-shadow:0 4px 12px -4px rgba(44,42,37,.28);z-index:4;
+    animation:chip-in .5s cubic-bezier(.34,1.4,.64,1) both}
+  .fc1{animation-delay:.55s}.fc2{animation-delay:.68s}.fc3{animation-delay:.8s}
+  .deepbreath{animation:chip-in .5s cubic-bezier(.34,1.4,.64,1) .95s both}
+  @keyframes chip-in{from{opacity:0;transform:scale(.7) rotate(var(--crot,0deg))}to{opacity:1;transform:scale(1) rotate(var(--crot,0deg))}}
+  .fc1{--crot:-4deg;background:#DCE0C2;color:#4E5A2E;left:2%;top:-4px;transform:rotate(var(--crot))}
+  .fc2{--crot:3deg;background:#E4D7EC;color:#5E5887;right:4%;top:26px;transform:rotate(var(--crot))}
+  .fc3{--crot:-2deg;background:#F0E4C4;color:#7A5A1F;right:12%;bottom:22px;transform:rotate(var(--crot))}
+  .deepbreath{--crot:-2deg;position:absolute;left:8%;bottom:-6px;font-family:var(--font-script);font-weight:700;
+    font-size:19px;color:var(--terracotta);transform:rotate(var(--crot));z-index:4;margin:0}
   @media(max-width:900px){.heroin{grid-template-columns:1fr}.fan{height:380px;max-width:560px;margin:0 auto}.hero{padding:44px 0 56px}}
   @media(max-width:560px){
     .fan{height:300px;max-width:370px}
@@ -77,35 +85,48 @@
   .all{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
   @media(max-width:860px){.all{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:560px){.all{grid-template-columns:1fr}}
-  .feat{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 20px 18px;
-    transition:transform .15s ease,box-shadow .15s ease}
-  .feat:hover{transform:translateY(-2px);box-shadow:0 1px 2px rgba(44,42,37,.06),0 14px 30px -14px rgba(44,42,37,.2)}
-  .feat .ic{width:38px;height:38px;border-radius:12px;background:var(--olive-tint);display:grid;place-items:center;margin-bottom:13px}
-  .feat .ic svg{width:19px;height:19px;stroke:var(--olive-dark);fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-  .feat h3{font-size:16.5px;margin:0 0 4px;letter-spacing:-.015em}
-  .feat p{font-size:14px;color:var(--muted);margin:0;line-height:1.55}
-  .feat .tag{float:right;font-family:var(--font-mono);font-size:10.5px;color:var(--gold);letter-spacing:.06em;margin-top:3px}
+  .feat{--fbg:var(--olive-tint);--fink:var(--olive-dark);--fdeep:var(--olive);
+    position:relative;overflow:hidden;background:var(--card);border:1px solid var(--line);border-radius:18px;
+    padding:20px 20px 18px;transition:transform .2s cubic-bezier(.22,.61,.36,1),box-shadow .2s ease,border-color .2s ease}
+  .feat::before{content:'';position:absolute;inset:0;background:var(--fdeep);border-radius:inherit;
+    transform:translateY(101%);transition:transform .34s cubic-bezier(.22,.61,.36,1)}
+  .feat>*{position:relative}
+  .feat:hover{transform:translateY(-3px);border-color:transparent;
+    box-shadow:0 2px 4px color-mix(in srgb,var(--fdeep) 20%,transparent),0 18px 34px -14px color-mix(in srgb,var(--fdeep) 55%,transparent)}
+  .feat:hover::before{transform:translateY(0)}
+  .feat .ic{width:38px;height:38px;border-radius:12px;background:var(--fbg);display:grid;place-items:center;margin-bottom:13px;
+    transition:background .3s ease}
+  .feat .ic svg{width:19px;height:19px;stroke:var(--fink);fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;
+    transition:stroke .3s ease}
+  .feat h3{font-size:16.5px;margin:0 0 4px;letter-spacing:-.015em;transition:color .28s ease}
+  .feat p{font-size:14px;color:var(--muted);margin:0;line-height:1.55;transition:color .28s ease}
+  .feat:hover h3{color:#FBF8EF}
+  .feat:hover p{color:rgba(251,248,239,.86)}
+  .feat:hover .ic{background:rgba(251,248,239,.16)}
+  .feat:hover .ic svg{stroke:#FBF8EF}
   .allnote{text-align:center;margin:30px 0 0;font-size:14.5px;color:var(--muted)}
   .allnote a{font-weight:600;text-decoration:none}
   .allnote a:hover{text-decoration:underline}
 
-  /* spreadsheet section */
-  .whytitle{max-width:19ch;margin-left:auto;margin-right:auto}
-  .compare{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:880px;margin:0 auto}
-  @media(max-width:720px){.compare{grid-template-columns:1fr}}
-  .col{border-radius:20px;padding:26px 24px}
-  .col .kick{font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;opacity:.75;margin:0 0 14px}
-  .col.old{background:#EFE4D6;border:1px solid var(--line)}
-  .col.new{background:var(--olive);color:var(--on-olive);
-    box-shadow:0 2px 4px rgba(94,107,64,.2),0 18px 40px -14px rgba(94,107,64,.45)}
-  .col ul{list-style:none;padding:0;margin:0;display:grid;gap:13px}
-  .col li{display:flex;gap:11px;font-size:15px;align-items:flex-start;line-height:1.5}
-  .col li svg{width:17px;height:17px;flex:0 0 auto;margin-top:3px;fill:none;stroke-width:2.4;stroke-linecap:round}
-  .col.old li svg{stroke:#B0765C}
-  .col.new li svg{stroke:#E8EFD4}
-  .otherapps{max-width:640px;margin:34px auto 0;text-align:center;font-size:15.5px;color:var(--body-ink);line-height:1.65}
+  /* comparison table */
+  .cmpwrap{max-width:880px;margin:0 auto;overflow-x:auto;border-radius:20px;
+    border:1px solid var(--line);background:var(--card);
+    box-shadow:0 1px 2px rgba(44,42,37,.05),0 16px 36px -18px rgba(44,42,37,.18)}
+  .cmp{width:100%;border-collapse:collapse;font-size:14.5px;min-width:560px}
+  .cmp th,.cmp td{padding:13px 16px;text-align:center;border-top:1px solid color-mix(in srgb,var(--line) 65%,transparent)}
+  .cmp thead th{border-top:0;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700;padding:15px 16px}
+  .cmp tbody th{text-align:left;font-weight:600;color:var(--ink);font-size:14px}
+  .cmp .what{width:34%}
+  .cmp .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .cmp td.us,.cmp th.us{background:var(--olive-tint)}
+  .cmp thead th.us{color:var(--olive-dark);font-size:12.5px}
+  .cmp .yes{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:999px;background:var(--olive-dark);color:#FBF8EF;font-size:13px;font-weight:700}
+  .cmp .no{color:var(--terracotta-dark);font-weight:700;font-size:14px;opacity:.85}
+  .cmp .some{font-size:12.5px;color:var(--muted)}
+  .cmp .txt{font-size:13px;color:var(--body-ink)}
+  .cmp .txt.strong{font-weight:700;color:var(--olive-dark)}
+  .otherapps{max-width:640px;margin:30px auto 0;text-align:center;font-size:15.5px;color:var(--body-ink);line-height:1.65}
   .otherapps b{color:var(--ink)}
-
   /* crew */
   .crewgrid{display:grid;grid-template-columns:1.02fr .98fr;gap:44px;align-items:center;max-width:960px;margin:0 auto}
   @media(max-width:840px){.crewgrid{grid-template-columns:1fr;gap:30px}}
@@ -171,20 +192,18 @@
     <a class="site-brand" href="/"><img src="/img/logo-1024.png" alt="" width="32" height="32">VowToDo</a>
     <nav class="site-links" aria-label="Site">
       <a href="/features">Features</a>
-      <a href="/guide">Guide</a>
       <a href="/blog">Blog</a>
     </nav>
     <details class="site-menu">
       <summary aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></summary>
       <nav class="sheet" aria-label="Site">
         <a href="/features">Features</a>
-        <a href="/guide">Guide</a>
-        <a href="/blog">Blog</a>
+          <a href="/blog">Blog</a>
         <a href="/download">Mobile App</a>
       </nav>
     </details>
     <a class="site-navapp" href="/app/login" title="Sign in to the VowToDo web app"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.8" y="4.4" width="18.4" height="12.4" rx="2"/><path d="M9 20.4h6"/><path d="M12 16.8v3.6"/></svg><span class="lbl">Web App</span></a>
-    <a class="site-btn" href="/download">Get the app</a>
+    <a class="site-btn" href="/download">Mobile App</a>
   </div>
 </header>
 
@@ -219,18 +238,18 @@
 <!-- EVERYTHING -->
 <section class="sec band-soft" id="everything">
   <div class="wrap">
-    <h2>Everything's in here.</h2>
+    <h2 class="reveal">Everything's in here.</h2>
     <p class="sub">Every job a wedding throws at you, handled in one app — nothing bolted on, nothing missing.</p>
     <div class="all">
-      <div class="feat"><span class="ic"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span><h3>Smart checklist</h3><p>Every task, grouped by when it's due — tailored to your venue and traditions.</p></div>
-      <div class="feat"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span><h3>Budget</h3><p>Planned, paid, and what's left — rolled up from the tasks themselves.</p></div>
-      <div class="feat"><span class="ic"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><h3>Guest list</h3><p>Sides, statuses, meals and notes — the one list that's easier on a laptop.</p></div>
-      <div class="feat"><span class="ic"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span><h3>RSVPs by link</h3><p>Guests reply in a browser — no app, no login. Replies tally themselves.</p></div>
-      <div class="feat"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><circle cx="12" cy="3.6" r="1.5"/><circle cx="12" cy="20.4" r="1.5"/><circle cx="3.6" cy="12" r="1.5"/><circle cx="20.4" cy="12" r="1.5"/><circle cx="6.1" cy="6.1" r="1.5"/><circle cx="17.9" cy="6.1" r="1.5"/><circle cx="6.1" cy="17.9" r="1.5"/><circle cx="17.9" cy="17.9" r="1.5"/></svg></span><h3>Seating chart <span class="tag">WEB</span></h3><p>Drag tables around the floor and seat every guest — the laptop job, done right.</p></div>
-      <div class="feat"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span><h3>Wedding-day run sheet</h3><p>The day, minute by minute — who's where, and when.</p></div>
-      <div class="feat"><span class="ic"><svg viewBox="0 0 24 24"><path d="M3 11l18-8-8 18-2-7-8-3z"/></svg></span><h3>Announcements</h3><p>Say it once. Everyone planning with you sees it.</p></div>
-      <div class="feat"><span class="ic"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></span><h3>Reminders</h3><p>Due dates nudge the right person automatically. You never chase.</p></div>
-      <div class="feat"><span class="ic"><svg viewBox="0 0 24 24"><rect x="2.8" y="4.4" width="18.4" height="12.4" rx="2"/><path d="M9 20.4h6M12 16.8v3.6"/></svg></span><h3>Phone + laptop</h3><p>One shared space, synced everywhere — plan from wherever you are.</p></div>
+      <div class="feat reveal" style="--rd:0.00s;--fbg:#DCE0C2;--fink:#4E5A2E;--fdeep:#7E8C57"><span class="ic"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span><h3>Smart checklist</h3><p>Every task, grouped by when it's due — tailored to your venue and traditions.</p></div>
+      <div class="feat reveal" style="--rd:0.07s;--fbg:#F0E4C4;--fink:#7A5A1F;--fdeep:#B08A45"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span><h3>Budget</h3><p>Planned, paid, and what's left — rolled up from the tasks themselves.</p></div>
+      <div class="feat reveal" style="--rd:0.14s;--fbg:#E4D7EC;--fink:#5E5887;--fdeep:#8B84C0"><span class="ic"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><h3>Guest list</h3><p>Sides, statuses, meals and notes — the one list that's easier on a laptop.</p></div>
+      <div class="feat reveal" style="--rd:0.05s;--fbg:#F1DED2;--fink:#A66A47;--fdeep:#C0835E"><span class="ic"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span><h3>RSVPs by link</h3><p>Guests reply in a browser — no app, no login. Replies tally themselves.</p></div>
+      <div class="feat reveal" style="--rd:0.12s;--fbg:#E7E4DC;--fink:#2C2A25;--fdeep:#3A372F"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><circle cx="12" cy="3.6" r="1.5"/><circle cx="12" cy="20.4" r="1.5"/><circle cx="3.6" cy="12" r="1.5"/><circle cx="20.4" cy="12" r="1.5"/><circle cx="6.1" cy="6.1" r="1.5"/><circle cx="17.9" cy="6.1" r="1.5"/><circle cx="6.1" cy="17.9" r="1.5"/><circle cx="17.9" cy="17.9" r="1.5"/></svg></span><h3>Seating chart</h3><p>Drag tables around the floor and seat every guest, on any screen.</p></div>
+      <div class="feat reveal" style="--rd:0.19s;--fbg:#D2E2CE;--fink:#3F6146;--fdeep:#5E6B40"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span><h3>Wedding-day run sheet</h3><p>The day, minute by minute — who's where, and when.</p></div>
+      <div class="feat reveal" style="--rd:0.10s;--fbg:#F4D6D2;--fink:#A85046;--fdeep:#B06A5A"><span class="ic"><svg viewBox="0 0 24 24"><path d="M3 11l18-8-8 18-2-7-8-3z"/></svg></span><h3>Announcements</h3><p>Say it once. Everyone planning with you sees it.</p></div>
+      <div class="feat reveal" style="--rd:0.17s;--fbg:#EFE3C8;--fink:#7A5A1F;--fdeep:#C2A36B"><span class="ic"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></span><h3>Reminders</h3><p>Due dates nudge the right person automatically. You never chase.</p></div>
+      <div class="feat reveal" style="--rd:0.24s;--fbg:#DDD9EE;--fink:#46426E;--fdeep:#5E5887"><span class="ic"><svg viewBox="0 0 24 24"><rect x="2.8" y="4.4" width="18.4" height="12.4" rx="2"/><path d="M9 20.4h6M12 16.8v3.6"/></svg></span><h3>Phone + laptop</h3><p>One shared space, synced everywhere — plan from wherever you are.</p></div>
     </div>
     <p class="allnote">Want the detail? <a href="/features">See every feature →</a></p>
   </div>
@@ -239,38 +258,34 @@
 <!-- WHY NOT A SPREADSHEET -->
 <section class="sec">
   <div class="wrap">
-    <h2 class="whytitle">A spreadsheet can hold your plans. It can't hold your wedding.</h2>
+    <h2 class="reveal">A spreadsheet can hold your plans.<br>It can't hold your wedding.</h2>
     <p class="sub">Sheets are great at numbers. Weddings are numbers, people, deadlines and a thousand tiny decisions.</p>
-    <div class="compare">
-      <div class="col old">
-        <p class="kick">The spreadsheet way</p>
-        <ul>
-          <li><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg><span>One person updates everything</span></li>
-          <li><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Nothing reminds anyone of anything</span></li>
-          <li><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg><span>RSVPs chased by text, retyped by hand</span></li>
-          <li><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Seating drawn on paper, redrawn nightly</span></li>
-        </ul>
-      </div>
-      <div class="col new grainy">
-        <p class="kick">The VowToDo way</p>
-        <ul>
-          <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 6"/></svg><span>The plan keeps itself up to date</span></li>
-          <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 6"/></svg><span>Reminders go out on their own</span></li>
-          <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 6"/></svg><span>Guests RSVP by link — tallied for you</span></li>
-          <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 6"/></svg><span>Seating is drag, drop, done</span></li>
-        </ul>
-      </div>
+    <div class="cmpwrap reveal">
+      <table class="cmp">
+        <thead>
+          <tr><th scope="col" class="what"><span class="sr">Capability</span></th><th scope="col">Spreadsheets</th><th scope="col">Other apps</th><th scope="col" class="us">VowToDo</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Everything in one place</th><td><span class="no">✕</span></td><td><span class="some">Some</span></td><td class="us"><span class="yes">✓</span></td></tr>
+          <tr><th scope="row">Built for two + helpers</th><td><span class="no">✕</span></td><td><span class="no">✕</span></td><td class="us"><span class="yes">✓</span></td></tr>
+          <tr><th scope="row">Automatic reminders</th><td><span class="no">✕</span></td><td><span class="some">Some</span></td><td class="us"><span class="yes">✓</span></td></tr>
+          <tr><th scope="row">RSVPs collect themselves</th><td><span class="no">✕</span></td><td><span class="some">Some</span></td><td class="us"><span class="yes">✓</span></td></tr>
+          <tr><th scope="row">Seating chart</th><td><span class="no">✕</span></td><td><span class="some">Paid</span></td><td class="us"><span class="yes">✓</span></td></tr>
+          <tr><th scope="row">Phone + web, synced</th><td><span class="some">Clunky</span></td><td><span class="some">Some</span></td><td class="us"><span class="yes">✓</span></td></tr>
+          <tr><th scope="row">Price</th><td><span class="txt">Free</span></td><td><span class="txt">Paid tiers</span></td><td class="us"><span class="txt strong">Free — all of it</span></td></tr>
+        </tbody>
+      </table>
     </div>
-    <p class="otherapps">And other planner apps? Most are a checklist for one person, with the useful parts behind a subscription. <b>VowToDo is the whole wedding — free.</b></p>
+    <p class="otherapps">No spreadsheet gymnastics, no upsells halfway through. <b>The whole wedding, free.</b></p>
   </div>
 </section>
 
 <!-- CREW (secondary) -->
 <section class="sec band-dark" id="crew">
   <div class="wrap">
-    <h2>Planning with people? Bring them in.</h2>
+    <h2 class="reveal">Planning with people? Bring them in.</h2>
     <p class="sub">Perfect for just the two of you — and ready the moment mums, siblings and best friends want to help.</p>
-    <div class="crewgrid">
+    <div class="crewgrid reveal">
       <div class="crewpts">
         <div class="pt">
           <span class="ic"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg></span>
@@ -306,9 +321,9 @@
 
 <!-- FREE + CTA -->
 <section class="freeband grainy" id="get">
-  <h2>Free. Actually free.</h2>
+  <h2 class="reveal">Free. Actually free.</h2>
   <p class="p">Every feature, every guest, every helper — included from day one.</p>
-  <div class="freechips" aria-hidden="true">
+  <div class="freechips reveal" style="--rd:.08s" aria-hidden="true">
     <span>No trial clock</span>
     <span>No card</span>
     <span>Nothing locked</span>
@@ -325,7 +340,7 @@
 <!-- FEEDBACK -->
 <section class="sec">
   <div class="wrap fb">
-    <h2>We read everything.</h2>
+    <h2 class="reveal">We read everything.</h2>
     <p>VowToDo is built by developers who take feedback seriously — tell us what's clunky, what's missing, or what to build next, and it genuinely shapes the app.</p>
     <a class="fbmail" href="mailto:support.vowtodo@gmail.com"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>support.vowtodo@gmail.com</a>
   </div>
@@ -339,12 +354,22 @@
         <p class="tagline">The only wedding app you'll ever need. Free.</p>
       </div>
       <div class="col"><p class="fh">Product</p><a href="/features">Features</a><a href="/app/login">Web App</a><a href="/download">Mobile App</a></div>
-      <div class="col"><p class="fh">Resources</p><a href="/guide">Wedding Guide</a><a href="/blog">Blog</a><a href="mailto:support.vowtodo@gmail.com">Send feedback</a></div>
+      <div class="col"><p class="fh">Resources</p><a href="/blog">Blog &amp; Guides</a><a href="/support">Support</a><a href="mailto:support.vowtodo@gmail.com">Send feedback</a></div>
       <div class="col"><p class="fh">Legal</p><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Use</a><a href="mailto:support.vowtodo@gmail.com">Contact</a></div>
     </div>
     <div class="legal"><span>© 2026 VowToDo</span><span>Made for couples, with care.</span></div>
   </div>
 </footer>
 
+<script>
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) { els.forEach(function(e){e.classList.add('in')}); return; }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    els.forEach(function(e){ io.observe(e); });
+  })();
+</script>
 </body>
 </html>

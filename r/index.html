@@ -20,7 +20,7 @@
   --ink:#2C2A25; --muted:#8A8273; --faint:#B3AB99;
   --olive:#7E8C57; --olive-dark:#5C6A3A;
   --gold:#C8A86B; --terracotta-dark:#A66A47; --danger:#B5564A;
-  --rule:rgba(44,42,37,.30); --hair:rgba(44,42,37,.16);
+  --rule:rgba(44,42,37,.30); --hair:rgba(44,42,37,.16); --ans:rgba(44,42,37,.065);
   --accept:var(--olive-dark); --decline:var(--terracotta-dark);
 }
 *{box-sizing:border-box}
@@ -84,7 +84,7 @@ button{-webkit-tap-highlight-color:transparent}
 .deadline[hidden] + .replyintro{margin-top:6px}
 
 /* ---------- guest reply blocks ---------- */
-.guest{margin:0 0 46px}
+.guest{margin:0 0 42px}
 .gname{display:flex; align-items:baseline; gap:14px; border-bottom:1px solid var(--rule); padding-bottom:10px; margin-bottom:20px}
 .gname .n{font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:20px; letter-spacing:.01em; min-width:0; overflow-wrap:anywhere}
 .gname .st{font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); white-space:nowrap}
@@ -100,7 +100,7 @@ button{-webkit-tap-highlight-color:transparent}
 .brow{
   display:flex; align-items:center; gap:16px; width:100%; text-align:left;
   background:none; border:0; padding:13px 2px; cursor:pointer; color:var(--ink);
-  font:inherit; font-size:15px; font-weight:400; border-bottom:1px solid var(--hair);
+  font:inherit; font-size:15px; font-weight:400; border-bottom:1px solid var(--ans);
   transition:padding-left .18s ease;
 }
 .brow:hover{padding-left:8px}
@@ -127,8 +127,8 @@ button{-webkit-tap-highlight-color:transparent}
 .guest.folded .foldnote{display:block}
 
 /* question blocks */
-.q{margin-top:36px}
-.qlab{font-size:11.5px; letter-spacing:.22em; text-transform:uppercase; font-weight:500; color:var(--ink); margin:0 0 10px}
+.q{margin-top:12px; background:var(--sand); border-radius:14px; padding:15px 18px 13px}
+.qlab{font-size:11.5px; letter-spacing:.22em; text-transform:uppercase; font-weight:500; color:var(--ink); margin:0 0 8px}
 .qlab b{color:var(--muted); font-weight:400}
 
 /* menu-style single select */
@@ -560,7 +560,10 @@ function render(){
       head.appendChild(el('span','st', statusText(st.rsvp_status)));
       sec.appendChild(head);
 
-      appendAttendance(sec, st, render);
+      const att = el('div','q');
+      att.appendChild(el('p','qlab','Will you attend?'));
+      appendAttendance(att, st, render);
+      sec.appendChild(att);
       appendQuestions(sec, st, render);
       sec.appendChild(el('p','foldnote', "We'll miss you, "+firstName(guest.name)+' — nothing more to fill in.'));
       root.appendChild(sec);

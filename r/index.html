@@ -11,43 +11,22 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,700&family=Caveat:wght@600&family=Lexend:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   VowToDo guest RSVP — printed-stationery register.
-   Colorways ("card stocks") are owner-picked: sand / olive / ink.
+   VowToDo guest RSVP — one clean card (2026-08-14 simplification):
+   banner · "We'd love to have you!" · title · venue pill · date & time ·
+   message · the reply. Printed-stationery register, sand only.
    ============================================================ */
 :root{
-  --sand:#F1E8D6; --surface:#EADFC9; --white:#FBF6EC; --line:#DDD1BA;
-  --ink-c:#2C2A25; --muted-c:#8A8273; --faint:#B3AB99;
-  --olive:#7E8C57; --olive-dark:#5C6A3A; --olive-tint:#E5E7CF;
-  --gold:#C8A86B; --terracotta:#C0835E; --terracotta-dark:#A66A47;
-  --lavender:#CBC7E6; --on-dark:#F3ECDC; --on-dark-muted:#B7AE99;
-  --dark:#2C2A25; --danger:#B5564A;
-}
-body{
-  --bg:var(--sand); --tx:var(--ink-c); --mut:var(--muted-c);
+  --sand:#F1E8D6; --white:#FBF6EC; --line:#DDD1BA;
+  --ink:#2C2A25; --muted:#8A8273; --faint:#B3AB99;
+  --olive:#7E8C57; --olive-dark:#5C6A3A;
+  --gold:#C8A86B; --terracotta-dark:#A66A47; --danger:#B5564A;
   --rule:rgba(44,42,37,.30); --hair:rgba(44,42,37,.16);
   --accept:var(--olive-dark); --decline:var(--terracotta-dark);
-  --mat:var(--white); --onfill:var(--on-dark);
-  --focus:var(--olive-dark); --btn-ink:var(--ink-c); --btn-tx:var(--on-dark);
 }
-body[data-way="olive"]{
-  --bg:#55633A; --tx:var(--on-dark); --mut:rgba(243,236,220,.62);
-  --rule:rgba(243,236,220,.38); --hair:rgba(243,236,220,.20);
-  --accept:var(--gold); --decline:#D8B08A;
-  --mat:rgba(243,236,220,.10); --onfill:#55633A;
-  --focus:var(--gold); --btn-ink:var(--on-dark); --btn-tx:#55633A;
-}
-body[data-way="ink"]{
-  --bg:#2C2A25; --tx:var(--on-dark); --mut:var(--on-dark-muted);
-  --rule:rgba(243,236,220,.36); --hair:rgba(243,236,220,.18);
-  --accept:var(--gold); --decline:#C89B78;
-  --mat:rgba(243,236,220,.08); --onfill:#2C2A25;
-  --focus:var(--gold); --btn-ink:var(--on-dark); --btn-tx:#2C2A25;
-}
-
 *{box-sizing:border-box}
 html,body{margin:0}
 body{
-  background:var(--bg); color:var(--tx);
+  background:var(--sand); color:var(--ink);
   font-family:'Lexend',system-ui,sans-serif; font-weight:300;
   line-height:1.6; -webkit-text-size-adjust:100%; -webkit-font-smoothing:antialiased;
 }
@@ -62,57 +41,55 @@ button{-webkit-tap-highlight-color:transparent}
 }
 .previewbar b{font-weight:600; letter-spacing:.26em}
 
-/* ---------- page frame ---------- */
-.sheet{max-width:720px; margin:0 auto; padding:clamp(20px,4vw,44px)}
-.frame{
-  border:1px solid var(--rule); padding:clamp(28px,6vw,72px) clamp(22px,6.5vw,84px);
-  position:relative;
+/* ---------- the card ---------- */
+.sheet{max-width:660px; margin:0 auto; padding:clamp(16px,3.5vw,40px)}
+.card{
+  background:var(--white); border:1px solid var(--line); border-radius:22px;
+  overflow:hidden;
+  box-shadow:0 1px 2px rgba(44,42,37,.05), 0 22px 48px -22px rgba(44,42,37,.24);
 }
-.frame::after{content:""; position:absolute; inset:7px; border:1px solid var(--hair); pointer-events:none}
+.banner{display:block; width:100%; aspect-ratio:16/9; object-fit:cover; border-bottom:1px solid var(--hair)}
+.inner{padding:clamp(26px,5.5vw,52px) clamp(20px,6vw,64px) clamp(30px,5.5vw,52px)}
 
 /* ---------- invitation head ---------- */
 .head{text-align:center}
-.eyebrow{font-size:11px; letter-spacing:.34em; text-transform:uppercase; font-weight:400; color:var(--mut); margin:0 0 26px}
+.eyebrow{font-size:11px; letter-spacing:.34em; text-transform:uppercase; font-weight:400; color:var(--muted); margin:0 0 18px}
 .names{
   font-family:'Bricolage Grotesque',sans-serif; font-weight:300;
-  font-size:clamp(38px,7.6vw,62px); line-height:1.08; letter-spacing:-.01em; margin:0 0 8px;
+  font-size:clamp(34px,6.8vw,54px); line-height:1.1; letter-spacing:-.01em; margin:0;
   overflow-wrap:break-word;
 }
 .names .amp{
   font-family:'Caveat',cursive; font-weight:600; font-size:.58em;
   color:var(--accept); vertical-align:.05em; padding:0 .24em;
 }
-.headrule{width:56px; height:1px; background:var(--rule); border:0; margin:26px auto}
-.facts{margin:0; font-size:12.5px; letter-spacing:.26em; text-transform:uppercase; font-weight:400}
-.facts span{display:block; margin:0 0 8px}
-.count{font-size:13px; color:var(--mut); margin:16px 0 0; letter-spacing:.02em}
-
-/* ---------- cover photo as mounted plate ---------- */
-.plate{margin:44px auto 0; max-width:520px; background:var(--mat); border:1px solid var(--rule); padding:10px}
-.plate img{display:block; width:100%; aspect-ratio:3/2; object-fit:cover;
-  filter:saturate(.82) contrast(.98); border:1px solid var(--hair)}
-
-/* ---------- couple message ---------- */
-.note{max-width:44ch; margin:40px auto 0; text-align:center; font-size:16.5px; line-height:1.75}
+.venuepill{
+  display:inline-flex; align-items:center; gap:7px; max-width:100%;
+  border:1px solid var(--line); border-radius:999px; padding:8px 16px; margin-top:18px;
+  font-size:12.5px; letter-spacing:.06em; font-weight:400;
+}
+.venuepill .v{overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.when{font-size:12.5px; letter-spacing:.24em; text-transform:uppercase; font-weight:400; margin:16px 0 0}
+.note{max-width:46ch; margin:22px auto 0; text-align:center; font-size:15.5px; line-height:1.75; color:var(--ink)}
 .note p{margin:0; white-space:pre-line}
 
 /* ---------- section rule + deadline ---------- */
-.replyrule{display:flex; align-items:center; gap:18px; margin:56px 0 8px}
+.replyrule{display:flex; align-items:center; gap:18px; margin:44px 0 8px}
 .replyrule::before,.replyrule::after{content:""; height:1px; background:var(--rule); flex:1}
 .replyrule .t{font-size:11px; letter-spacing:.3em; text-transform:uppercase; font-weight:400; white-space:nowrap}
-.deadline{text-align:center; font-size:13px; color:var(--mut); margin:0 0 44px; letter-spacing:.02em}
-.deadline b{color:var(--tx); font-weight:500}
-.replyintro{text-align:center; font-size:13.5px; color:var(--mut); margin:-30px 0 40px}
+.deadline{text-align:center; font-size:13px; color:var(--muted); margin:0 0 38px; letter-spacing:.02em}
+.deadline b{color:var(--ink); font-weight:500}
+.replyintro{text-align:center; font-size:13.5px; color:var(--muted); margin:-26px 0 34px}
 .deadline[hidden] + .replyintro{margin-top:6px}
 
 /* ---------- guest reply blocks ---------- */
-.guest{margin:0 0 52px}
-.gname{display:flex; align-items:baseline; gap:14px; border-bottom:1px solid var(--rule); padding-bottom:10px; margin-bottom:22px}
+.guest{margin:0 0 46px}
+.gname{display:flex; align-items:baseline; gap:14px; border-bottom:1px solid var(--rule); padding-bottom:10px; margin-bottom:20px}
 .gname .n{font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:19px; letter-spacing:.01em; min-width:0; overflow-wrap:anywhere}
-.gname .st{font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--mut); white-space:nowrap}
+.gname .st{font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); white-space:nowrap}
 .gname .rm{
   margin-left:auto; font:inherit; font-size:11px; letter-spacing:.18em; text-transform:uppercase;
-  color:var(--mut); background:none; border:0; padding:2px 0; cursor:pointer;
+  color:var(--muted); background:none; border:0; padding:2px 0; cursor:pointer;
 }
 .gname .rm:hover{color:var(--danger)}
 
@@ -120,7 +97,7 @@ button{-webkit-tap-highlight-color:transparent}
 .ballot{display:flex; flex-direction:column; gap:2px}
 .brow{
   display:flex; align-items:center; gap:16px; width:100%; text-align:left;
-  background:none; border:0; padding:13px 2px; cursor:pointer; color:var(--tx);
+  background:none; border:0; padding:13px 2px; cursor:pointer; color:var(--ink);
   font:inherit; font-size:15.5px; font-weight:300; border-bottom:1px solid var(--hair);
   transition:padding-left .18s ease;
 }
@@ -135,25 +112,22 @@ button{-webkit-tap-highlight-color:transparent}
   background-repeat:no-repeat; background-position:center; background-size:12px;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M2 8 5.5 11.5 12 2.5' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
-body[data-way="olive"] .brow .bx::after, body[data-way="ink"] .brow .bx::after{
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M2 8 5.5 11.5 12 2.5' fill='none' stroke='%232C2A25' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-}
 .brow[aria-pressed="true"] .bx{background:var(--accept); border-color:var(--accept)}
 .brow[aria-pressed="true"] .bx::after{opacity:1; transform:scale(1)}
 .brow[aria-pressed="true"]{font-weight:400}
 .brow.decline[aria-pressed="true"] .bx{background:var(--decline); border-color:var(--decline)}
-.brow em{font-style:normal; color:var(--mut); font-size:13px; margin-left:auto; letter-spacing:.02em}
+.brow em{font-style:normal; color:var(--muted); font-size:13px; margin-left:auto; letter-spacing:.02em}
 
 /* declined guests fold their questions away */
 .qs{max-height:4000px; overflow:hidden; transition:max-height .45s ease, opacity .35s ease; opacity:1}
 .guest.folded .qs{max-height:0; opacity:0}
-.foldnote{display:none; font-size:13.5px; color:var(--mut); margin:14px 2px 0}
+.foldnote{display:none; font-size:13.5px; color:var(--muted); margin:14px 2px 0}
 .guest.folded .foldnote{display:block}
 
 /* question blocks */
-.q{margin-top:30px}
-.qlab{font-size:11px; letter-spacing:.26em; text-transform:uppercase; font-weight:400; color:var(--mut); margin:0 0 12px}
-.qlab b{color:var(--tx); font-weight:500}
+.q{margin-top:28px}
+.qlab{font-size:11px; letter-spacing:.26em; text-transform:uppercase; font-weight:400; color:var(--muted); margin:0 0 12px}
+.qlab b{color:var(--ink); font-weight:500}
 
 /* menu-style single select */
 .menu .brow{align-items:flex-start; padding:12px 2px}
@@ -164,58 +138,55 @@ body[data-way="olive"] .brow .bx::after, body[data-way="ink"] .brow .bx::after{
 .chips{display:flex; flex-wrap:wrap; gap:9px}
 .chip{
   font:inherit; font-size:12px; letter-spacing:.14em; text-transform:uppercase;
-  color:var(--tx); background:none; border:1px solid var(--rule); border-radius:0;
+  color:var(--ink); background:none; border:1px solid var(--rule); border-radius:0;
   padding:9px 16px; cursor:pointer; transition:all .15s ease; font-weight:400;
 }
-.chip[aria-pressed="true"]{background:var(--accept); border-color:var(--accept); color:var(--onfill)}
-body:not([data-way]) .chip[aria-pressed="true"]{color:var(--on-dark)}
+.chip[aria-pressed="true"]{background:var(--accept); border-color:var(--accept); color:#F3ECDC}
 
 /* ruled write-in line */
 .writein input{
-  width:100%; font:inherit; font-size:15.5px; color:var(--tx); background:transparent;
+  width:100%; font:inherit; font-size:15.5px; color:var(--ink); background:transparent;
   border:0; border-bottom:1px solid var(--rule); border-radius:0; padding:10px 2px 9px;
   transition:border-color .15s ease;
 }
-.writein input:focus{outline:none; border-bottom:1.5px solid var(--focus)}
-.writein input::placeholder{color:var(--mut); opacity:.8; font-weight:300}
+.writein input:focus{outline:none; border-bottom:1.5px solid var(--olive-dark)}
+.writein input::placeholder{color:var(--muted); opacity:.8; font-weight:300}
 
 /* generic: side segmented control */
 .side{display:flex; border:1px solid var(--rule)}
 .side button{
   flex:1; font:inherit; font-size:11.5px; letter-spacing:.14em; text-transform:uppercase;
-  font-weight:400; color:var(--tx); background:none; border:0; padding:12px 4px; cursor:pointer;
+  font-weight:400; color:var(--ink); background:none; border:0; padding:12px 4px; cursor:pointer;
 }
 .side button + button{border-left:1px solid var(--rule)}
-.side button[aria-pressed="true"]{background:var(--accept); color:var(--onfill)}
-body:not([data-way]) .side button[aria-pressed="true"]{color:var(--on-dark)}
+.side button[aria-pressed="true"]{background:var(--accept); color:#F3ECDC}
 
 .addrow{
   font:inherit; font-size:12px; letter-spacing:.22em; text-transform:uppercase; font-weight:400;
-  color:var(--mut); background:none; border:0; border-bottom:1px solid var(--hair);
-  width:100%; text-align:left; padding:13px 2px; cursor:pointer; margin-bottom:52px;
+  color:var(--muted); background:none; border:0; border-bottom:1px solid var(--hair);
+  width:100%; text-align:left; padding:13px 2px; cursor:pointer; margin-bottom:46px;
 }
-.addrow:hover{color:var(--tx)}
+.addrow:hover{color:var(--ink)}
 
 /* ---------- send ---------- */
-.send{margin:10px 0 0}
+.send{margin:6px 0 0}
 .send button{
   width:100%; font:inherit; font-size:13px; letter-spacing:.3em; text-transform:uppercase;
-  font-weight:500; color:var(--btn-tx); background:var(--btn-ink);
-  border:1px solid var(--btn-ink); padding:19px 10px 18px; cursor:pointer;
+  font-weight:500; color:#F3ECDC; background:var(--ink);
+  border:1px solid var(--ink); border-radius:999px; padding:18px 10px 17px; cursor:pointer;
   transition:letter-spacing .25s ease, opacity .15s ease;
 }
 .send button:hover{letter-spacing:.38em}
 .send button:active{opacity:.85}
 .send button:disabled{opacity:.55; cursor:default}
-.hint{text-align:center; font-size:12.5px; color:var(--mut); margin:14px 0 0; min-height:1em}
+.hint{text-align:center; font-size:12.5px; color:var(--muted); margin:14px 0 0; min-height:1em}
 .hint.err{color:var(--danger)}
-body[data-way="olive"] .hint.err, body[data-way="ink"] .hint.err{color:#E8A79B}
 
 /* ---------- notices / closed ---------- */
-.notice{text-align:center; font-size:14px; color:var(--mut); padding:30px 0}
-.closed{text-align:center; padding:26px 0 8px}
+.notice{text-align:center; font-size:14px; color:var(--muted); padding:30px 0}
+.closed{text-align:center; padding:22px 0 4px}
 .closed .big{font-family:'Bricolage Grotesque',sans-serif; font-weight:300; font-size:30px; margin:0 0 12px}
-.closed p{margin:0 auto; max-width:40ch; font-size:15px; color:var(--mut)}
+.closed p{margin:0 auto; max-width:40ch; font-size:15px; color:var(--muted)}
 
 /* ---------- success overlay ---------- */
 .successOverlay{
@@ -224,11 +195,10 @@ body[data-way="olive"] .hint.err, body[data-way="ink"] .hint.err{color:#E8A79B}
 }
 .successOverlay.show{opacity:1; pointer-events:auto}
 .successCard{
-  background:var(--sand); color:var(--ink-c); border:1px solid rgba(44,42,37,.3);
-  padding:36px 32px 30px; text-align:center; max-width:330px; margin:0 20px; position:relative;
+  background:var(--sand); color:var(--ink); border:1px solid rgba(44,42,37,.3); border-radius:18px;
+  padding:36px 32px 30px; text-align:center; max-width:330px; margin:0 20px;
   transform:scale(.94); transition:transform .25s ease;
 }
-.successCard::after{content:""; position:absolute; inset:6px; border:1px solid rgba(44,42,37,.16); pointer-events:none}
 .successOverlay.show .successCard{transform:scale(1)}
 .successTick{
   width:54px; height:54px; border:1px solid var(--olive-dark); border-radius:50%; margin:0 auto 16px;
@@ -236,10 +206,10 @@ body[data-way="olive"] .hint.err, body[data-way="ink"] .hint.err{color:#E8A79B}
 }
 .successTick svg{width:24px; height:24px; stroke:var(--olive-dark); stroke-width:2.2; fill:none; stroke-linecap:round; stroke-linejoin:round}
 .successTitle{font-family:'Bricolage Grotesque',sans-serif; font-weight:300; font-size:24px; margin:0 0 8px}
-.successSub{font-size:13px; line-height:1.55; color:var(--muted-c); margin:0}
+.successSub{font-size:13px; line-height:1.55; color:var(--muted); margin:0}
 
 /* ---------- footer ---------- */
-.foot{text-align:center; margin-top:58px; font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:var(--mut)}
+.foot{text-align:center; margin:26px 0 6px; font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:var(--muted)}
 .foot a{color:inherit; text-decoration:none; border-bottom:1px solid var(--hair); padding-bottom:2px}
 
 /* ---------- entrance ---------- */
@@ -249,11 +219,10 @@ body[data-way="olive"] .hint.err, body[data-way="ink"] .hint.err{color:#E8A79B}
   .d1{animation-delay:.05s}.d2{animation-delay:.14s}.d3{animation-delay:.23s}
   .d4{animation-delay:.32s}.d5{animation-delay:.41s}.d6{animation-delay:.5s}
 }
-:is(button,input,a):focus-visible{outline:2px solid var(--focus); outline-offset:3px}
+:is(button,input,a):focus-visible{outline:2px solid var(--olive-dark); outline-offset:3px}
 
 @media (max-width:560px){
-  .frame{padding:34px 20px}
-  .frame::after{inset:5px}
+  .inner{padding:26px 18px 30px}
   .brow em{display:none}
 }
 @media print{.previewbar,.send,.foot{display:none}}
@@ -264,41 +233,40 @@ body[data-way="olive"] .hint.err, body[data-way="ink"] .hint.err{color:#E8A79B}
 <div class="previewbar" id="previewbar" hidden><b>Preview</b> · this is what your guests will see · replies are disabled</div>
 
 <div class="sheet">
-<main class="frame">
-  <header class="head" id="head" hidden>
-    <p class="eyebrow rise d1">Together with their families</p>
-    <h1 class="names rise d2" id="names"></h1>
-    <hr class="headrule rise d2">
-    <p class="facts rise d3" id="facts"></p>
-    <p class="count rise d3" id="count" hidden></p>
-  </header>
+<main class="card">
+  <img class="banner rise d1" id="banner" alt="" hidden>
+  <div class="inner">
+    <header class="head" id="head" hidden>
+      <p class="eyebrow rise d1">We&rsquo;d love to have you!</p>
+      <h1 class="names rise d2" id="names"></h1>
+      <span class="venuepill rise d3" id="venuepill" hidden><span aria-hidden="true">&#128205;</span><span class="v" id="venueText"></span></span>
+      <p class="when rise d3" id="when" hidden></p>
+      <div class="note rise d4" id="note" hidden><p id="noteText"></p></div>
+    </header>
 
-  <figure class="plate rise d4" id="plate" hidden></figure>
-  <div class="note rise d5" id="note" hidden><p id="noteText"></p></div>
+    <div id="reply" hidden>
+      <div class="replyrule rise d5"><span class="t">The Reply</span></div>
+      <p class="deadline rise d5" id="deadline" hidden></p>
+      <p class="replyintro" id="replyintro" hidden></p>
 
-  <div id="reply" hidden>
-    <div class="replyrule rise d6"><span class="t">The Reply</span></div>
-    <p class="deadline rise d6" id="deadline" hidden></p>
-    <p class="replyintro" id="replyintro" hidden></p>
+      <div id="replybody">
+        <div id="guests"></div>
+        <div class="send" id="bar" hidden>
+          <button type="button" id="save">Send Reply</button>
+          <p class="hint" id="status"></p>
+        </div>
+      </div>
 
-    <div id="replybody">
-      <div id="guests"></div>
-      <div class="send" id="bar" hidden>
-        <button type="button" id="save">Send Reply</button>
-        <p class="hint" id="status"></p>
+      <div class="closed" id="closedCard" hidden>
+        <p class="big">The reply book has closed</p>
+        <p id="closedText"></p>
       </div>
     </div>
 
-    <div class="closed" id="closedCard" hidden>
-      <p class="big">The reply book has closed</p>
-      <p id="closedText"></p>
-    </div>
+    <div class="notice" id="notice">Opening your invitation&hellip;</div>
   </div>
-
-  <div class="notice" id="notice">Opening your invitation…</div>
-
-  <footer class="foot"><a href="https://vowtodo.com" rel="noopener">Made with VowToDo</a></footer>
 </main>
+<footer class="foot"><a href="https://vowtodo.com" rel="noopener">Made with VowToDo</a></footer>
 </div>
 
 <script>
@@ -307,9 +275,9 @@ body[data-way="olive"] .hint.err, body[data-way="ink"] .hint.err{color:#E8A79B}
 //   ?g=<token>,<token>   named link  — pre-created guests, update in place
 //   ?s=<space_token>     generic link — visitor types their own name (+side); each submit creates new guests
 //   &preview=1           owner preview — form renders and can be tapped, but sending is disabled
-// Wave 1: space carries rsvp_deadline / rsvp_message / rsvp_cover_url / rsvp_theme;
-// questions carry kind (meal/dietary/custom) and any field_type
-// (single_select · multi_select · boolean · text). payload.closed is authoritative.
+// space carries wedding_date / wedding_time / venue / rsvp_deadline / rsvp_message /
+// rsvp_cover_url; questions carry any field_type (single_select · multi_select ·
+// boolean · text). payload.closed is authoritative.
 const API = 'https://ejfddddwqbjebwffgadc.supabase.co/functions/v1/rsvp';
 
 const params = new URLSearchParams(location.search);
@@ -322,7 +290,6 @@ const state = {};
 let ORDER = [];        // generic mode: block ids in display order
 let nextBlock = 1;
 const MAX_PEOPLE = 10; // matches the API's per-submission cap
-const THEMES = ['sand','olive','ink'];
 const SIDE_OPTS = [
   { value: 'bride', label: "Bride's guest" },
   { value: 'groom', label: "Groom's guest" },
@@ -345,9 +312,27 @@ function fmtDate(d, opts){
   return dt.toLocaleDateString('en-SG', opts || {weekday:'long', day:'numeric', month:'long', year:'numeric'});
 }
 
+/* 'HH:MM[:SS]' 24h -> '6:00 PM'. */
+function fmtTime(v){
+  const m = v ? /^(\d{2}):(\d{2})/.exec(v) : null;
+  if(!m) return '';
+  const h24 = Number(m[1]);
+  const h12 = h24 % 12 || 12;
+  return h12 + ':' + m[2] + ' ' + (h24 >= 12 ? 'PM' : 'AM');
+}
+
 /* ----------------------------- head ----------------------------- */
+/* The simplified order (2026-08-14): banner · "We'd love to have you!" ·
+   title · venue pill · date & time · message · the reply. */
 
 function buildHead(space){
+  if(space.rsvp_cover_url){
+    const b = document.getElementById('banner');
+    b.src = space.rsvp_cover_url;
+    b.hidden = false;
+    b.addEventListener('error', ()=>{ b.hidden = true; });
+  }
+
   const couple = String(space.name||'').replace(/[’'`]s\s+wedding$/i,'').replace(/\s+wedding$/i,'').trim();
   const parts = couple.split(/\s*&\s*|\s+and\s+/i).filter(Boolean);
   const namesEl = document.getElementById('names');
@@ -357,27 +342,15 @@ function buildHead(space){
     namesEl.textContent = couple || "You're invited";
   }
 
-  const facts = [];
-  const date = fmtDate(space.wedding_date);
-  if(date) facts.push('<span>'+esc(date)+'</span>');
-  if(space.venue) facts.push('<span>'+esc(space.venue)+'</span>');
-  document.getElementById('facts').innerHTML = facts.join('');
-
-  if(space.wedding_date){
-    const days = Math.ceil((new Date(space.wedding_date+'T00:00:00') - new Date()) / 86400000);
-    const c = document.getElementById('count');
-    if(days > 1){ c.hidden = false; c.textContent = days + ' days from today'; }
-    else if(days === 1){ c.hidden = false; c.textContent = 'Tomorrow'; }
-    else if(days === 0){ c.hidden = false; c.textContent = "Today's the day"; }
+  if(space.venue){
+    document.getElementById('venuepill').hidden = false;
+    document.getElementById('venueText').textContent = space.venue;
   }
 
-  if(space.rsvp_cover_url){
-    const plate = document.getElementById('plate');
-    plate.hidden = false;
-    const img = document.createElement('img');
-    img.alt = ''; img.loading = 'lazy'; img.src = space.rsvp_cover_url;
-    img.addEventListener('error', ()=>{ plate.hidden = true; });
-    plate.appendChild(img);
+  const when = [fmtDate(space.wedding_date), fmtTime(space.wedding_time)].filter(Boolean).join(' · ');
+  if(when){
+    const w = document.getElementById('when');
+    w.hidden = false; w.textContent = when;
   }
 
   if(space.rsvp_message && space.rsvp_message.trim()){
@@ -716,9 +689,6 @@ async function load(){
     const out = await r.json();
     if(!r.ok || out.error) throw new Error(out.error||'This invitation could not be opened.');
     DATA = out;
-
-    const theme = THEMES.includes(out.space.rsvp_theme) ? out.space.rsvp_theme : 'sand';
-    if(theme !== 'sand') document.body.dataset.way = theme;
 
     document.getElementById('notice').hidden = true;
     buildHead(out.space);

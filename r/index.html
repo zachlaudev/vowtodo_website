@@ -290,6 +290,8 @@ let GENERIC = !g && !!s;
 let DATA = null;
 const state = {};
 let ORDER = [];        // generic mode: block ids in display order
+// Attendance wording — couple overrides from the space (mig 0027), defaults otherwise.
+let W = { q:'Will you be attending?', yes:'Joyfully accepts', no:'Regretfully declines', custom:false };
 let nextBlock = 1;
 const MAX_PEOPLE = 10; // matches the API's per-submission cap
 const SIDE_OPTS = [
@@ -472,11 +474,11 @@ function appendQuestions(container, st, rerender){
 
 function appendAttendance(container, st, rerender){
   const group = el('div','ballot');
-  group.setAttribute('role','group'); group.setAttribute('aria-label','Will you attend?');
-  group.appendChild(ballotRow('Joyfully accepts', st.rsvp_status==='attending', "we can't wait", ()=>{
+  group.setAttribute('role','group'); group.setAttribute('aria-label', W.q);
+  group.appendChild(ballotRow(W.yes, st.rsvp_status==='attending', W.custom ? null : "we can't wait", ()=>{
     st.rsvp_status = (st.rsvp_status==='attending') ? 'pending' : 'attending'; rerender();
   }, 'accept'));
-  group.appendChild(ballotRow('Regretfully declines', st.rsvp_status==='declined', "you'll be missed", ()=>{
+  group.appendChild(ballotRow(W.no, st.rsvp_status==='declined', W.custom ? null : "you'll be missed", ()=>{
     st.rsvp_status = (st.rsvp_status==='declined') ? 'pending' : 'declined'; rerender();
   }, 'decline'));
   container.appendChild(group);
@@ -535,7 +537,7 @@ function render(){
       sq.appendChild(side); sec.appendChild(sq);
 
       const att = el('div','q');
-      att.appendChild(el('p','qlab','Will you attend?'));
+      att.appendChild(el('p','qlab',W.q));
       appendAttendance(att, st, render);
       sec.appendChild(att);
 
@@ -561,7 +563,7 @@ function render(){
       sec.appendChild(head);
 
       const att = el('div','q');
-      att.appendChild(el('p','qlab','Will you attend?'));
+      att.appendChild(el('p','qlab',W.q));
       appendAttendance(att, st, render);
       sec.appendChild(att);
       appendQuestions(sec, st, render);
@@ -694,6 +696,11 @@ async function load(){
     const out = await r.json();
     if(!r.ok || out.error) throw new Error(out.error||'This invitation could not be opened.');
     DATA = out;
+
+    const wq = (out.space.rsvp_attend_label||'').trim();
+    const wy = (out.space.rsvp_yes_label||'').trim();
+    const wn = (out.space.rsvp_no_label||'').trim();
+    W = { q: wq || W.q, yes: wy || W.yes, no: wn || W.no, custom: !!(wy || wn) };
 
     document.getElementById('notice').hidden = true;
     buildHead(out.space);

@@ -5,61 +5,53 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Page not found — VowToDo</title>
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#7E8C57">
+<meta name="theme-color" content="#F1E8D6">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,600;12..96,700;12..96,800&family=Caveat:wght@600;700&family=Fragment+Mono&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Caveat:wght@600;700&family=Fragment+Mono&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/site.css">
-<style>
-  main{min-height:calc(100vh - 64px); display:flex; align-items:center; justify-content:center; padding:40px 22px}
-  .box{max-width:520px; text-align:center}
-  .code{font-family:var(--font-mono); font-size:13px; color:var(--terracotta-dark); letter-spacing:.14em; margin:0 0 12px}
-  h1{font-size:clamp(30px,5vw,42px); font-weight:800; margin:0 0 12px}
-  p{color:var(--body-ink); font-size:16px; margin:0 0 26px}
-  .row{display:flex; flex-wrap:wrap; gap:12px; justify-content:center}
-  .home{display:inline-flex; align-items:center; gap:8px; background:var(--ink); color:#F6F2E7; text-decoration:none;
-    padding:12px 22px; border-radius:14px; font-weight:600; font-size:15px; transition:background .15s ease,transform .06s ease}
-  .home:hover{background:#3A372F}
-  .home:active{transform:scale(.98)}
-  .aside{font-family:var(--font-script); font-weight:700; font-size:20px; color:var(--olive); margin:30px 0 0}
-</style>
 <link rel="icon" href="/img/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 </head>
 <body>
-
+<a class="skip" href="#main">Skip to content</a>
 <header class="site-nav">
   <div class="in">
-    <a class="site-brand" href="/"><img src="/img/logo-1024.png" alt="" width="32" height="32">VowToDo</a>
+    <a class="site-brand" href="/"><img src="/img/apple-touch-icon.png" alt="" width="28" height="28">VowToDo</a>
+    <span class="site-folio">Singapore · free</span>
     <nav class="site-links" aria-label="Site">
       <a href="/features">Features</a>
-      <a href="/blog">Blog</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/blog">Guides</a>
     </nav>
     <details class="site-menu">
       <summary aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></summary>
       <nav class="sheet" aria-label="Site">
         <a href="/features">Features</a>
-          <a href="/blog">Blog</a>
-        <a href="/download">Mobile App</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/blog">Guides</a>
+        <a href="/download">Download</a>
+        <a href="/app/login">Web app</a>
+        <a href="/support">Support</a>
       </nav>
     </details>
-    <a class="site-navapp" href="/app/login" title="Sign in to the VowToDo web app"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.8" y="4.4" width="18.4" height="12.4" rx="2"/><path d="M9 20.4h6"/><path d="M12 16.8v3.6"/></svg><span class="lbl">Web App</span></a>
-    <a class="site-btn" href="/download">Mobile App</a>
+    <a class="site-navapp" href="/app/login"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.8" y="4.4" width="18.4" height="12.4" rx="2"/><path d="M9 20.4h6"/><path d="M12 16.8v3.6"/></svg>Web app</a>
+    <a class="site-btn" href="https://apps.apple.com/sg/app/vowtodo-wedding-planner/id6788746982" target="_blank" rel="noopener">App Store</a>
   </div>
 </header>
 
-<main>
+<main id="main" class="miss">
   <div class="box">
-    <p class="code">404 — NOT FOUND</p>
-    <h1>This page isn't on the seating chart</h1>
-    <p>It may have moved, or the link may be a little off. The plan itself is safe.</p>
-    <div class="row">
-      <a class="home" href="/">Back to the start</a>
-      <a class="ghost" href="/guide">Read the wedding guide</a>
+    <p class="kicker">404 · not on the plan</p>
+    <h1>This page isn’t on the seating chart.</h1>
+    <p class="lede">The link is off, or the page moved. The wedding you were planning is still where you left it.</p>
+    <div class="cta" style="margin-top:22px">
+      <a class="site-btn" href="/">Back to the start</a>
+      <a class="ghost" href="/blog">Read the guides</a>
     </div>
-    <p class="aside">okay — deep breath.</p>
+    <p class="script">wrong table.</p>
   </div>
 </main>
-
 </body>
 </html>

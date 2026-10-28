@@ -3,18 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>VowToDo — The Only Wedding App You'll Ever Need.</title>
-<meta name="description" content="Checklist, budget, guest list, RSVPs, seating chart and the wedding-day run sheet, on your phone and in your browser. Any style of wedding.">
+<title>VowToDo — All-in-one Wedding Planner</title>
+<meta name="description" content="Tasks, budget, guests and the big day. One app, on iPhone and web.">
 <link rel="canonical" href="https://vowtodo.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="VowToDo">
-<meta property="og:title" content="VowToDo — the only wedding app you'll ever need">
-<meta property="og:description" content="Checklist, budget, guests, RSVPs, seating, and the day itself, for the whole wedding.">
+<meta property="og:title" content="VowToDo — All-in-one Wedding Planner">
+<meta property="og:description" content="Tasks, budget, guests and the big day. One app, on iPhone and web.">
 <meta property="og:url" content="https://vowtodo.com/">
 <meta property="og:image" content="https://vowtodo.com/img/logo-1024.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="VowToDo — the only wedding app you'll ever need">
-<meta name="twitter:description" content="The complete wedding planner. iPhone and web.">
+<meta name="twitter:title" content="VowToDo — All-in-one Wedding Planner">
+<meta name="twitter:description" content="Tasks, budget, guests and the big day. One app, on iPhone and web.">
 <meta name="twitter:image" content="https://vowtodo.com/img/logo-1024.png">
 <meta name="theme-color" content="#7E8C57">
 <link rel="preload" as="image" type="image/webp" href="/img/hero-veil-blur.webp" imagesrcset="/img/hero-veil-blur-800.webp 800w, /img/hero-veil-blur.webp 1400w" imagesizes="100vw" fetchpriority="high">
@@ -23,161 +23,111 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,600;12..96,700;12..96,800&family=Caveat:wght@600;700&family=Fragment+Mono&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/site.css">
 <style>
-  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
-
-  /* ---------- hero ---------- */
-  .hero{position:relative;isolation:isolate;overflow:hidden;padding:72px 0 80px;background:var(--ash);color:var(--off-white)}
+  .hero{position:relative;isolation:isolate;overflow:hidden;padding:88px 0 96px;background:var(--ash);color:var(--off-white)}
   .hero-photo{position:absolute;z-index:0;inset:-6%;width:112%;height:112%;object-fit:cover;object-position:72% center;pointer-events:none}
   .hero-shade{position:absolute;z-index:1;inset:0;pointer-events:none;background:
-    linear-gradient(100deg,rgb(from var(--ash) r g b / .88) 0%,rgb(from var(--ash) r g b / .72) 42%,rgb(from var(--ash) r g b / .55) 100%)}
+    linear-gradient(100deg,rgb(from var(--ash) r g b / .9) 0%,rgb(from var(--ash) r g b / .74) 46%,rgb(from var(--ash) r g b / .58) 100%)}
   .hero .wrap{position:relative;z-index:2}
-  .hero .heroin{position:relative;z-index:2}
-  .heroin{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
-  .freebadge{display:inline-flex;align-items:center;gap:8px;background:var(--olive-tint);color:var(--olive-dark);
-    font-weight:700;letter-spacing:.11em;text-transform:uppercase;font-size:11.5px;margin:0 0 18px;padding:7px 14px;border-radius:999px}
-  .freebadge .dot{width:7px;height:7px;border-radius:999px;background:var(--olive-dark);animation:pulse 2.6s ease-in-out infinite}
-  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(92,106,58,.35)}50%{box-shadow:0 0 0 5px rgba(92,106,58,0)}}
-  h1{font-size:clamp(40px,11vw,108px);line-height:.92;margin:0 0 18px;letter-spacing:-.045em;font-weight:800;text-wrap:wrap}
-  h1 em{font-family:var(--font-script);font-style:normal;font-weight:700;color:var(--gold)}
-  .lede{font-size:18px;color:var(--off-white);margin:0 0 28px;max-width:40ch;line-height:1.55}
+  h1{font-size:clamp(40px,5vw,76px);line-height:1.02;letter-spacing:-.045em;font-weight:800;margin:0 0 18px;max-width:12ch}
+  .heroin{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,.9fr);gap:48px 64px;align-items:center}
+  .lede{font-size:18px;line-height:1.55;color:var(--off-white);margin:0 0 28px;max-width:34ch}
   .cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
-  .trust{margin:18px 0 0;font-family:var(--font-mono);font-size:12.5px;color:var(--gold)}
+
+  .hero .stage{position:relative;height:auto;width:100%;max-width:440px;margin:0 0 0 auto;display:block}
+  .hero .stage .front{position:relative;display:flex;justify-content:center}
+  .hero .stage .front .phone{width:268px}
+  .hero .chip-days{left:0;bottom:42px;top:auto}
+  .hero .chip-money{right:0;top:28px;left:auto;width:auto}
+
+  .sec{padding:108px 0}
+  .sec h2.display{font-size:clamp(36px,4vw,56px);line-height:1.05;letter-spacing:-.04em;font-weight:800;max-width:16ch;margin:0 0 18px}
+  .dek{font-size:18px;line-height:1.55;max-width:38ch;margin:0}
+  .sec.light .dek{color:var(--olive-dark)}
+
+  .tiles{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:48px}
+  .tile{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:12px 12px 26px;display:flex;flex-direction:column;gap:16px}
+  .crop{position:relative;height:176px;border-radius:16px;overflow:hidden;background:var(--sand)}
+  .crop img{width:100%;height:100%;object-fit:cover;object-position:center 10%;display:block}
+  .ui{position:absolute;left:12px;bottom:12px;background:var(--off-white);color:var(--olive-dark);
+    border-radius:999px;padding:6px 12px;font-size:12.5px;font-weight:700;letter-spacing:-.01em;
+    box-shadow:0 10px 24px -14px rgb(from var(--ash) r g b / .5)}
+  .tile h3{margin:4px 12px 0;font-size:22px;letter-spacing:-.03em}
+  .tile p{margin:0 12px;color:var(--olive-dark);font-size:16.5px;line-height:1.45}
+
+  .roles{display:flex;flex-wrap:wrap;gap:14px;margin-top:40px}
+  .role{display:inline-flex;align-items:center;gap:10px;padding:8px 18px 8px 8px;border-radius:999px;
+    background:rgb(from var(--off-white) r g b / .08);color:var(--off-white);font-weight:700;font-size:15px}
+  .role i{width:40px;height:40px;border-radius:999px;display:grid;place-items:center;font-style:normal;font-weight:800;font-size:14px}
+
+  .hands{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:48px}
+  .hand{display:flex;align-items:center;gap:12px;background:var(--cream);border:1px solid var(--line);
+    border-radius:18px;padding:20px 18px;color:var(--ash)}
+  .hand .tick{width:28px;height:28px;border-radius:999px;background:var(--olive-dark);color:var(--off-white);
+    display:grid;place-items:center;font-weight:700;flex:none}
+  .hand b{font-weight:700}
+  .hand .to{color:var(--olive-dark);font-weight:600}
+
+  .pair{display:grid;grid-template-columns:220px minmax(0,1fr);gap:28px;align-items:end;margin-top:56px;max-width:820px}
+  .pair .phone{width:220px;outline:1px solid rgb(from var(--off-white) r g b / .22)}
+  .laptop{background:var(--ash);border:1px solid rgb(from var(--off-white) r g b / .28);border-radius:18px;padding:12px 12px 16px;
+    box-shadow:0 28px 50px -28px rgb(from var(--ash) r g b / .7)}
+  .chrome-bar{display:flex;align-items:center;gap:6px;height:28px;margin:0 4px 10px}
+  .chrome-bar i{width:8px;height:8px;border-radius:999px;background:var(--warm-grey);display:block}
+  .closer{border-bottom:1px solid rgb(from var(--off-white) r g b / .16)}
+  .chrome-bar em{margin-left:8px;font-style:normal;font-family:var(--font-mono);font-size:11px;color:var(--off-white);
+    background:rgb(from var(--off-white) r g b / .08);border-radius:999px;padding:3px 10px}
+  .laptop .screen{height:340px;overflow:hidden;border-radius:10px;background:var(--off-white)}
+  .laptop .screen img{display:block;width:100%;height:auto;transform:translateY(-9%)}
+
+  .why{margin-top:40px;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--card)}
+  .whyhead,.whyrow{display:grid;grid-template-columns:1.05fr 1.25fr 1.35fr 1.25fr}
+  .whyhead span{padding:14px 16px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--olive-dark)}
+  .whyrow b,.whyrow span{padding:13px 16px;border-top:1px solid var(--line);font-weight:500;font-size:15px;line-height:1.35}
+  .whyrow b{font-weight:700;color:var(--ash)}
+  .whyrow .us{color:var(--olive-dark);font-weight:700}
+
+  .closer{text-align:center}
+  .closer h2{margin-left:auto;margin-right:auto;text-align:center;max-width:none}
+  .closer .cta{justify-content:center;margin-top:28px}
 
   @media(max-width:900px){
-    .heroin{grid-template-columns:1fr}.hero{padding:44px 0 56px}
-    .hero-shade{background:linear-gradient(180deg,rgb(from var(--ash) r g b / .86) 0%,rgb(from var(--ash) r g b / .62) 100%)}
+    .heroin{grid-template-columns:1fr;gap:36px}
+    .hero .stage{margin:8px auto 0}
+    .hero-shade{background:linear-gradient(180deg,rgb(from var(--ash) r g b / .88) 0%,rgb(from var(--ash) r g b / .64) 100%)}
     .hero-photo{object-position:68% 20%}
+    .pair{grid-template-columns:1fr;justify-items:center}
+    .laptop{width:100%}
+    .laptop .screen{height:230px}
   }
-  /* ---------- sections ---------- */
-  .sec{padding:76px 0}
-  .sec h2{font-size:clamp(28px,3.8vw,40px);margin:0 0 10px;text-align:center;letter-spacing:-.03em}
-  .sec h2.display{font-size:clamp(46px,7vw,100px);line-height:.9;letter-spacing:-.045em;font-weight:800;text-align:left;max-width:11ch;margin:0 0 16px}
-  .sec .sub{text-align:center;color:var(--muted);max-width:56ch;margin:0 auto 46px;font-size:16.5px}
-  .band-soft{background:var(--cream-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-  .band-dark{background:var(--ash);color:var(--off-white)}
-  .band-dark h2{color:var(--off-white)}
-  .band-dark .sub{color:var(--on-dark-muted)}
-
-  /* everything grid */
-  .all{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-  @media(max-width:860px){.all{grid-template-columns:repeat(2,1fr)}}
-  @media(max-width:560px){.all{grid-template-columns:1fr}}
-  .feat{--fbg:var(--olive-tint);--fink:var(--olive-dark);--fdeep:var(--olive);
-    position:relative;overflow:hidden;background:var(--card);border:1px solid var(--line);border-radius:18px;
-    padding:20px 20px 18px;transition:transform .2s cubic-bezier(.22,.61,.36,1),box-shadow .2s ease,border-color .2s ease}
-  .feat::before{content:'';position:absolute;inset:0;background:var(--fdeep);border-radius:inherit;
-    transform:translateY(101%);transition:transform .34s cubic-bezier(.22,.61,.36,1)}
-  .feat>*{position:relative}
-  .feat:hover{transform:translateY(-3px);border-color:transparent;
-    box-shadow:0 2px 4px color-mix(in srgb,var(--fdeep) 20%,transparent),0 18px 34px -14px color-mix(in srgb,var(--fdeep) 55%,transparent)}
-  .feat:hover::before{transform:translateY(0)}
-  .feat .ic{width:38px;height:38px;border-radius:12px;background:var(--fbg);display:grid;place-items:center;margin-bottom:13px;
-    transition:background .3s ease}
-  .feat .ic svg{width:19px;height:19px;stroke:var(--fink);fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;
-    transition:stroke .3s ease}
-  .feat h3{font-size:16.5px;margin:0 0 4px;letter-spacing:-.015em;transition:color .28s ease}
-  .feat p{font-size:14px;color:var(--muted);margin:0;line-height:1.55;transition:color .28s ease}
-  .feat:hover h3{color:var(--off-white)}
-  .feat:hover p{color:var(--off-white)}
-  .feat:hover .ic{background:rgb(from var(--off-white) r g b / .16)}
-  .feat:hover .ic svg{stroke:var(--off-white)}
-  .allnote{text-align:center;margin:30px 0 0;font-size:14.5px;color:var(--muted)}
-  .allnote a{font-weight:600;text-decoration:none}
-  .allnote a:hover{text-decoration:underline}
-
-  /* comparison table */
-  .cmpwrap{max-width:880px;margin:0 auto;overflow-x:auto;border-radius:20px;
-    border:1px solid var(--line);background:var(--card);
-    box-shadow:0 1px 2px rgb(from var(--ash) r g b / .05),0 16px 36px -18px rgb(from var(--ash) r g b / .18)}
-  .cmp{width:100%;border-collapse:collapse;font-size:13.5px;min-width:720px}
-  .cmp th,.cmp td{padding:13px 18px;text-align:left;border-top:1px solid color-mix(in srgb,var(--line) 65%,transparent);vertical-align:middle}
-  .cmp thead th{border-top:0;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700;padding:15px 18px}
-  .cmp tbody th{font-weight:600;color:var(--ink);font-size:14px}
-  .cmp .what{width:22%}
-  .cmp .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
-  .cmp td.us,.cmp th.us{background:var(--olive-tint)}
-  .cmp thead th.us{color:var(--olive-dark);font-size:12.5px}
-  .cmp td{color:var(--muted);line-height:1.45}
-  .cmp td.win{color:var(--body-ink);font-weight:600}
-  .cmp td.us{color:var(--olive-dark);font-weight:600}
-  .cmp td.us .cell{display:flex;align-items:flex-start;gap:8px}
-  @media(max-width:640px){
-    .cmp{display:block;min-width:0;font-size:13px}
-    .cmp thead{display:none}
-    .cmp tbody,.cmp tr,.cmp tbody th,.cmp td{display:block}
-    .cmp tbody th{padding:15px 16px 5px;font-size:15px;border-top:1px solid var(--line)}
-    .cmp tr:first-child th{border-top:0}
-    .cmp td{border-top:0;padding:3px 16px;display:flex;align-items:flex-start;gap:10px}
-    .cmp td::before{content:attr(data-l);flex:none;width:94px;font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--faint);margin-top:3px}
-    .cmp td.us{margin:7px 12px 15px;padding:9px 12px;border-radius:12px}
-    .cmp td.us::before{color:var(--olive-dark)}
+  @media(max-width:720px){
+    .tiles,.hands{grid-template-columns:1fr}
+    .whyhead{display:none}
+    .whyrow{grid-template-columns:1fr;padding:8px 0 12px}
+    .whyrow b{border-top:1px solid var(--line);padding-bottom:4px}
+    .whyrow span{border-top:0;padding-top:2px;padding-bottom:2px;display:flex;gap:10px}
+    .whyrow span::before{content:attr(data-l);flex:none;width:92px;font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--olive-dark);margin-top:3px}
   }
-  .cmp td.us .yes{display:inline-grid;place-items:center;width:19px;height:19px;border-radius:999px;background:var(--olive-dark);color:var(--off-white);font-size:11px;font-weight:700;flex:none;margin-top:1px}
-  .otherapps{max-width:640px;margin:30px auto 0;text-align:center;font-size:15.5px;color:var(--body-ink);line-height:1.65}
-  .otherapps b{color:var(--ink)}
-  /* crew */
-  .crewgrid{display:grid;grid-template-columns:1.02fr .98fr;gap:44px;align-items:center;max-width:960px;margin:0 auto}
-  @media(max-width:840px){.crewgrid{grid-template-columns:1fr;gap:30px}}
-  .crewpts{display:grid;gap:19px}
-  .pt{display:flex;gap:14px}
-  .pt .ic{width:40px;height:40px;border-radius:12px;background:rgb(from var(--off-white) r g b / .12);display:grid;place-items:center;flex:0 0 auto}
-  .pt .ic svg{width:19px;height:19px;stroke:var(--gold);fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-  .pt h3{margin:0 0 3px;font-size:16.5px;color:var(--off-white)}
-  .pt p{margin:0;font-size:14px;color:var(--on-dark-muted);line-height:1.55}
-  .solonote{max-width:960px;margin:34px auto 0;text-align:center;font-size:14px;color:var(--on-dark-muted)}
-  .roster{background:var(--ash);border-radius:22px;padding:18px}
-  .rrow{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:13px;background:rgb(from var(--off-white) r g b / .08);margin-bottom:8px}
-  .rrow:last-child{margin-bottom:0}
-  .rav{width:36px;height:36px;border-radius:999px;display:grid;place-items:center;font-weight:700;color:var(--off-white);font-size:13.5px;flex:0 0 auto}
-  .rn{font-weight:600;font-size:14.5px;color:var(--off-white);line-height:1.2}
-  .rs{font-size:11.5px;color:var(--on-dark-muted)}
-  .rb{margin-left:auto;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
-    padding:4px 10px;border-radius:999px;background:rgb(from var(--gold) r g b / .28);color:var(--gold);white-space:nowrap}
-  .rb.crew{background:rgb(from var(--off-white) r g b / .12);color:var(--off-white)}
-  .rnote{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);text-align:right;margin:13px 4px 0}
-
-  /* free band */
-  .freeband{background:var(--off-white);color:var(--ash);text-align:center;padding:78px 22px}
-  .freeband h2{font-size:clamp(56px,8vw,110px);margin:0 auto 12px;color:var(--ash);letter-spacing:-.045em;line-height:.9;max-width:12ch}
-  .sec h2.display.center{text-align:center;margin-left:auto;margin-right:auto;max-width:16ch}
-  .freeband .p{margin:0 auto 26px;max-width:46ch;font-size:16.5px;opacity:.95;line-height:1.6}
-  .freechips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:0 0 32px}
-  .freechips span{font-family:var(--font-mono);font-size:12.5px;padding:8px 15px;border-radius:999px;
-    background:var(--olive-tint);color:var(--olive-dark);border:1px solid var(--olive-dark)}
-  .freeband .cta{justify-content:center}
-
-  /* feedback */
-  .fb{max-width:680px;margin:0 auto;text-align:center}
-  .fb h2{font-size:clamp(24px,3vw,30px)}
-  .fb p{color:var(--off-white);font-size:15.5px;line-height:1.65;margin:0 auto 20px;max-width:50ch}
-  .fbmail{display:inline-flex;align-items:center;gap:9px;background:var(--card);border:1px solid var(--line);
-    border-radius:999px;padding:10px 20px;text-decoration:none;font-family:var(--font-mono);font-size:14px;color:var(--ink);
-    transition:border-color .15s ease,color .15s ease}
-  .fbmail:hover{border-color:var(--olive);color:var(--olive-dark)}
-  .fbmail svg{width:15px;height:15px;stroke:var(--olive-dark);fill:none;stroke-width:1.8;stroke-linecap:round}
   @media(max-width:430px){
-    h1{font-size:clamp(32px,8.8vw,40px);line-height:1.05;margin-bottom:12px}
-    .lede,.dek,.sec .sub,.fb p,.otherapps{font-size:16px}
-    .hero{padding:28px 0 32px}
-    .sec{padding:36px 0}
-    .sec h2.display,.sec h2.display.center{font-size:clamp(28px,8vw,34px);line-height:1.08;max-width:none}
-    .freebadge{font-size:10px;padding:5px 10px;margin-bottom:10px}
-    .cmp tbody th{padding:10px 12px 2px;font-size:15px}
-    .cmp td{padding:2px 12px;font-size:14px}
-    .cmp td.us{margin:4px 8px 8px;padding:6px 10px}
-    .pt{gap:10px}
-    .crewpts{gap:12px}
+    h1{font-size:clamp(32px,8.8vw,40px);line-height:1.05;margin-bottom:16px}
+    .lede,.dek,.tile p,.hand,.whyrow b,.whyrow span{font-size:16px}
+    .hero{padding:36px 0 40px}
+    .sec{padding:52px 0}
+    .sec h2.display{font-size:clamp(28px,8vw,34px);line-height:1.08;max-width:none;margin-bottom:12px}
+    .tiles{margin-top:28px;gap:14px}
+    .crop{height:148px}
+    .hands{margin-top:28px}
+    .hero .stage{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px;max-width:100%}
+    .hero .stage .front{position:static;flex:1 0 100%;display:flex;justify-content:center}
+    .hero .stage .front .phone{width:min(210px,62vw)}
+    .hero .stage .chip{position:static;width:auto;max-width:100%;margin:0}
+    .pair{margin-top:28px}
+    .pair .phone{width:min(180px,52vw)}
   }
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
  {"@type":"Organization","name":"VowToDo","url":"https://vowtodo.com/","logo":"https://vowtodo.com/img/logo-1024.png","email":"support.vowtodo@gmail.com"},
- {"@type":"SoftwareApplication","name":"VowToDo — Wedding Planner","operatingSystem":"iOS 16.4+, Web","applicationCategory":"LifestyleApplication","url":"https://vowtodo.com/","downloadUrl":"https://apps.apple.com/sg/app/vowtodo-wedding-planner/id6788746982","description":"Wedding planner for couples anywhere: checklist, budget, guest list, RSVPs, seating chart and the wedding-day run sheet, on iPhone and the web."},
- {"@type":"FAQPage","mainEntity":[
-   {"@type":"Question","name":"Why not just plan our wedding in a spreadsheet?","acceptedAnswer":{"@type":"Answer","text":"A spreadsheet holds information, but it can't hand out a task, remind someone it's due, collect RSVPs, or seat your guests. VowToDo does the coordinating for you — reminders go out, RSVPs tally themselves, and everyone sees their part of the plan."}},
-   {"@type":"Question","name":"Do my guests need the app to RSVP?","acceptedAnswer":{"@type":"Answer","text":"No. You share a link and guests reply from any web browser. Their answers appear on your dashboard automatically."}},
-   {"@type":"Question","name":"Can we plan with other people?","acceptedAnswer":{"@type":"Answer","text":"Yes — invite anyone as Crew. Hand them real tasks, send announcements everyone sees, and keep the budget visible to the couple only. It works beautifully for just the two of you as well."}}
- ]}
+ {"@type":"SoftwareApplication","name":"VowToDo — Wedding Planner","operatingSystem":"iOS 16.4+, Web","applicationCategory":"LifestyleApplication","url":"https://vowtodo.com/","downloadUrl":"https://apps.apple.com/sg/app/vowtodo-wedding-planner/id6788746982","description":"Tasks, budget, guests and the big day. One app, on iPhone and web."}
 ]}
 </script>
 <link rel="icon" href="/img/favicon.ico" sizes="any">
@@ -209,199 +159,165 @@
   </div>
 </header>
 
-<!-- HERO -->
 <section class="hero">
   <img class="hero-photo" src="/img/hero-veil-blur.webp" srcset="/img/hero-veil-blur-800.webp 800w, /img/hero-veil-blur.webp 1400w" sizes="100vw" alt="" width="1400" height="600" fetchpriority="high" decoding="async">
   <div class="hero-shade" aria-hidden="true"></div>
   <div class="wrap">
-    <p class="freebadge"><span class="dot" aria-hidden="true"></span>iPhone + web</p>
-    <h1>The only wedding app you'll <em>ever</em> need.</h1>
     <div class="heroin">
-    <div>
-      <p class="lede">Checklist, budget, guest list, RSVPs, seating and the day itself — one calm place, on your phone and in your browser.</p>
-      <div class="cta">
-        <a class="appstore" href="https://apps.apple.com/sg/app/vowtodo-wedding-planner/id6788746982" target="_blank" rel="noopener">
-          <svg viewBox="0 0 384 512"><path fill="currentColor" d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zM262.1 104.5c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
-          <span class="l"><small>Download on the</small><b>App Store</b></span>
-        </a>
-        <a class="ghost on-dark" href="/app/login">Open the web app →</a>
-      </div>
-      <p class="trust">iPhone and web · 2-minute setup</p>
-    </div>
-    <div class="stage">
-      <div class="back">
-        <div class="phone">
-          <img src="/img/app/welcome.webp" alt="VowToDo welcome: checklist, RSVPs, the day itself, and budget, in one quiet place" width="1080" height="2346">
+      <div>
+        <h1>All-in-one Wedding Planner</h1>
+        <p class="lede">Tasks, budget, guests and the big day. One app, on iPhone and web.</p>
+        <div class="cta">
+          <a class="appstore" href="https://apps.apple.com/sg/app/vowtodo-wedding-planner/id6788746982" target="_blank" rel="noopener">
+            <svg viewBox="0 0 384 512" aria-hidden="true"><path fill="currentColor" d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zM262.1 104.5c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+            <span class="l"><small>Download on the</small><b>App Store</b></span>
+          </a>
+          <a class="ghost on-dark" href="/app/login">Open the web app →</a>
         </div>
       </div>
-      <div class="front">
-        <div class="phone">
-          <img src="/img/app/dashboard.webp" alt="VowToDo home screen: days until the wedding, a budget total, tasks completed, guests going, and crew members" width="1080" height="2346">
+      <div class="stage">
+        <div class="front">
+          <div class="phone">
+            <img src="/img/app/dashboard.webp" alt="VowToDo dashboard: days to go, budget, tasks, guests, and crew" width="1080" height="2346">
+          </div>
         </div>
-      </div>
-      <div class="chip chip-days float" aria-hidden="true"><small>Big day</small><b>128</b>days</div>
-      <div class="chip chip-money float d2" aria-hidden="true"><small>Budget</small><b>S$90,570</b></div>
-    </div>
-    </div>
-  </div>
-</section>
-
-<section class="sec light" id="checklist">
-  <div class="wrap">
-    <p class="kicker">Checklist</p>
-    <h2 class="display">Due when it is <span class="script mark-olive">actually</span> due.</h2>
-    <p class="dek">Tasks sit under how far out the wedding is, from a year before to the morning itself. A date, a category, and a name. The reminder goes to that person.</p>
-    <div class="cluster">
-      <div class="phone lg">
-        <img src="/img/app/checklist.webp" alt="VowToDo checklist: tasks grouped by how far out they are, with a category, a date, and a name on each" width="1080" height="2346" loading="lazy">
-      </div>
-      <div class="floats">
-        <div class="task float c1"><i class="on"></i><div><b>Confirm the ballroom</b><em>Venue · Phil</em></div></div>
-        <div class="task float d2 c2"><i></i><div><b>Book the solemniser</b><em>Ceremony</em></div></div>
-        <div class="task float d3 c4"><i class="on"></i><div><b>Send the invites</b><em>Guests · Manny</em></div></div>
+        <div class="chip chip-days float" aria-hidden="true"><small>Big day</small><b>128</b>days</div>
+        <div class="chip chip-money float d2" aria-hidden="true"><small>Budget</small><b>S$90,570</b></div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="sec dark" id="budget">
-  <div class="wrap">
-    <p class="kicker">Budget</p>
-    <h2 class="display">One total, <span class="script mark-gold">from the tasks.</span></h2>
-    <p class="giant"><small>S$</small>90,570</p>
-    <div class="bar" aria-hidden="true"><i class="o"></i><i class="t"></i><i class="l"></i><i class="g"></i></div>
-    <div class="pills">
-      <span class="pill paid">S$41,488 paid</span>
-      <span class="pill left">S$49,082 to go</span>
-    </div>
-    <p class="dek" style="margin-top:18px">Each task can hold an amount. Those amounts become planned, paid, and still to come, by category. The couple sees it. Helpers do not, unless you open it.</p>
-    <div class="cluster" style="min-height:520px">
-      <div class="phone lg">
-        <img src="/img/app/budget.webp" alt="VowToDo budget: an estimated total, what is paid, what is left, and a breakdown by category" width="1080" height="2346" loading="lazy">
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="sec light" id="guests">
-  <div class="wrap">
-    <p class="kicker">Guests and RSVPs</p>
-    <h2 class="display">A link. They reply <span class="script mark-olive">in a browser.</span></h2>
-    <p class="dek">Going, can't, and still pending, plus the questions you actually ask — a meal, a bus, a seat. No app and no account for a guest. The seating chart is this same list, laid out in the web app, where the room is big enough to drag.</p>
-  </div>
-  <div class="ticker" aria-hidden="true">
-    <div class="ticker-track">
-      <span class="g">30 going</span><span class="c">3 can't</span><span class="p">7 pending</span><span>Cameron Tucker · attending</span><span>Broderick · pending</span><span>Meal · Shuttle · Seat</span>
-      <span class="g">30 going</span><span class="c">3 can't</span><span class="p">7 pending</span><span>Cameron Tucker · attending</span><span>Broderick · pending</span><span>Meal · Shuttle · Seat</span>
-    </div>
-  </div>
-  <div class="wrap">
-    <div class="status light">
-      <article><b>30</b>Going</article>
-      <article><b>3</b>Can't</article>
-      <article><b>7</b>Pending</article>
-    </div>
-    <div class="cluster">
-      <div class="phone lg">
-        <img src="/img/app/guests.webp" alt="VowToDo guest list: going, can't, and pending, with RSVP answers shown as coloured dots" width="1080" height="2346" loading="lazy">
-      </div>
-      <div class="floats">
-        <div class="chip chip-go float c2">Attending</div>
-        <div class="chip float d2 c3" style="background:var(--lavender);font-weight:700">Pending</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="sec dark" id="day">
-  <div class="wrap">
-    <p class="kicker">The day</p>
-    <h2 class="display">Blocks you <span class="script mark-terra">can drag.</span></h2>
-    <p class="dek">The run of the day sits on a clock. Hold a block and move it when the photos run long. Add another day if the legal wedding and the party are not the same afternoon.</p>
-    <div class="run" aria-hidden="true">
-      <div class="a"><b>Rest and touch-up</b><span>2:00 PM</span></div>
-      <div class="b"><b>Couple photos</b><span>4:05 PM</span></div>
-      <div class="c"><b>Cocktails</b><span>5:30 PM</span></div>
-      <div class="d"><b>Dinner</b><span>7:15 PM</span></div>
-    </div>
-    <p class="more" style="margin-top:18px"><a href="/features" style="color:var(--gold)">See each of these up close →</a></p>
-    <div class="cluster" style="min-height:560px">
-      <div class="phone lg">
-        <img src="/img/app/day-of.webp" alt="VowToDo day-of schedule: the wedding day as timed blocks you can drag" width="1080" height="2346" loading="lazy">
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- WHY NOT A SPREADSHEET -->
 <section class="sec light">
   <div class="wrap">
-    <h2 class="display center reveal">A spreadsheet can hold your plans. It can't hold <span class="script mark-olive">your wedding.</span></h2>
-    <p class="sub">Sheets are great at numbers. Weddings are numbers, people, deadlines and a thousand tiny decisions.</p>
-    <div class="cmpwrap reveal">
-      <table class="cmp">
-        <thead>
-          <tr><th scope="col" class="what"><span class="sr">Capability</span></th><th scope="col">Spreadsheets</th><th scope="col">Wedding apps</th><th scope="col" class="us">VowToDo</th></tr>
-        </thead>
-        <tbody>
-          <tr><th scope="row">Everything in one place</th><td data-l="Spreadsheets">You build every tab</td><td data-l="Wedding apps">A checklist, then links out</td><td class="us" data-l="VowToDo"><span class="cell"><span class="yes">✓</span><span>Tasks to seating, built in</span></span></td></tr>
-          <tr><th scope="row">Working together</th><td data-l="Spreadsheets">Everyone edits everything</td><td data-l="Wedding apps">Built around one planner</td><td class="us" data-l="VowToDo"><span class="cell"><span class="yes">✓</span><span>Couple + helpers, with roles</span></span></td></tr>
-          <tr><th scope="row">Reminders</th><td data-l="Spreadsheets">It never pings you</td><td data-l="Wedding apps">Promos more than progress</td><td class="us" data-l="VowToDo"><span class="cell"><span class="yes">✓</span><span>Due dates nudge the right person</span></span></td></tr>
-          <tr><th scope="row">Collecting RSVPs</th><td data-l="Spreadsheets">You chase every reply</td><td data-l="Wedding apps">Tied to their invites</td><td class="us" data-l="VowToDo"><span class="cell"><span class="yes">✓</span><span>One link — answers file themselves</span></span></td></tr>
-          <tr><th scope="row">Seating chart</th><td data-l="Spreadsheets">Cells and crossed fingers</td><td data-l="Wedding apps">Cramped on a small screen</td><td class="us" data-l="VowToDo"><span class="cell"><span class="yes">✓</span><span>Drag guests onto seats</span></span></td></tr>
-          <tr><th scope="row">Phone + laptop</th><td data-l="Spreadsheets">Pinch-zoom on mobile</td><td data-l="Wedding apps">App or website — pick one</td><td class="us" data-l="VowToDo"><span class="cell"><span class="yes">✓</span><span>iPhone app + full web app</span></span></td></tr>
-        </tbody>
-      </table>
+    <h2 class="display">All in one</h2>
+    <div class="tiles">
+      <article class="tile">
+        <div class="crop">
+          <img src="/img/app/checklist.webp" alt="Checklist in the VowToDo app" width="1080" height="2346" loading="lazy">
+          <span class="ui">Due · 12 May</span>
+        </div>
+        <h3>Checklist</h3>
+        <p>Know what's due, and when.</p>
+      </article>
+      <article class="tile">
+        <div class="crop">
+          <img src="/img/app/budget.webp" alt="Budget in the VowToDo app" width="1080" height="2346" loading="lazy">
+          <span class="ui">S$90,570</span>
+        </div>
+        <h3>Budget</h3>
+        <p>Every dollar, accounted for.</p>
+      </article>
+      <article class="tile">
+        <div class="crop">
+          <img src="/img/app/guests.webp" alt="Guest list in the VowToDo app" width="1080" height="2346" loading="lazy">
+          <span class="ui">30 going</span>
+        </div>
+        <h3>Guests</h3>
+        <p>RSVPs that track themselves.</p>
+      </article>
+      <article class="tile">
+        <div class="crop">
+          <img src="/img/app/day-of.webp" alt="Day-of timeline in the VowToDo app" width="1080" height="2346" loading="lazy">
+          <span class="ui">4:05 PM</span>
+        </div>
+        <h3>Day-of</h3>
+        <p>Your timeline, minute by minute.</p>
+      </article>
     </div>
   </div>
 </section>
 
-<!-- CREW (secondary) -->
-<section class="sec band-dark" id="crew">
-  <div class="wrap">
-    <div class="stack" aria-hidden="true"><i>C</i><i>P</i><i>A</i><i>H</i></div>
-    <h2 class="display reveal" style="margin-top:16px">Planning with people? <span class="script mark-gold">Bring them in.</span></h2>
-    <p class="sub">Perfect for just the two of you — and ready the moment family and friends want to help. The home screen keeps a count of who's joined.</p>
-    <div class="crewgrid reveal">
-      <div class="crewpts">
-        <div class="pt">
-          <span class="ic"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg></span>
-          <div><h3>Invite your people</h3><p>Partner, parents, friends — invite as many as you like.</p></div>
-        </div>
-        <div class="pt">
-          <span class="ic"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span>
-          <div><h3>Hand out real tasks</h3><p>Assign by name. They own it, get reminded, and tick it off.</p></div>
-        </div>
-        <div class="pt">
-          <span class="ic"><svg viewBox="0 0 24 24"><path d="M3 11l18-8-8 18-2-7-8-3z"/></svg></span>
-          <div><h3>Announce once</h3><p>Venue moved? One post reaches everyone.</p></div>
-        </div>
-        <div class="pt">
-          <span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
-          <div><h3>Roles that protect</h3><p>Couple, Admins, Crew — helpers see their jobs, not your budget.</p></div>
-        </div>
-      </div>
-      <div>
-        <div class="roster" aria-hidden="true">
-          <div class="rrow"><span class="rav" style="background:var(--olive-dark)">C</span><span><span class="rn">Claire</span><br><span class="rs">that's you</span></span><span class="rb">Couple</span></div>
-          <div class="rrow"><span class="rav" style="background:var(--terracotta);color:var(--ash)">P</span><span><span class="rn">Phil</span><br><span class="rs">your other half</span></span><span class="rb">Couple</span></div>
-          <div class="rrow"><span class="rav" style="background:var(--gold);color:var(--ash)">A</span><span><span class="rn">Alex</span><br><span class="rs">the reliable one</span></span><span class="rb crew">Crew</span></div>
-          <div class="rrow"><span class="rav" style="background:var(--olive-deep)">H</span><span><span class="rn">Haley</span><br><span class="rs">fashion assistance</span></span><span class="rb crew">Crew</span></div>
-          <div class="rrow"><span class="rav" style="background:var(--lavender-dark)">L</span><span><span class="rn">Luke</span><br><span class="rs">happy to be there</span></span><span class="rb crew">Crew</span></div>
-        </div>
-        <p class="rnote">Invite your crew →</p>
-      </div>
-    </div>
-    <p class="solonote">No crew? No clutter — the collaborative parts stay out of your way until you want them.</p>
-  </div>
-</section>
-
-<!-- FEEDBACK -->
 <section class="sec dark">
-  <div class="wrap fb">
-    <h2 class="display center reveal">We read <span class="script mark-lav">all</span> your feedback.</h2>
-    <p>VowToDo is built by developers who take feedback seriously — tell us what's clunky, what's missing, or what to build next, and it genuinely shapes the app.</p>
-    <a class="fbmail" href="mailto:support.vowtodo@gmail.com"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>support.vowtodo@gmail.com</a>
+  <div class="wrap">
+    <h2 class="display">Collaborative Planning</h2>
+    <p class="dek">Bring in your partner, parents and planner. Everyone sees what they need.</p>
+    <div class="roles" aria-label="Roles">
+      <span class="role"><i style="background:var(--olive-dark)">P</i>Partner</span>
+      <span class="role"><i style="background:var(--terracotta);color:var(--ash)">M</i>Mum</span>
+      <span class="role"><i style="background:var(--gold);color:var(--ash)">Pl</i>Planner</span>
+    </div>
+  </div>
+</section>
+
+<section class="sec light">
+  <div class="wrap">
+    <h2 class="display">Delegate and breathe</h2>
+    <p class="dek">Hand off tasks. Lighten the load.</p>
+    <div class="hands">
+      <article class="hand"><span class="tick" aria-hidden="true">✓</span><span><b>Book florist</b> <span class="to">→ Mum</span></span></article>
+      <article class="hand"><span class="tick" aria-hidden="true">✓</span><span><b>Confirm venue</b> <span class="to">→ Partner</span></span></article>
+      <article class="hand"><span class="tick" aria-hidden="true">✓</span><span><b>Send invites</b> <span class="to">→ Planner</span></span></article>
+    </div>
+  </div>
+</section>
+
+<section class="sec dark">
+  <div class="wrap">
+    <h2 class="display">iPhone and Web</h2>
+    <p class="dek">Plan on the go or on the big screen. Always in sync.</p>
+    <div class="pair">
+      <div class="phone">
+        <img src="/img/app/dashboard.webp" alt="VowToDo on iPhone" width="1080" height="2346" loading="lazy">
+      </div>
+      <div class="laptop">
+        <div class="chrome-bar" aria-hidden="true"><i></i><i></i><i></i><em>vowtodo.com</em></div>
+        <div class="screen">
+          <img src="/img/app/dashboard.webp" alt="The same VowToDo wedding open in the browser" width="1080" height="2346" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec light">
+  <div class="wrap">
+    <h2 class="display">Why VowToDo</h2>
+    <div class="why">
+      <div class="whyhead">
+        <span></span>
+        <span>Spreadsheets</span>
+        <span>Other wedding apps</span>
+        <span>VowToDo</span>
+      </div>
+      <div class="whyrow">
+        <b>One place</b>
+        <span data-l="Spreadsheets">You build the tabs</span>
+        <span data-l="Other apps">A list, then links</span>
+        <span class="us" data-l="VowToDo">Tasks to seating</span>
+      </div>
+      <div class="whyrow">
+        <b>Together</b>
+        <span data-l="Spreadsheets">Everyone edits all</span>
+        <span data-l="Other apps">One planner</span>
+        <span class="us" data-l="VowToDo">Partner and family</span>
+      </div>
+      <div class="whyrow">
+        <b>RSVPs</b>
+        <span data-l="Spreadsheets">You chase replies</span>
+        <span data-l="Other apps">Tied to invites</span>
+        <span class="us" data-l="VowToDo">They file themselves</span>
+      </div>
+      <div class="whyrow">
+        <b>Devices</b>
+        <span data-l="Spreadsheets">Pinch to zoom</span>
+        <span data-l="Other apps">Pick one</span>
+        <span class="us" data-l="VowToDo">iPhone and web</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec dark closer">
+  <div class="wrap">
+    <h2 class="display">Start planning together.</h2>
+    <div class="cta">
+      <a class="appstore" href="https://apps.apple.com/sg/app/vowtodo-wedding-planner/id6788746982" target="_blank" rel="noopener">
+        <svg viewBox="0 0 384 512" aria-hidden="true"><path fill="currentColor" d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zM262.1 104.5c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+        <span class="l"><small>Download on the</small><b>App Store</b></span>
+      </a>
+      <a class="ghost on-dark" href="/app/login">Open the web app →</a>
+    </div>
   </div>
 </section>
 
@@ -420,15 +336,5 @@
   </div>
 </footer>
 
-<script>
-  (function(){
-    var els = document.querySelectorAll('.reveal');
-    if (!('IntersectionObserver' in window)) { els.forEach(function(e){e.classList.add('in')}); return; }
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(en){ if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
-    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
-    els.forEach(function(e){ io.observe(e); });
-  })();
-</script>
 </body>
 </html>

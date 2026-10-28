@@ -3,184 +3,176 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Wedding guides — VowToDo</title>
-<meta name="description" content="Practical notes for planning a wedding. The essays currently here are written for Singapore: ROM, banquet costs, ang bao, Chinese customs, and a month-by-month checklist.">
+<title>Blog &amp; Wedding Guides — VowToDo</title>
+<meta name="description" content="Honest numbers and clear steps for planning a wedding in Singapore — banquet costs, ang bao rates, ROM, customs, the day-of timeline, and the master checklist.">
 <link rel="canonical" href="https://vowtodo.com/blog">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="VowToDo">
-<meta property="og:title" content="Wedding guides — VowToDo">
-<meta property="og:description" content="Practical notes for planning a wedding, including a set written for Singapore.">
+<meta property="og:title" content="VowToDo — Blog &amp; Wedding Guides">
+<meta property="og:description" content="Honest numbers and clear steps for planning a wedding in Singapore.">
 <meta property="og:url" content="https://vowtodo.com/blog">
 <meta property="og:image" content="https://vowtodo.com/img/logo-1024.png">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Wedding guides — VowToDo">
-<meta name="twitter:description" content="Practical notes for planning a wedding, including a set written for Singapore.">
-<meta name="twitter:image" content="https://vowtodo.com/img/logo-1024.png">
-<meta name="theme-color" content="#F1E8D6">
+<meta name="theme-color" content="#7E8C57">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fragment+Mono&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,600;12..96,700;12..96,800&family=Caveat:wght@600;700&family=Fragment+Mono&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/site.css">
+<style>
+  .head{max-width:1080px;margin:0 auto;padding:52px 22px 8px}
+  h1{font-size:clamp(32px,4.4vw,46px);letter-spacing:-.03em;margin:0 0 10px}
+  .head p{color:var(--body-ink);font-size:16px;max-width:56ch;margin:0}
+  .layout{max-width:1080px;margin:0 auto;padding:34px 22px 84px;display:grid;grid-template-columns:210px 1fr;gap:34px;align-items:start}
+  @media(max-width:820px){.layout{grid-template-columns:1fr;gap:22px}}
+
+  /* category rail */
+  .rail{position:sticky;top:78px;display:grid;gap:2px}
+  .rail .rh{font-size:11px;letter-spacing:.13em;text-transform:uppercase;font-weight:700;color:var(--muted);margin:0 0 8px;padding-left:12px}
+  .cat{display:flex;align-items:center;gap:9px;padding:8px 12px;border-radius:999px;border:0;background:none;
+    font:inherit;font-size:14px;font-weight:500;color:var(--body-ink);cursor:pointer;text-align:left;
+    transition:background .15s ease,color .15s ease}
+  .cat .dot{width:8px;height:8px;border-radius:999px;background:var(--cdot,var(--olive));flex:none}
+  .cat:hover{background:var(--sand-2)}
+  .cat[aria-pressed="true"]{background:var(--olive-tint);color:var(--olive-dark);font-weight:700}
+  .cat .n{margin-left:auto;font-family:var(--font-mono);font-size:11px;color:var(--faint)}
+  @media(max-width:820px){
+    .rail{position:static;grid-auto-flow:column;grid-auto-columns:max-content;overflow-x:auto;gap:6px;padding-bottom:4px}
+    .rail .rh{display:none}
+    .cat{border:1px solid var(--line);padding:7px 13px}
+    .cat .n{display:none}
+  }
+
+  /* article cards */
+  .posts{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:640px){.posts{grid-template-columns:1fr}}
+  .post{--cbg:var(--olive-tint);--cink:var(--olive-dark);
+    display:flex;flex-direction:column;gap:10px;background:var(--card);border:1px solid var(--line);
+    border-radius:18px;padding:20px;text-decoration:none;color:var(--ink);
+    transition:transform .2s cubic-bezier(.22,.61,.36,1),box-shadow .2s ease,border-color .2s ease}
+  .post:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--cink) 35%,transparent);
+    box-shadow:0 2px 4px color-mix(in srgb,var(--cink) 12%,transparent),0 16px 32px -14px color-mix(in srgb,var(--cink) 30%,transparent)}
+  .post[hidden]{display:none}
+  .chip{align-self:flex-start;font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+    background:var(--cbg);color:var(--cink);padding:4px 10px;border-radius:999px}
+  .post h2{font-size:19px;line-height:1.25;letter-spacing:-.02em;margin:0;transition:color .2s ease}
+  .post:hover h2{color:var(--cink)}
+  .post p{font-size:13.5px;color:var(--muted);line-height:1.6;margin:0}
+  .post .meta{margin-top:auto;padding-top:6px;font-family:var(--font-mono);font-size:11.5px;color:var(--faint)}
+  .post .go{font-size:13px;font-weight:700;color:var(--cink)}
+</style>
 <link rel="icon" href="/img/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
-<link rel="manifest" href="/site.webmanifest">
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"CollectionPage","name":"VowToDo wedding guides","url":"https://vowtodo.com/blog","description":"Practical notes for planning a wedding. The current essays focus on weddings in Singapore.","mainEntity":{"@type":"ItemList","itemListElement":[
- {"@type":"ListItem","position":1,"url":"https://vowtodo.com/blog/wedding-planning-checklist-timeline","name":"The month-by-month wedding checklist"},
- {"@type":"ListItem","position":2,"url":"https://vowtodo.com/guide/wedding-banquet-cost-singapore","name":"What a banquet really costs in Singapore"},
- {"@type":"ListItem","position":3,"url":"https://vowtodo.com/guide/rom-singapore","name":"ROM: registering your marriage"},
- {"@type":"ListItem","position":4,"url":"https://vowtodo.com/guide/chinese-wedding-customs","name":"Chinese wedding customs"},
- {"@type":"ListItem","position":5,"url":"https://vowtodo.com/guide/ang-bao-rates-singapore","name":"Ang bao rates in 2026"},
- {"@type":"ListItem","position":6,"url":"https://vowtodo.com/guide/wedding-day-timeline-singapore","name":"The wedding day, hour by hour"}
-]}}
-</script>
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
+
 <header class="site-nav">
   <div class="in">
-    <a class="site-brand" href="/"><img src="/img/apple-touch-icon.png" alt="" width="28" height="28">VowToDo</a>
-    <span class="site-folio">Singapore · free</span>
+    <a class="site-brand" href="/"><img src="/img/logo-1024.png" alt="" width="32" height="32">VowToDo</a>
     <nav class="site-links" aria-label="Site">
       <a href="/features">Features</a>
-      <a href="/pricing">Pricing</a>
-      <a href="/blog" aria-current="page">Guides</a>
+      <a href="/blog" aria-current="page">Blog</a>
     </nav>
     <details class="site-menu">
       <summary aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></summary>
       <nav class="sheet" aria-label="Site">
         <a href="/features">Features</a>
-        <a href="/pricing">Pricing</a>
-        <a href="/blog" aria-current="page">Guides</a>
-        <a href="/download">Download</a>
-        <a href="/app/login">Web app</a>
+        <a href="/blog">Blog</a>
+        <a href="/download">Mobile App</a>
         <a href="/support">Support</a>
       </nav>
     </details>
-    <a class="site-navapp" href="/app/login"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.8" y="4.4" width="18.4" height="12.4" rx="2"/><path d="M9 20.4h6"/><path d="M12 16.8v3.6"/></svg>Web app</a>
-    <a class="site-btn" href="https://apps.apple.com/sg/app/vowtodo-wedding-planner/id6788746982" target="_blank" rel="noopener">App Store</a>
+    <a class="site-navapp" href="/app/login" title="Sign in to the VowToDo web app"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.8" y="4.4" width="18.4" height="12.4" rx="2"/><path d="M9 20.4h6"/><path d="M12 16.8v3.6"/></svg><span class="lbl">Web App</span></a>
+    <a class="site-btn" href="/download">Mobile App</a>
   </div>
 </header>
 
-<main id="main">
-  <div class="page-head">
-    <div class="wrap">
-      <p class="kicker">The shelf</p>
-      <h1>Notes for planning a wedding.</h1>
-      <p class="lede">The essays on this shelf are written for weddings in Singapore: the registry, the banquet, ang bao, and the customs around a Chinese wedding. The app itself is for any wedding. More notes, for other places, will follow.</p>
-      <figure class="essay-photo" style="margin-top:28px">
-        <img src="/img/photos/banner-stationery-florals-flatlay.webp" alt="Wedding invitations, a wax seal, rings, and roses on linen" width="2048" height="1360" loading="lazy">
-      </figure>
-      <!--
-        Adding a post: copy blog/_post-template.html into blog/<slug>/index.html
-        or guide/<slug>/index.html, then add one <a class="post"> here.
-        data-cat must match a filter button. Update the counts in the buttons.
-        Add the URL to sitemap.xml. See the comment at the top of the template.
-      -->
-      <div class="filters" role="group" aria-label="Filter by topic">
-        <button type="button" data-cat="all" aria-pressed="true">All <span class="mono">6</span></button>
-        <button type="button" data-cat="planning" aria-pressed="false">Planning <span class="mono">1</span></button>
-        <button type="button" data-cat="budget" aria-pressed="false">Budget <span class="mono">1</span></button>
-        <button type="button" data-cat="legal" aria-pressed="false">Legal <span class="mono">1</span></button>
-        <button type="button" data-cat="traditions" aria-pressed="false">Traditions <span class="mono">1</span></button>
-        <button type="button" data-cat="etiquette" aria-pressed="false">Etiquette <span class="mono">1</span></button>
-        <button type="button" data-cat="big-day" aria-pressed="false">The day <span class="mono">1</span></button>
-      </div>
-    </div>
-  </div>
+<div class="head">
+  <h1>The wedding shelf.</h1>
+  <p>Guides and honest numbers for planning a wedding in Singapore — written to be used, not scrolled past.</p>
+</div>
 
-  <div class="wrap">
-    <div class="posts" aria-live="polite">
-      <a class="post" data-cat="planning" href="/blog/wedding-planning-checklist-timeline">
-        <span class="num">01</span>
-        <span class="chip">Planning</span>
-        <h2>The month-by-month wedding checklist</h2>
-        <p>What to do 12 months out, and what can wait until the RSVPs are actually in. Written for a Singapore calendar: ROM, the ballroom, Guo Da Li.</p>
-        <span class="go">8 min</span>
-      </a>
-      <a class="post" data-cat="budget" href="/guide/wedding-banquet-cost-singapore">
-        <span class="num">02</span>
-        <span class="chip">Budget</span>
-        <h2>What a banquet really costs</h2>
-        <p>2026 per-table prices for restaurants and hotels, the minimum-table trap, and the 20% the brochure leaves off.</p>
-        <span class="go">7 min</span>
-      </a>
-      <a class="post" data-cat="legal" href="/guide/rom-singapore">
-        <span class="num">03</span>
-        <span class="chip">Legal</span>
-        <h2>ROM: registering your marriage</h2>
-        <p>The 21-day rule, the fees, two witnesses, and solemnising somewhere that is not the banquet hall.</p>
-        <span class="go">6 min</span>
-      </a>
-      <a class="post" data-cat="traditions" href="/guide/chinese-wedding-customs">
-        <span class="num">04</span>
-        <span class="chip">Traditions</span>
-        <h2>Chinese wedding customs, in practice</h2>
-        <p>Guo Da Li, Si Dian Jin, An Chuang, gatecrashing, and the tea ceremony. What they are, and how couples shorten them.</p>
-        <span class="go">9 min</span>
-      </a>
-      <a class="post" data-cat="etiquette" href="/guide/ang-bao-rates-singapore">
-        <span class="num">05</span>
-        <span class="chip">Etiquette</span>
-        <h2>Ang bao rates in 2026</h2>
-        <p>How much to give by venue and meal, plus the rules about 4s, pairs, and not attending.</p>
-        <span class="go">6 min</span>
-      </a>
-      <a class="post" data-cat="big-day" href="/guide/wedding-day-timeline-singapore">
-        <span class="num">06</span>
-        <span class="chip">The day</span>
-        <h2>The wedding day, hour by hour</h2>
-        <p>From the 5:30am makeup call to the yam seng, with the helper roles to assign before anyone is tired.</p>
-        <span class="go">7 min</span>
-      </a>
-    </div>
-  </div>
-</main>
+<div class="layout">
+  <aside class="rail" aria-label="Categories">
+    <p class="rh">Browse</p>
+    <button class="cat" data-cat="all" aria-pressed="true"><span class="dot" style="--cdot:#2C2A25"></span>All<span class="n">6</span></button>
+    <button class="cat" data-cat="planning" aria-pressed="false"><span class="dot" style="--cdot:#7E8C57"></span>Planning<span class="n">1</span></button>
+    <button class="cat" data-cat="budget" aria-pressed="false"><span class="dot" style="--cdot:#B08A45"></span>Budget<span class="n">1</span></button>
+    <button class="cat" data-cat="legal" aria-pressed="false"><span class="dot" style="--cdot:#5E5887"></span>Legal<span class="n">1</span></button>
+    <button class="cat" data-cat="traditions" aria-pressed="false"><span class="dot" style="--cdot:#B06A5A"></span>Traditions<span class="n">1</span></button>
+    <button class="cat" data-cat="etiquette" aria-pressed="false"><span class="dot" style="--cdot:#C2A36B"></span>Etiquette<span class="n">1</span></button>
+    <button class="cat" data-cat="big-day" aria-pressed="false"><span class="dot" style="--cdot:#5E6B40"></span>The big day<span class="n">1</span></button>
+  </aside>
+
+  <main class="posts" aria-live="polite">
+    <a class="post" data-cat="planning" href="/blog/wedding-planning-checklist-timeline" style="--cbg:#DCE0C2;--cink:#4E5A2E">
+      <span class="chip">Planning</span>
+      <h2>The month-by-month wedding checklist</h2>
+      <p>What to do 12 months out, 6 months out, and the week of — the backbone of your whole plan.</p>
+      <span class="meta">8 min read</span>
+      <span class="go">Read the checklist →</span>
+    </a>
+    <a class="post" data-cat="budget" href="/guide/wedding-banquet-cost-singapore" style="--cbg:#F0E4C4;--cink:#7A5A1F">
+      <span class="chip">Budget</span>
+      <h2>What a banquet really costs in Singapore</h2>
+      <p>2026 per-table prices for hotels and restaurants, minimum tables, and the 20% the brochure hides.</p>
+      <span class="meta">7 min read</span>
+      <span class="go">See the numbers →</span>
+    </a>
+    <a class="post" data-cat="legal" href="/guide/rom-singapore" style="--cbg:#E4D7EC;--cink:#5E5887">
+      <span class="chip">Legal</span>
+      <h2>ROM: registering your marriage</h2>
+      <p>The 21-day rule, fees, witnesses, solemnisers — the steps that actually make you married.</p>
+      <span class="meta">6 min read</span>
+      <span class="go">Get the steps →</span>
+    </a>
+    <a class="post" data-cat="traditions" href="/guide/chinese-wedding-customs" style="--cbg:#F4D6D2;--cink:#A85046">
+      <span class="chip">Traditions</span>
+      <h2>Chinese wedding customs, decoded</h2>
+      <p>Guo Da Li, An Chuang, gatecrashing, the tea ceremony and Si Dian Jin — what they mean and how couples adapt them.</p>
+      <span class="meta">9 min read</span>
+      <span class="go">Learn the customs →</span>
+    </a>
+    <a class="post" data-cat="etiquette" href="/guide/ang-bao-rates-singapore" style="--cbg:#EFE3C8;--cink:#7A5A1F">
+      <span class="chip">Etiquette</span>
+      <h2>Ang bao rates in 2026</h2>
+      <p>How much to give by venue and meal — plus the etiquette rules nobody writes down.</p>
+      <span class="meta">6 min read</span>
+      <span class="go">Check the rates →</span>
+    </a>
+    <a class="post" data-cat="big-day" href="/guide/wedding-day-timeline-singapore" style="--cbg:#D2E2CE;--cink:#3F6146">
+      <span class="chip">The big day</span>
+      <h2>The wedding day, hour by hour</h2>
+      <p>A realistic template from the 5:30am makeup call to the yam seng — plus the helper roles to assign.</p>
+      <span class="meta">7 min read</span>
+      <span class="go">Steal the schedule →</span>
+    </a>
+  </main>
+</div>
 
 <footer class="site-footer">
   <div class="in">
     <div class="cols">
       <div>
-        <a class="site-brand" href="/"><img src="/img/apple-touch-icon.png" alt="" width="28" height="28">VowToDo</a>
-        <p class="tagline">A free wedding planner for any style of wedding. Checklist, budget, guests, and the day itself.</p>
+        <a class="site-brand" href="/"><img src="/img/logo-1024.png" alt="" width="32" height="32">VowToDo</a>
+        <p class="tagline">The only wedding app you'll ever need. Free.</p>
       </div>
-      <div class="col">
-        <p class="fh">Product</p>
-        <a href="/features">Features</a>
-        <a href="/pricing">Pricing</a>
-        <a href="/download">Download</a>
-        <a href="/app/login">Web app</a>
-      </div>
-      <div class="col">
-        <p class="fh">Guides</p>
-        <a href="/blog">All guides</a>
-        <a href="/guide/rom-singapore">ROM</a>
-        <a href="/guide/wedding-banquet-cost-singapore">Banquet costs</a>
-        <a href="/guide/ang-bao-rates-singapore">Ang bao</a>
-        <a href="/support">Support</a>
-      </div>
-      <div class="col">
-        <p class="fh">Legal</p>
-        <a href="/privacy">Privacy</a>
-        <a href="/terms">Terms</a>
-        <a href="mailto:support.vowtodo@gmail.com">support.vowtodo@gmail.com</a>
-      </div>
+      <div class="col"><p class="fh">Product</p><a href="/features">Features</a><a href="/app/login">Web App</a><a href="/download">Mobile App</a></div>
+      <div class="col"><p class="fh">Resources</p><a href="/blog">Blog &amp; Guides</a><a href="/support">Support</a><a href="mailto:support.vowtodo@gmail.com">Send feedback</a></div>
+      <div class="col"><p class="fh">Legal</p><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Use</a><a href="mailto:support.vowtodo@gmail.com">Contact</a></div>
     </div>
-    <div class="legal"><span>© 2026 VowToDo</span><span>For couples, wherever the wedding is</span></div>
+    <div class="legal"><span>© 2026 VowToDo</span><span>Made for couples, with care.</span></div>
   </div>
 </footer>
+
 <script>
   (function(){
-    var buttons = document.querySelectorAll('.filters button');
+    var btns = document.querySelectorAll('.cat');
     var posts = document.querySelectorAll('.post');
-    buttons.forEach(function(button){
-      button.addEventListener('click', function(){
-        buttons.forEach(function(other){ other.setAttribute('aria-pressed', other === button ? 'true' : 'false'); });
-        var cat = button.getAttribute('data-cat');
-        posts.forEach(function(post){
-          post.hidden = cat !== 'all' && post.getAttribute('data-cat') !== cat;
-        });
+    btns.forEach(function(b){
+      b.addEventListener('click', function(){
+        btns.forEach(function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+        var c = b.getAttribute('data-cat');
+        posts.forEach(function(p){ p.hidden = (c !== 'all' && p.getAttribute('data-cat') !== c); });
       });
     });
   })();

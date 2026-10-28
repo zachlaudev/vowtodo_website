@@ -1,3 +1,2 @@
-# Exact paths only. /guide/rom-singapore and the other articles stay put.
-# /pricing is a real page (see /pricing and sitemap.xml), so it is not redirected.
 /guide /blog 301
+/pricing / 301

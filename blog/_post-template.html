@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<!--
+  VowToDo post template. Copy this file, do not publish this path.
+
+  1. Copy to blog/your-slug/index.html or guide/your-slug/index.html.
+     Slug: lowercase, hyphens, no date in the folder name.
+  2. Replace every SLOT. Delete this comment and the noindex tag.
+  3. Add the post on blog/index.html (a .post with data-cat).
+  4. Add the URL to sitemap.xml.
+  5. Keep the App Store link. Do not invent prices, fees, or legal rules.
+     Singapore guides stay Singapore-specific. Product pages stay global.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- SLOT: title -->
+<title>Post title goes here | VowToDo</title>
+<!-- SLOT: description, under 160 characters -->
+<meta name="description" content="One sentence on what this piece helps a couple do.">
+<!-- SLOT: canonical, no trailing slash -->
+<link rel="canonical" href="https://vowtodo.com/blog/your-slug">
+<meta name="robots" content="noindex">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="VowToDo">
+<meta property="og:title" content="Post title goes here">
+<meta property="og:description" content="One sentence on what this piece helps a couple do.">
+<meta property="og:url" content="https://vowtodo.com/blog/your-slug">
+<meta property="og:image" content="https://vowtodo.com/img/logo-1024.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Post title goes here">
+<meta name="twitter:description" content="One sentence on what this piece helps a couple do.">
+<meta name="twitter:image" content="https://vowtodo.com/img/logo-1024.png">
+<meta name="theme-color" content="#7E8C57">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,600;12..96,700;12..96,800&family=Caveat:wght@600;700&family=Fragment+Mono&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/site.css">
+<style>
+  article{max-width:720px;margin:0 auto;padding:34px 22px 60px}
+  .crumb{font-size:13px;color:var(--muted);margin-bottom:14px}
+  .crumb a{color:var(--muted)}
+  .cat{color:var(--olive-dark);font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+  article h1{font-size:clamp(28px,4vw,40px);line-height:1.15;margin:8px 0 10px}
+  .byline{color:var(--muted);font-size:14px;margin-bottom:26px;border-bottom:1px solid var(--line);padding-bottom:18px}
+  article h2{font-size:22px;margin:34px 0 8px}
+  article p{font-size:16.5px;margin:0 0 16px}
+  article ul{margin:0 0 18px;padding-left:22px}
+  article li{margin:6px 0;font-size:16px}
+  .lede{font-size:18px;color:#54503F}
+  article .cta{background:var(--olive);color:#F6F2E7;border-radius:20px;padding:26px 24px;margin:34px 0 10px;text-align:center}
+  article .cta h3{margin:0 0 8px;font-size:20px}
+  article .cta p{margin:0 0 16px;opacity:.92;font-size:15px}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article",
+ "headline":"Post title goes here",
+ "description":"One sentence on what this piece helps a couple do.",
+ "datePublished":"2026-01-01","dateModified":"2026-01-01",
+ "author":{"@type":"Organization","name":"VowToDo"},
+ "publisher":{"@type":"Organization","name":"VowToDo","url":"https://vowtodo.com/"},
+ "mainEntityOfPage":"https://vowtodo.com/blog/your-slug"}
+</script>
+<link rel="icon" href="/img/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+</head>
+<body>
+<header class="site-nav">
+  <div class="in">
+    <a class="site-brand" href="/"><img src="/img/logo-1024.png" alt="" width="32" height="32">VowToDo</a>
+    <nav class="site-links" aria-label="Site">
+      <a href="/features">Features</a>
+      <a href="/blog" aria-current="page">Blog</a>
+    </nav>
+    <details class="site-menu">
+      <summary aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></summary>
+      <nav class="sheet" aria-label="Site">
+        <a href="/features">Features</a>
+        <a href="/blog">Blog</a>
+        <a href="/download">Mobile App</a>
+        <a href="/pricing">Pricing</a>
+      </nav>
+    </details>
+    <a class="site-navapp" href="/app/login"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.8" y="4.4" width="18.4" height="12.4" rx="2"/><path d="M9 20.4h6"/><path d="M12 16.8v3.6"/></svg><span class="lbl">Web App</span></a>
+    <a class="site-btn" href="/download">Mobile App</a>
+  </div>
+</header>
+<article>
+  <div class="crumb"><a href="/">Home</a> › <a href="/blog">Blog</a> › <!-- SLOT: short crumb -->Title</div>
+  <!-- SLOT: category label -->
+  <span class="cat">Planning</span>
+  <!-- SLOT: h1 -->
+  <h1>Post title goes here</h1>
+  <!-- SLOT: byline date and reading time -->
+  <p class="byline">By the VowToDo team · 1 January 2026 · 6 min read</p>
+  <p class="lede">The opening paragraph. Say what the piece is for, in plain language.</p>
+  <h2>First section</h2>
+  <p>A short paragraph, then the list.</p>
+  <ul>
+    <li>One concrete step.</li>
+    <li>Another.</li>
+  </ul>
+  <div class="cta">
+    <h3>Keep the list in the app</h3>
+    <p>Checklist, budget, guests, RSVPs and the day itself, on iPhone and the web.</p>
+    <a class="appstore" href="https://apps.apple.com/sg/app/vowtodo-wedding-planner/id6788746982" target="_blank" rel="noopener">
+      <svg viewBox="0 0 384 512" aria-hidden="true"><path fill="currentColor" d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zM262.1 104.5c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+      <span class="l"><small>Download on the</small><b>App Store</b></span>
+    </a>
+  </div>
+</article>
+<footer class="site-footer">
+  <div class="in">
+    <div class="cols">
+      <div>
+        <a class="site-brand" href="/"><img src="/img/logo-1024.png" alt="" width="32" height="32">VowToDo</a>
+        <p class="tagline">The only wedding app you'll ever need.</p>
+      </div>
+      <div class="col"><p class="fh">Product</p><a href="/features">Features</a><a href="/pricing">Pricing</a><a href="/app/login">Web App</a><a href="/download">Mobile App</a></div>
+      <div class="col"><p class="fh">Resources</p><a href="/blog">Blog &amp; Guides</a><a href="/support">Support</a><a href="mailto:support.vowtodo@gmail.com">Send feedback</a></div>
+      <div class="col"><p class="fh">Legal</p><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Use</a><a href="mailto:support.vowtodo@gmail.com">Contact</a></div>
+    </div>
+    <div class="legal"><span>© 2026 VowToDo</span><span>Made for couples, with care.</span></div>
+  </div>
+</footer>
+</body>
+</html>

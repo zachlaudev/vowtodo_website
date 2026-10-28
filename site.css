@@ -9,12 +9,16 @@
    ============================================================ */
 
 :root{
-  --sand:#F1E8D6; --surface:#EADFC9; --sand-2:#F5EEDF; --line:#DDD1BA;
-  --dark:#2C2A25; --dark-2:#3A372F; --on-dark:#F3ECDC; --on-dark-muted:#B7AE99;
-  --ink:#2C2A25; --body-ink:#57533F; --muted:#8A8273; --faint:#B3AB99;
-  --olive:#7E8C57; --olive-dark:#5C6A3A; --olive-tint:#E5E7CF; --on-olive:#F7F1E3;
-  --gold:#C8A86B; --terracotta:#C0835E; --terracotta-dark:#A66A47;
-  --lavender:#CBC7E6; --lavender-dark:#5E5887; --white:#FBF6EC; --card:#FBF6EC;
+  --sand:#F1E8D6; --surface:var(--sand-2); --sand-2:#F5EEDF; --line:var(--olive-tint);
+  --dark:var(--ash); --dark-2:var(--ash); --on-dark:var(--off-white); --on-dark-muted:var(--off-white);
+  --ink:var(--ash); --body-ink:var(--ash); --muted:var(--olive-dark); --faint:var(--olive-dark);
+  /* Sand & Olive, from packages/shared/src/theme/palette.ts */
+  --olive:#7E8C57; --olive-dark:#5C6A3A; --olive-deep:#5E6B40; --olive-tint:#E5E7CF; --on-olive:#F8F7F4;
+  --gold:#C8A86B; --gold-muted:#C2A36B; --terracotta:#C0835E; --terracotta-dark:#A66A47;
+  --lavender:#CBC7E6; --lavender-dark:#5E5887; --lavender-deep:#46426E;
+  --danger:#B5564A;
+  --ash:#2A2926; --warm-grey:#8A8676; --off-white:#F8F7F4;
+  --white:#F8F7F4; --card:#F8F7F4;
   --cream:#F1E8D6; --cream-2:#F5EEDF;
   --font-display:'Bricolage Grotesque','Lexend',system-ui,sans-serif;
   --font-body:'Instrument Sans','Bricolage Grotesque',system-ui,sans-serif;
@@ -72,7 +76,7 @@ a{color:var(--olive-dark)}
   font-family:var(--font-display); font-weight:800; font-size:20px;
   letter-spacing:-.03em; color:var(--ink); line-height:1;
 }
-.site-brand img{width:32px; height:32px; border-radius:9px; display:block; object-fit:cover; background:#20201C}
+.site-brand img{width:32px; height:32px; border-radius:9px; display:block; object-fit:cover; background:var(--ash)}
 .site-links{display:flex; gap:22px; margin-left:auto}
 .site-links a{
   color:var(--ink); text-decoration:none; font-size:14.5px; font-weight:500;
@@ -91,11 +95,11 @@ a{color:var(--olive-dark)}
 .site-navapp:hover{border-color:var(--olive); color:var(--olive-dark)}
 .site-navapp:active{transform:scale(.98)}
 .site-btn{
-  background:var(--ink); color:#F6F2E7; text-decoration:none; font-size:14px;
+  background:var(--ash); color:var(--off-white); text-decoration:none; font-size:14px;
   font-weight:600; padding:9px 17px; border-radius:999px; white-space:nowrap;
   transition:background .15s ease,transform .06s ease;
 }
-.site-btn:hover{background:#3A372F}
+.site-btn:hover{background:var(--olive-dark)}
 .site-btn:active{transform:scale(.98)}
 
 /* Mobile menu — CSS only. The summary is the hamburger. */
@@ -109,7 +113,7 @@ a{color:var(--olive-dark)}
 .site-menu .sheet{
   position:absolute; right:0; top:46px; min-width:180px;
   background:var(--card); border:1px solid var(--line); border-radius:16px;
-  padding:8px; box-shadow:0 8px 24px rgba(44,42,37,.14); display:grid;
+  padding:8px; box-shadow:0 8px 24px rgb(from var(--ash) r g b / .14); display:grid;
 }
 .site-menu .sheet a{
   color:var(--ink); text-decoration:none; font-size:15px; font-weight:500;
@@ -124,31 +128,31 @@ a{color:var(--olive-dark)}
 }
 
 /* ---------- shared shell: footer ---------- */
-.site-footer{background:#20201C; color:#CFC9BB; padding:46px 0 30px; font-size:14px; text-align:left}
+.site-footer{background:var(--ash); color:var(--off-white); padding:46px 0 30px; font-size:14px; text-align:left}
 .site-footer .in{max-width:1080px; margin:0 auto; padding:0 22px}
 .site-footer .cols{display:flex; flex-wrap:wrap; gap:30px 46px; justify-content:space-between}
-.site-footer .site-brand{color:#F6F2E7; font-size:19px}
-.site-footer .tagline{color:#8E887A; font-size:13px; margin:10px 0 0; max-width:24ch}
+.site-footer .site-brand{color:var(--off-white); font-size:19px}
+.site-footer .tagline{color:var(--off-white); font-size:13px; margin:10px 0 0; max-width:24ch}
 .site-footer .fh{
-  color:#8E887A; font-size:11.5px; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--off-white); font-size:11.5px; letter-spacing:.12em; text-transform:uppercase;
   font-weight:700; margin:0 0 10px;
 }
-.site-footer .col a{color:#CFC9BB; text-decoration:none; display:block; margin:8px 0; transition:color .15s ease}
-.site-footer .col a:hover{color:#fff}
+.site-footer .col a{color:var(--off-white); text-decoration:none; display:block; margin:8px 0; transition:color .15s ease}
+.site-footer .col a:hover{color:var(--gold)}
 .site-footer .legal{
-  border-top:1px solid #3A362E; margin-top:32px; padding-top:18px; color:#8E887A;
+  border-top:1px solid rgb(from var(--off-white) r g b / .28); margin-top:32px; padding-top:18px; color:var(--off-white);
   font-family:var(--font-mono); font-size:12px; display:flex; flex-wrap:wrap; gap:12px;
   justify-content:space-between;
 }
 
 /* ---------- shared components ---------- */
 .appstore,.store.ios{
-  display:inline-flex; align-items:center; gap:11px; background:#161513; color:#fff;
+  display:inline-flex; align-items:center; gap:11px; background:var(--ash); color:var(--off-white);
   text-decoration:none; padding:13px 22px; border-radius:14px;
   transition:transform .08s ease,box-shadow .15s ease;
-  box-shadow:0 1px 2px rgba(32,32,28,.25),0 10px 24px -12px rgba(32,32,28,.5);
+  box-shadow:0 1px 2px rgb(from var(--ash) r g b / .25),0 10px 24px -12px rgb(from var(--ash) r g b / .5);
 }
-.appstore:hover,.store.ios:hover{box-shadow:0 2px 4px rgba(32,32,28,.28),0 14px 30px -12px rgba(32,32,28,.55)}
+.appstore:hover,.store.ios:hover{box-shadow:0 2px 4px rgb(from var(--ash) r g b / .28),0 14px 30px -12px rgb(from var(--ash) r g b / .55)}
 .appstore:active,.store.ios:active{transform:scale(.98)}
 .appstore svg,.store.ios svg{width:24px; height:24px; flex:none}
 .appstore .l,.store.ios .lab{display:flex; flex-direction:column; line-height:1.12; text-align:left}
@@ -162,10 +166,10 @@ a{color:var(--olive-dark)}
 }
 .ghost:hover{border-color:var(--olive); color:var(--olive-dark)}
 .ghost:active{transform:scale(.98)}
-.ghost.on-dark{border-color:rgba(243,236,220,.35); color:var(--on-dark)}
-.ghost.on-dark:hover{border-color:var(--on-dark); color:#fff}
-.ghost.on-olive{border-color:rgba(247,241,227,.4); color:var(--on-olive)}
-.ghost.on-olive:hover{border-color:var(--on-olive); color:#fff}
+.ghost.on-dark{border-color:rgb(from var(--off-white) r g b / .35); color:var(--off-white)}
+.ghost.on-dark:hover{border-color:var(--off-white); color:var(--off-white)}
+.ghost.on-olive{border-color:rgb(from var(--off-white) r g b / .4); color:var(--off-white)}
+.ghost.on-olive:hover{border-color:var(--off-white); color:var(--off-white)}
 
 /* Article metadata reads in the data voice. */
 .byline,.meta{font-family:var(--font-mono)}
@@ -186,16 +190,16 @@ a{color:var(--olive-dark)}
 /* ---------- real app screens, in a plain iPhone frame ---------- */
 .phone{
   width:260px; margin:0; padding:8px; border-radius:38px;
-  background:#161513;
+  background:var(--ash);
   box-shadow:
-    0 1px 0 rgba(255,255,255,.2) inset,
-    0 2px 4px rgba(44,42,37,.16),
-    0 28px 50px -22px rgba(44,42,37,.45);
+    0 1px 0 rgb(from var(--off-white) r g b / .2) inset,
+    0 2px 4px rgb(from var(--ash) r g b / .16),
+    0 28px 50px -22px rgb(from var(--ash) r g b / .45);
   transition:transform .35s cubic-bezier(.22,.61,.36,1);
 }
 .phone img{
   display:block; width:100%; height:auto; border-radius:30px;
-  background:#F3ECDC; aspect-ratio:1287/2796; object-fit:cover;
+  background:var(--off-white); aspect-ratio:1287/2796; object-fit:cover;
 }
 .phone:hover{transform:translateY(-8px)}
 .stage{position:relative; height:640px}
@@ -217,24 +221,24 @@ a{color:var(--olive-dark)}
 .shotcopy .more{margin-top:16px; font-weight:600}
 .device{display:flex; justify-content:center}
 
-/* Section bands. Colours are the site accents, darkened where the token
-   itself misses WCAG AA for body text. Sand stays on the comparison
-   and the letter, as the breathers. */
-.tone-olive{background:#5C6A3A;color:#F7F1E3}
-.tone-terra{background:#7E5832;color:#F7F1E3}
-.tone-lav{background:#5E5887;color:#F7F1E3}
-.tone-ink{background:#2C2A25;color:#F3ECDC}
-.tone-gold{background:#C8A86B;color:#2C2A25}
-.tone-mist{background:#E5E7CF;color:#2C2A25}
-.tone-olive .shotcopy .kicker,
-.tone-terra .shotcopy .kicker,
-.tone-lav .shotcopy .kicker,
-.tone-ink .shotcopy .kicker,
-.tone-olive h2,.tone-terra h2,.tone-lav h2,.tone-ink h2,
-.tone-olive .shotcopy p,.tone-terra .shotcopy p,.tone-lav .shotcopy p,.tone-ink .shotcopy p,
-.tone-olive a,.tone-terra a,.tone-lav a,.tone-ink a{color:#F7F1E3}
-.tone-gold .shotcopy .kicker,.tone-gold h2,.tone-gold .shotcopy p,.tone-gold a{color:#2C2A25}
-.tone-olive a,.tone-terra a,.tone-lav a,.tone-ink a,.tone-gold a{text-underline-offset:3px}
+/* One accent per band. Dark olive and deep olive take off-white (the
+   primary olive fails AA either way). Terracotta, lavender and gold
+   take ash. Sand sections stay the breather. */
+.tone-olive{background:var(--olive-dark);color:var(--off-white)}
+.tone-olive-deep{background:var(--olive-deep);color:var(--off-white)}
+.tone-terra{background:var(--terracotta);color:var(--ash)}
+.tone-lav{background:var(--lavender);color:var(--ash)}
+.tone-gold{background:var(--gold);color:var(--ash)}
+.tone-mist{background:var(--olive-tint);color:var(--ash)}
+.tone-olive .shotcopy .kicker,.tone-olive-deep .shotcopy .kicker,
+.tone-olive h2,.tone-olive-deep h2,
+.tone-olive .shotcopy p,.tone-olive-deep .shotcopy p,
+.tone-olive a,.tone-olive-deep a{color:var(--off-white)}
+.tone-terra .shotcopy .kicker,.tone-lav .shotcopy .kicker,.tone-gold .shotcopy .kicker,
+.tone-terra h2,.tone-lav h2,.tone-gold h2,
+.tone-terra .shotcopy p,.tone-lav .shotcopy p,.tone-gold .shotcopy p,
+.tone-terra a,.tone-lav a,.tone-gold a{color:var(--ash)}
+.tone-olive a,.tone-olive-deep a,.tone-terra a,.tone-lav a,.tone-gold a{text-underline-offset:3px}
 @media(max-width:900px){
   .stage{height:560px; max-width:520px; margin:8px auto 0}
   .stage .front{right:0}

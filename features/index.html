@@ -24,7 +24,7 @@
 <style>
   .head{text-align:center;padding:64px 22px 8px}
   .head .eyebrow{display:inline-block;background:var(--olive-tint);color:var(--olive-dark);font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:11.5px;padding:6px 12px;border-radius:999px;margin-bottom:14px}
-  .head h1{font-size:clamp(32px,4.6vw,48px);margin:0 0 12px;line-height:1.08}
+  .head h1{font-size:clamp(52px,7vw,100px);margin:0 0 12px;line-height:.9;letter-spacing:-.045em}
   .head p{color:var(--ash);max-width:46ch;margin:0 auto;font-size:18px;line-height:1.55}
   .head.tone-mist .eyebrow{background:var(--off-white);color:var(--olive-dark)}
   .sec{padding:64px 0}
@@ -63,100 +63,119 @@
   </div>
 </header>
 
-<div class="head tone-mist">
+<div class="head">
   <span class="eyebrow">Features</span>
-  <h1>Built for more than one person</h1>
+  <h1>Built for more than <span class="script mark-olive">one</span> person</h1>
   <p>The list, the money, the people, and the day. Open it on your phone. The same wedding is in the browser when you want a bigger screen.</p>
 </div>
 
 <main>
-  <section class="sec tone-olive" id="home">
-    <div class="wrap shotrow">
-      <div class="device reveal">
-        <div class="phone">
+  <section class="sec dark" id="home">
+    <div class="wrap">
+      <p class="kicker">Home</p>
+      <h2 class="display">The wedding, <span class="script mark-gold">at a glance.</span></h2>
+      <p class="dek">Days to go. How much of the list is done. What the budget adds up to. How many guests are coming, and how many people are helping. Invite a partner, parents, or friends when you want them — they join free, and the home screen keeps the count. A broadcast sits there for the thing everyone needs to hear once.</p>
+      <div class="bento">
+        <div class="phone lg">
           <img src="/img/app/dashboard.webp" alt="VowToDo home screen: days until the wedding, a budget total, tasks completed, guests going, and crew members" width="1080" height="2346" loading="lazy">
         </div>
-      </div>
-      <div class="shotcopy reveal">
-        <span class="kicker">Home</span>
-        <h2>The wedding, at a glance.</h2>
-        <p>Days to go. How much of the list is done. What the budget adds up to. How many guests are coming, and how many people are helping. Invite a partner, parents, or friends when you want them — they join free, and the home screen keeps the count. A broadcast sits there for the thing everyone needs to hear once.</p>
+        <div class="mini">
+          <div class="chip chip-days"><small>Big day</small><b>128</b>days</div>
+          <div class="chip chip-money"><small>Budget</small><b>S$90,570</b>across 31 items</div>
+          <div class="chip" style="background:var(--lavender)"><small>Guest list</small><b style="font-size:36px">30</b>going</div>
+          <div class="chip" style="background:var(--terracotta)"><small>Crew</small><b style="font-size:36px">4</b>members</div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="sec tone-terra" id="checklist">
-    <div class="wrap shotrow rev">
-      <div class="device reveal">
-        <div class="phone">
+  <section class="sec light" id="checklist">
+    <div class="wrap">
+      <p class="kicker">Checklist</p>
+      <h2 class="display">Grouped by <span class="script mark-olive">when</span> it is due.</h2>
+      <p class="dek">Start from a timeline shaped by your venue and your traditions, or from a blank page. Tasks gather from a year out to the day itself. Each one can hold a date, a category, a cost, and the person who owns it.</p>
+      <div class="run" style="margin-bottom:8px">
+        <div class="a"><b>Confirm Fullerton ballroom</b><span>Venue · Phil</span></div>
+        <div class="d"><b>Book the solemniser</b><span>Ceremony</span></div>
+        <div class="b"><b>Send digital invites</b><span>Guests · Manny</span></div>
+      </div>
+      <div class="cluster" style="min-height:620px">
+        <div class="phone lg">
           <img src="/img/app/checklist.webp" alt="VowToDo checklist: tasks grouped by how far out they are, with a category, a date, and a name on each" width="1080" height="2346" loading="lazy">
         </div>
       </div>
-      <div class="shotcopy reveal">
-        <span class="kicker">Checklist</span>
-        <h2>Grouped by when it is due.</h2>
-        <p>Start from a timeline shaped by your venue and your traditions, or from a blank page. Tasks gather from a year out to the day itself. Each one can hold a date, a category, a cost, and the person who owns it.</p>
-      </div>
     </div>
   </section>
 
-  <section class="sec tone-gold" id="budget">
-    <div class="wrap shotrow">
-      <div class="device reveal">
-        <div class="phone">
+  <section class="sec dark" id="budget">
+    <div class="wrap">
+      <p class="kicker">Budget</p>
+      <h2 class="display">Planned, paid, <span class="script mark-terra">and left.</span></h2>
+      <p class="giant"><small>S$</small>90,570</p>
+      <div class="bar" aria-hidden="true"><i class="o"></i><i class="t"></i><i class="l"></i><i class="g"></i></div>
+      <div class="pills">
+        <span class="pill paid">S$41,488 paid</span>
+        <span class="pill left">S$49,082 to go</span>
+      </div>
+      <p class="dek" style="margin-top:16px">Amounts live on the tasks, then roll into one total. You see what is paid and what is still to come, in whatever currency you spend. Couple-only, unless you choose otherwise.</p>
+      <div class="cluster" style="min-height:520px">
+        <div class="phone lg">
           <img src="/img/app/budget.webp" alt="VowToDo budget: an estimated total, what is paid, what is left, and a breakdown by category" width="1080" height="2346" loading="lazy">
         </div>
       </div>
-      <div class="shotcopy reveal">
-        <span class="kicker">Budget</span>
-        <h2>Planned, paid, and left.</h2>
-        <p>Amounts live on the tasks, then roll into one total. You see what is paid and what is still to come, in whatever currency you spend. Couple-only, unless you choose otherwise.</p>
-      </div>
     </div>
   </section>
 
-  <section class="sec tone-lav" id="guests">
-    <div class="wrap shotrow rev">
-      <div class="device reveal">
-        <div class="phone">
+  <section class="sec light" id="guests">
+    <div class="wrap">
+      <p class="kicker">Guests and RSVPs</p>
+      <h2 class="display">Replies that <span class="script mark-olive">file themselves.</span></h2>
+      <p class="dek">Share a link. Guests answer in a browser — no app, no login. Going, can't, and pending stay in one list, with the questions you wrote: a meal, a shuttle, a seat.</p>
+      <p class="dek" style="margin-top:12px">The seating chart is that list on a floor plan. Round tables or a long table, dragged to where they sit. It is roomiest on a laptop, which is why the same wedding is in the web app.</p>
+      <div class="status light">
+        <article><b>30</b>Going</article>
+        <article><b>3</b>Can't</article>
+        <article><b>7</b>Pending</article>
+      </div>
+      <div class="cluster">
+        <div class="phone lg">
           <img src="/img/app/guests.webp" alt="VowToDo guest list: going, can't, and pending, with RSVP answers shown as coloured dots" width="1080" height="2346" loading="lazy">
         </div>
       </div>
-      <div class="shotcopy reveal">
-        <span class="kicker">Guests and RSVPs</span>
-        <h2>Replies that file themselves.</h2>
-        <p>Share a link. Guests answer in a browser — no app, no login. Going, can't, and pending stay in one list, with the questions you wrote: a meal, a shuttle, a seat.</p>
-        <p style="margin-top:14px">The seating chart is that list on a floor plan. Round tables or a long table, dragged to where they sit. It is roomiest on a laptop, which is why the same wedding is in the web app.</p>
-      </div>
     </div>
   </section>
 
-  <section class="sec tone-olive-deep" id="day">
-    <div class="wrap shotrow">
-      <div class="device reveal">
-        <div class="phone">
+  <section class="sec dark" id="day">
+    <div class="wrap">
+      <p class="kicker">The day</p>
+      <h2 class="display">A clock you <span class="script mark-lav">can rearrange.</span></h2>
+      <p class="dek">Tap an empty slot, or hold a block and drag it. The legal wedding and the celebration can be two different days. Everyone with the wedding sees the same times.</p>
+      <div class="run">
+        <div class="a"><b>Rest and touch-up</b><span>2:00 PM</span></div>
+        <div class="b"><b>Couple photos</b><span>4:05 PM</span></div>
+        <div class="c"><b>Cocktails</b><span>5:30 PM</span></div>
+        <div class="d"><b>Dinner</b><span>7:15 PM</span></div>
+      </div>
+      <div class="cluster" style="min-height:560px">
+        <div class="phone lg">
           <img src="/img/app/day-of.webp" alt="VowToDo day-of schedule: the wedding day as timed blocks you can drag" width="1080" height="2346" loading="lazy">
         </div>
       </div>
-      <div class="shotcopy reveal">
-        <span class="kicker">The day</span>
-        <h2>A clock you can rearrange.</h2>
-        <p>Tap an empty slot, or hold a block and drag it. The legal wedding and the celebration can be two different days. Everyone with the wedding sees the same times.</p>
-      </div>
     </div>
   </section>
-
 </main>
 
-<section class="band grainy">
-  <h2>See it with your own list</h2>
+<section class="sec light" style="text-align:center">
+  <div class="wrap">
+  <h2 class="display center">See it with your <span class="script mark-olive">own list</span></h2>
   <p>Completely free — every feature, and everyone you invite. iPhone, or the browser.</p>
   <div class="cta">
     <a class="appstore" href="https://apps.apple.com/sg/app/vowtodo-wedding-planner/id6788746982" target="_blank" rel="noopener">
       <svg viewBox="0 0 384 512" aria-hidden="true"><path fill="currentColor" d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zM262.1 104.5c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
       <span class="l"><small>Download on the</small><b>App Store</b></span>
     </a>
-    <a class="ghost on-olive" href="/app/login">Open the web app →</a>
+    <a class="ghost" href="/app/login">Open the web app →</a>
+  </div>
   </div>
 </section>
 

@@ -376,3 +376,53 @@ a{color:var(--olive-dark)}
   .phone{border-radius:32px; padding:6px}
   .phone img{border-radius:26px}
 }
+
+/* Phones 360–430px. Desktop rules above stay as they are. */
+@media(max-width:430px){
+  html{overflow-x:clip}
+  body{font-size:16px;line-height:1.5}
+  p,li,.dek,.lede,.sub,.sec .sub{font-size:16px;line-height:1.5}
+  .wrap,.site-nav .in,.site-footer .in{padding-left:14px;padding-right:14px}
+  .site-nav .in{padding-top:8px;padding-bottom:8px;gap:8px}
+  .site-brand{font-size:16px;gap:6px}
+  .site-brand img{width:22px;height:22px}
+  .site-btn{display:none}
+  .site-navapp{padding:6px}
+  .site-navapp svg{width:16px;height:16px}
+  .site-menu{margin-left:auto}
+  .site-menu summary{width:32px;height:32px}
+  .hero{padding:28px 0 32px}
+  .hero h1,h1,article h1{font-size:clamp(32px,8.8vw,40px);line-height:1.05;letter-spacing:-.03em;margin-bottom:12px}
+  article h2{font-size:clamp(28px,8vw,34px);line-height:1.1}
+  .sec,.head{padding-top:36px;padding-bottom:36px}
+  .display,.sec h2.display,.head h1{
+    font-size:clamp(28px,8vw,34px);line-height:1.08;letter-spacing:-.03em;max-width:none;margin-bottom:10px
+  }
+  .giant{font-size:clamp(40px,12vw,52px)}
+  .status{gap:8px;margin-top:14px}
+  .status article{padding:12px 12px 10px;border-radius:16px}
+  .status b{font-size:32px}
+  .cluster{min-height:0;margin-top:16px}
+  .cluster .phone.lg,.phone.lg{width:min(210px,62vw)}
+  .stage{
+    height:auto;width:100%;max-width:100%;margin:12px auto 0;
+    display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-end;gap:8px;
+  }
+  .stage .back,.stage .front{position:static;transform:none;margin:0}
+  .stage .back .phone,.stage .front .phone{width:min(148px,40vw)}
+  .stage .chip,.floats .chip,.floats .task{position:static;width:auto;max-width:100%;margin:0}
+  .chip-days{width:auto;padding:10px 12px}
+  .chip-days b{font-size:28px}
+  .chip-money{width:auto;padding:10px 12px}
+  .chip-money b{font-size:18px}
+  .task{width:auto;max-width:100%}
+  .run div{padding:10px 12px}
+  .ticker{max-width:100%}
+  .bento,.mini{gap:8px}
+  .sec .sub{margin-bottom:18px}
+  .cmp tbody th{padding:10px 12px 2px;font-size:15px}
+  .cmp td{padding:2px 12px 2px;font-size:14px}
+  .cmp td.us{margin:4px 8px 8px;padding:6px 10px}
+  .rrow{padding:8px 10px;margin-bottom:6px}
+  .appstore{padding:10px 14px}
+}

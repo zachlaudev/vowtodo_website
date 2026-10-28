@@ -216,6 +216,25 @@ a{color:var(--olive-dark)}
 .shotcopy p{margin:0; color:var(--body-ink); font-size:17.5px; line-height:1.6; max-width:42ch}
 .shotcopy .more{margin-top:16px; font-weight:600}
 .device{display:flex; justify-content:center}
+
+/* Section bands. Colours are the site accents, darkened where the token
+   itself misses WCAG AA for body text. Sand stays on the comparison
+   and the letter, as the breathers. */
+.tone-olive{background:#5C6A3A;color:#F7F1E3}
+.tone-terra{background:#7E5832;color:#F7F1E3}
+.tone-lav{background:#5E5887;color:#F7F1E3}
+.tone-ink{background:#2C2A25;color:#F3ECDC}
+.tone-gold{background:#C8A86B;color:#2C2A25}
+.tone-mist{background:#E5E7CF;color:#2C2A25}
+.tone-olive .shotcopy .kicker,
+.tone-terra .shotcopy .kicker,
+.tone-lav .shotcopy .kicker,
+.tone-ink .shotcopy .kicker,
+.tone-olive h2,.tone-terra h2,.tone-lav h2,.tone-ink h2,
+.tone-olive .shotcopy p,.tone-terra .shotcopy p,.tone-lav .shotcopy p,.tone-ink .shotcopy p,
+.tone-olive a,.tone-terra a,.tone-lav a,.tone-ink a{color:#F7F1E3}
+.tone-gold .shotcopy .kicker,.tone-gold h2,.tone-gold .shotcopy p,.tone-gold a{color:#2C2A25}
+.tone-olive a,.tone-terra a,.tone-lav a,.tone-ink a,.tone-gold a{text-underline-offset:3px}
 @media(max-width:900px){
   .stage{height:560px; max-width:520px; margin:8px auto 0}
   .stage .front{right:0}

@@ -59,7 +59,9 @@
 
   .together{position:relative;overflow:hidden}
   .together .wrap{position:relative}
-  .we-in{position:absolute;right:18px;bottom:-8px;width:min(500px,48%);height:auto;opacity:1;pointer-events:none}
+  .we-in{position:absolute;right:0;bottom:0;display:block;width:min(680px,54%);margin:0;pointer-events:none;z-index:0}
+  .we-in img{display:block;width:100%;height:auto}
+  .together .kicker{margin:0 0 12px}
   @media(min-width:901px){
     .together .wrap{min-height:540px;display:flex;flex-direction:column;justify-content:center}
     .together h2{max-width:12ch}
@@ -106,7 +108,9 @@
     .hero-photo{object-position:68% 20%}
     .pair{grid-template-columns:1fr;justify-items:center}
     .laptop{width:100%}
-    .we-in{position:relative;display:block;width:min(100%,520px);height:auto;right:auto;bottom:auto;margin:32px auto 0;opacity:1}
+    .together{padding-bottom:0}
+    .together .wrap{padding-bottom:52vw}
+    .we-in{left:50%;right:auto;width:min(100%,520px);transform:translateX(-50%)}
     .delegate{grid-template-columns:1fr;gap:22px}
     .delegate .copy{order:-1}
     .flow-wide{display:none}
@@ -217,21 +221,17 @@
       <div class="tilecol">
         <article class="tile a">
           <img src="/img/app/tiles/checklist.webp" alt="Wedding checklist in the VowToDo planner app" width="464" height="568" loading="lazy">
-          <p>Know what's due, and when.</p>
         </article>
         <article class="tile c">
           <img src="/img/app/tiles/schedule.webp" alt="Wedding timeline and day-of schedule in the VowToDo app" width="464" height="462" loading="lazy">
-          <p>Your timeline, minute by minute.</p>
         </article>
       </div>
       <div class="tilecol">
         <article class="tile b">
           <img src="/img/app/tiles/rsvps.webp" alt="Guest list and RSVP tracker in the VowToDo app" width="464" height="468" loading="lazy">
-          <p>RSVPs that track themselves.</p>
         </article>
         <article class="tile d">
           <img src="/img/app/tiles/budget.webp" alt="Wedding budget planner in the VowToDo app" width="466" height="570" loading="lazy">
-          <p>Every dollar, accounted for.</p>
         </article>
       </div>
     </div>
@@ -240,20 +240,7 @@
 
 <section class="sec dark together">
   <div class="wrap">
-    <svg class="we-in" viewBox="-20 -36 780 660" aria-hidden="true">
-      <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="10">
-        <path stroke="#7E8C57" d="M48 590C40 460 58 340 52 250C38 220 12 196 28 162C42 132 74 134 82 166C74 140 70 78 112 62C162 42 188 108 168 168C176 210 186 250 178 310C186 430 168 590 160 590"/>
-        <path stroke="#F8F7F4" d="M168 590C158 470 184 360 176 278C188 246 214 228 198 196C184 166 154 164 150 196C156 150 176 92 222 78C274 62 292 128 270 186C262 224 254 268 262 330C254 440 270 590 278 590"/>
-        <path stroke="#CBC7E6" d="M292 590C284 450 308 320 300 210C286 176 258 150 276 114C292 82 328 80 334 116C328 70 346 8 398 0C456 -8 474 70 446 128C438 166 430 206 440 268C448 400 430 590 422 590"/>
-        <path stroke="#7E8C57" d="M430 590C442 470 418 360 432 286C418 254 394 236 412 202C428 172 460 174 454 206C462 164 478 108 522 98C570 86 584 150 558 204C550 240 544 280 554 340C546 450 564 590 572 590"/>
-        <path stroke="#F8F7F4" d="M560 590C548 480 572 390 564 318C578 290 604 274 588 244C574 216 544 214 542 246C546 206 564 156 604 146C648 134 662 190 640 240C632 272 626 310 634 360C626 460 644 590 652 590"/>
-        <g stroke-width="7">
-          <path stroke="#F8F7F4" d="M96 48l8-18M214 36l-6-16"/>
-          <path stroke="#CBC7E6" d="M390 28l6-16"/>
-          <path stroke="#7E8C57" d="M500 70l10-16"/>
-        </g>
-      </g>
-    </svg>
+    <p class="kicker">Collaborative planning</p>
     <h2 class="display">Plan a wedding with your partner</h2>
     <p class="dek">Bring in your partner, parents and planner. Everyone sees what they need.</p>
     <p class="dek">Roles keep the budget with the couple, and the jobs with the people doing them.</p>
@@ -263,6 +250,10 @@
       <span class="role"><i style="background:var(--gold);color:var(--ash)">Pl</i>Planner</span>
     </div>
   </div>
+  <picture class="we-in">
+    <source srcset="/assets/raised-hands.webp" type="image/webp">
+    <img src="/assets/raised-hands.png" alt="" width="1200" height="582">
+  </picture>
 </section>
 
 <section class="sec light">

@@ -187,10 +187,10 @@ a{color:var(--wine)}
   position:absolute; z-index:1; inset:0 auto 0 0;
   width:min(26rem, 34%);
   display:flex; flex-direction:column; justify-content:center;
-  padding:40px var(--pad);
+  padding:28px var(--pad) 32px;
   margin-left:max(0px, calc((100% - var(--page)) / 2));
 }
-.cover h1{font-size:clamp(48px, 5.6vw, 84px); max-width:10ch; color:var(--ink)}
+.cover h1{font-size:clamp(44px, 5vw, 76px); max-width:10ch; color:var(--ink)}
 .cover h1 em{font-style:italic; color:var(--wine)}
 .dek{font-size:18px; line-height:1.55; color:var(--ink-soft); max-width:36ch; margin:18px 0 0}
 .cover .eyebrow{margin-bottom:14px}
@@ -202,7 +202,14 @@ a{color:var(--wine)}
   margin:10px 0 0; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--meta);
 }
 .band{margin:0}
-.band img{width:100%; aspect-ratio:4/1; object-fit:cover; object-position:center}
+.band img{width:100%; aspect-ratio:3/2; object-fit:cover; object-position:center}
+.icon{width:64px; height:64px; object-fit:contain}
+.icon-card{
+  width:88px; height:88px; border-radius:22px; background:var(--ivory-2);
+  display:grid; place-items:center; padding:8px; box-shadow:var(--shadow);
+}
+.icon-card img{width:72px; height:72px; object-fit:contain}
+.icon-row{display:flex; flex-wrap:wrap; gap:14px; margin:22px 0 8px}
 @media(min-width:801px){
   .article-wrap .essay-photo{width:calc(100% + 210px); margin-left:-210px}
 }

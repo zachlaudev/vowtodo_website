@@ -1,97 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Set a new password · VowToDo</title>
-<meta name="robots" content="noindex, nofollow" />
-<meta name="theme-color" content="#F1E8D6" />
-<link rel="icon" href="/img/favicon.ico" sizes="any" />
-<!-- Standalone stopgap (2026-11-02): the web app had no reset-password route, so
-     reset emails landed on Not Found. Self-contained (no app bundle) so it survives
-     until the next web-app deploy, whose prerendered shell replaces this file with
-     the React page (apps/web/src/pages/auth/ResetPassword.tsx). -->
-<style>
-  *{box-sizing:border-box}
-  body{margin:0;min-height:100dvh;display:flex;align-items:center;justify-content:center;background:#F1E8D6;color:#2C2A25;
-    font-family:'Instrument Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;padding:24px}
-  .card{width:100%;max-width:400px;background:#FBF6EC;border:1px solid #DDD1BA;border-radius:20px;padding:32px 28px}
-  .brand{font-weight:700;font-size:15px;color:#5C6A3A;letter-spacing:.01em;margin-bottom:22px}
-  h1{font-size:27px;line-height:1.2;margin:0;font-weight:600}
-  .lede{margin:6px 0 0;font-size:14px;color:#8A8273}
-  form{margin-top:26px;display:flex;flex-direction:column;gap:16px}
-  label{display:flex;flex-direction:column;gap:6px;font-size:13.5px;font-weight:600}
-  input{font:inherit;font-weight:400;font-size:15px;padding:12px 14px;border:1px solid #DDD1BA;border-radius:12px;background:#fff;color:#2C2A25}
-  input:focus{outline:2px solid #7E8C57;outline-offset:1px;border-color:#7E8C57}
-  button{font:inherit;font-weight:600;font-size:15px;padding:13px;border:0;border-radius:12px;background:#5C6A3A;color:#F7F1E3;cursor:pointer}
-  button:disabled{opacity:.6;cursor:default}
-  .msg{border-radius:10px;padding:10px 14px;font-size:13.5px;margin:0}
-  .err{background:rgba(181,86,74,.1);color:#B5564A}
-  .ok{background:#E5E7CF;color:#5C6A3A;margin-top:24px}
-  .foot{margin-top:24px;font-size:13.5px;color:#8A8273}
-  a{color:#5C6A3A;font-weight:600}
-  [hidden]{display:none!important}
-</style>
-</head>
-<body>
-<main class="card">
-  <div class="brand">VowToDo</div>
-  <h1 id="title">Set a new password</h1>
-  <p class="lede" id="lede"></p>
-  <form id="form" novalidate hidden>
-    <p class="msg err" id="err" role="alert" hidden></p>
-    <label>New password<input id="pw" type="password" autocomplete="new-password" placeholder="At least 8 characters" required /></label>
-    <label>Confirm password<input id="pw2" type="password" autocomplete="new-password" placeholder="Re-enter password" required /></label>
-    <button id="btn" type="submit">Update password</button>
-  </form>
-  <p class="msg ok" id="done" role="status" hidden>Password updated. Sign in with your new password on the web or in the VowToDo app.</p>
-  <p class="foot" id="foot"><a href="/app/forgot-password">Send a new link</a></p>
-</main>
-<script>
-(function () {
-  var SB = 'https://ejfddddwqbjebwffgadc.supabase.co';
-  var KEY = 'sb_publishable_T7jUy5pNkc_bWNBxqk01ig_X44tzoWk'; // publishable key — safe to ship, same one the app bundle uses
-  var h = new URLSearchParams(location.hash.replace(/^#/, ''));
-  var token = h.get('access_token');
-  function el(id) { return document.getElementById(id); }
-  // Don't leave the token sitting in the address bar / history.
-  if (location.hash) history.replaceState(null, '', location.pathname);
-
-  if (!token) {
-    el('title').textContent = 'Link expired';
-    el('lede').textContent = (h.get('error_description') || 'This reset link is invalid or has already been used.').replace(/\+/g, ' ');
-    return;
-  }
-  el('form').hidden = false;
-
-  el('form').addEventListener('submit', function (e) {
-    e.preventDefault();
-    var pw = el('pw').value, pw2 = el('pw2').value;
-    function fail(m) { el('err').textContent = m; el('err').hidden = false; }
-    el('err').hidden = true;
-    if (pw.length < 8) return fail('Password must be at least 8 characters');
-    if (pw !== pw2) return fail('Passwords do not match');
-    el('btn').disabled = true;
-    fetch(SB + '/auth/v1/user', {
-      method: 'PUT',
-      headers: { apikey: KEY, Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ password: pw })
-    }).then(function (r) {
-      return r.json().catch(function () { return {}; }).then(function (j) {
-        if (!r.ok) throw new Error(j.msg || j.message || j.error_description || 'Could not update your password.');
-      });
-    }).then(function () {
-      el('form').hidden = true;
-      el('done').hidden = false;
-      el('foot').innerHTML = '<a href="/app/login">Sign in</a>';
-    }).catch(function (err) {
-      el('btn').disabled = false;
-      var m = String((err && err.message) || err);
-      if (/expired|invalid jwt|bad_jwt/i.test(m)) m = 'This link has expired. Request a new one below.';
-      fail(m);
-    });
-  });
-})();
-</script>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>VowToDo</title>
+    <meta name="description" content="Plan your wedding with your people — the VowToDo web app." />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#F1E8D6" />
+    <link rel="icon" href="/img/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/img/apple-touch-icon.png" />
+    <script type="module" crossorigin src="/app/assets/index-CJjaRtTL.js"></script>
+    <link rel="stylesheet" crossorigin href="/app/assets/index-WmO8QE2W.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
 </html>
